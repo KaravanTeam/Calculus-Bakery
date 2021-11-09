@@ -4,6 +4,6 @@ namespace Model.Transporter
 {
     internal sealed class Pipe : MonoBehaviour
     {
-        public PipePosition Location;
+        public PipeType Type;
     }
 }

@@ -7,15 +7,15 @@ namespace Model.Transporter
 {
     internal sealed class Transporter : MonoBehaviour
     {
-        public PipeType? ServedPipe => _servecedPipe?.Type;
+        public PipeType? ServicedPipe => _servicedPipe?.Type;
+        public bool IsMoving { get; private set; }
 
         [SerializeField] private float _timeTransitionInSeconds = 1;
-        private bool _isMoving; 
 
         private Platform _platform;
         private IReadOnlyDictionary<PipeType, Pipe> _pipes;
 
-        private Pipe _servecedPipe;
+        private Pipe _servicedPipe;
         private Vector3 _defaultPlatformPosition; 
 
         private void Start()
@@ -31,35 +31,39 @@ namespace Model.Transporter
                 _platform.transform.localPosition.y);
 
             _platform.transform.localPosition = _defaultPlatformPosition;
-            _servecedPipe = _pipes[PipeType.CakeBuilder];
+            _servicedPipe = _pipes[PipeType.CakeBuilder];
         }
 
-        public void TryMoveTowards(Direction direction)
+        public bool TryMoveTowards(Direction direction)
         {
-            if (_isMoving)
-                return;
+            if (IsMoving)
+                return false;
 
-            var target = (int)_servecedPipe.Type + (int)direction;
+            var target = (int)_servicedPipe.Type + (int)direction;
           
             if (target < (int)Direction.Left || target > (int)Direction.Right)
-                return;
+                return false;
 
-            _servecedPipe = _pipes[(PipeType)target];
+            _servicedPipe = _pipes[(PipeType)target];
             StartCoroutine(MoveTo((PipeType)target));
+
+            return true;
         }
 
-        public void TryMoveToDefault()
+        public bool TryMoveToDefault()
         {
-            if (_isMoving)
-                return;
+            if (IsMoving)
+                return false;
 
-            _servecedPipe = _pipes[PipeType.CakeBuilder];
+            _servicedPipe = _pipes[PipeType.CakeBuilder];
             StartCoroutine(MoveTo(PipeType.CakeBuilder));
+
+            return true;
         }
 
         private IEnumerator MoveTo(PipeType target)
         {
-            _isMoving = true;
+            IsMoving = true;
 
             var nextPipe = _pipes[target];
             
@@ -76,7 +80,7 @@ namespace Model.Transporter
 
             _platform.transform.localPosition = end;
 
-            _isMoving = false;
+            IsMoving = false;
         }
     }
 }

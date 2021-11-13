@@ -40,7 +40,7 @@ namespace Controller
             _transporter.TryMoveTowards(_direction);
 
             if (_direction == Direction.Right
-                && _transporter.ServedPipe == PipeType.Left)
+                && _transporter.ServicedPipe == PipeType.Left)
             {
                 _serveButton.SetState(ButtonState.Enabled);
             }

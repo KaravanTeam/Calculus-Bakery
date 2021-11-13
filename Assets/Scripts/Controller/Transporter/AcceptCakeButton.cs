@@ -36,10 +36,12 @@ namespace Controller
 
         protected override void OnClick()
         {
-            _transporter.TryMoveToDefault();
-            _serveButton.SetState(ButtonState.Disabled);
+            if (_transporter.TryMoveToDefault())
+            {
+                _serveButton.SetState(ButtonState.Disabled);
 
-            SetDisabledState();
+                SetDisabledState();
+            }
         }
 
         protected override void SetDisabledState()

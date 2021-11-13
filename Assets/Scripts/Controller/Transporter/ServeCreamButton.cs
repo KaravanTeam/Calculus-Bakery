@@ -36,6 +36,9 @@ namespace Controller
 
         protected override void OnClick()
         {
+            if (_transporter.IsMoving)
+                return;
+
             _acceptButton.SetState(ButtonState.Enabled);
 
             SetDisabledState();

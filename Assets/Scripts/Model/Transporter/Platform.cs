@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Model.Factory;
 using UnityEngine;
 
 namespace Model.Transporter
@@ -10,6 +6,6 @@ namespace Model.Transporter
     [RequireComponent(typeof(Transform))]
     internal sealed class Platform : MonoBehaviour
     {
-
+        public Bread Equation { get; set; }
     }
 }

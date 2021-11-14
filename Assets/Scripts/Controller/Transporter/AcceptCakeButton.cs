@@ -1,4 +1,6 @@
 using Model.Transporter;
+using Model.Factory;
+using Model.Chef;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +10,8 @@ namespace Controller
     internal class AcceptCakeButton : TransporterManipulationButton
     {
         private Transporter _transporter;
+        private Factory _factory;
+        private Chef _chef;
 
         private Button _button;
         private ServeCreamButton _serveButton;
@@ -26,6 +30,9 @@ namespace Controller
         private void Start()
         {
             _transporter = FindObjectOfType<Transporter>();
+            _factory = FindObjectOfType<Factory>();
+            _chef = FindObjectOfType<Chef>();
+
             _serveButton = FindObjectOfType<ServeCreamButton>();
         }
 
@@ -38,6 +45,8 @@ namespace Controller
         {
             if (_transporter.TryMoveToDefault())
             {
+                Debug.Log(_chef.IsGoodCake(_factory.FinishedCake));
+                _factory.Distribute();
                 _serveButton.SetState(ButtonState.Disabled);
 
                 SetDisabledState();

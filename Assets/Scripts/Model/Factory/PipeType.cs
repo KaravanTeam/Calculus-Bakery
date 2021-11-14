@@ -1,4 +1,4 @@
-﻿namespace Model.Transporter
+﻿namespace Model.Factory
 {
     internal enum PipeType
     {

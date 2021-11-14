@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Model.Factory;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -7,31 +8,31 @@ namespace Model.Transporter
 {
     internal sealed class Transporter : MonoBehaviour
     {
-        public PipeType? ServicedPipe => _servicedPipe?.Type;
+        public PipeType ServicedPipe { get; private set; }
         public bool IsMoving { get; private set; }
 
         [SerializeField] private float _timeTransitionInSeconds = 1;
 
-        private Platform _platform;
-        private IReadOnlyDictionary<PipeType, Pipe> _pipes;
+        private Factory.Factory _factory;
+        private Transform _platform;
+        private IReadOnlyDictionary<PipeType, Vector3> _pipes;
 
-        private Pipe _servicedPipe;
         private Vector3 _defaultPlatformPosition; 
 
         private void Start()
         {
-            _platform = FindObjectOfType<Platform>();
+            _factory = FindObjectOfType<Factory.Factory>();
+            _platform = FindObjectOfType<Platform>().GetComponent<Transform>();
 
             _pipes = FindObjectsOfType<Pipe>()
-                .OrderBy(pipe => pipe.Type)
-                .ToDictionary(pipe => pipe.Type);
+                .ToDictionary(pipe => pipe.Type, pipe => pipe.transform.localPosition);
 
             _defaultPlatformPosition = new Vector3(
-                _pipes[PipeType.CakeBuilder].transform.localPosition.x,
-                _platform.transform.localPosition.y);
+                _pipes[PipeType.CakeBuilder].x,
+                _platform.localPosition.y);
 
             _platform.transform.localPosition = _defaultPlatformPosition;
-            _servicedPipe = _pipes[PipeType.CakeBuilder];
+            ServicedPipe = PipeType.CakeBuilder;
         }
 
         public bool TryMoveTowards(Direction direction)
@@ -39,12 +40,12 @@ namespace Model.Transporter
             if (IsMoving)
                 return false;
 
-            var target = (int)_servicedPipe.Type + (int)direction;
+            var target = (int)ServicedPipe + (int)direction;
           
             if (target < (int)Direction.Left || target > (int)Direction.Right)
                 return false;
 
-            _servicedPipe = _pipes[(PipeType)target];
+            ServicedPipe = (PipeType)target;
             StartCoroutine(MoveTo((PipeType)target));
 
             return true;
@@ -55,7 +56,7 @@ namespace Model.Transporter
             if (IsMoving)
                 return false;
 
-            _servicedPipe = _pipes[PipeType.CakeBuilder];
+            ServicedPipe = PipeType.CakeBuilder;
             StartCoroutine(MoveTo(PipeType.CakeBuilder));
 
             return true;
@@ -68,7 +69,8 @@ namespace Model.Transporter
             var nextPipe = _pipes[target];
             
             var start = _platform.transform.localPosition;
-            var end = new Vector3(nextPipe.transform.localPosition.x, start.y);
+            var end = new Vector3(nextPipe.x, start.y);
+
             for (var t = 0f; t < 1; t += Time.deltaTime / _timeTransitionInSeconds)
             {
                 var easingTime = t < 0.5 ? t * t * 2 : 1 - (1 - t) * (1 - t) * 2;

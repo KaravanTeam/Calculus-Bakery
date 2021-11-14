@@ -1,4 +1,5 @@
 ﻿using Model.Transporter;
+using Model.Factory;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ namespace Controller
     internal class ServeCreamButton : TransporterManipulationButton
     {
         private Transporter _transporter;
+        private Factory _factory;
 
         private Button _button;
         private AcceptCakeButton _acceptButton;
@@ -26,6 +28,7 @@ namespace Controller
         private void Start()
         {
             _transporter = FindObjectOfType<Transporter>();
+            _factory = FindObjectOfType<Factory>();
             _acceptButton = FindObjectOfType<AcceptCakeButton>();
         }
 
@@ -38,6 +41,8 @@ namespace Controller
         {
             if (_transporter.IsMoving)
                 return;
+
+            _factory.BuildCake(_transporter.ServicedPipe);
 
             _acceptButton.SetState(ButtonState.Enabled);
 

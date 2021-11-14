@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Model.Factory
+namespace Model.Transporter
 {
     internal sealed class Pipe : MonoBehaviour
     {

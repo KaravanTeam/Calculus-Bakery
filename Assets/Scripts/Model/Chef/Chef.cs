@@ -1,4 +1,4 @@
-﻿using Model.Factory;
+﻿using Model.Transporter;
 using UnityEngine;
 
 namespace Model.Chef

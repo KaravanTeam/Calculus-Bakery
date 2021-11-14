@@ -1,9 +1,8 @@
-﻿using Model.Transporter;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Model.Factory
+namespace Model.Transporter
 {
     internal sealed class Factory : MonoBehaviour
     {

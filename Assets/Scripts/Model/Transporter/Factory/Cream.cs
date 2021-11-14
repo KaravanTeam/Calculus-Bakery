@@ -1,4 +1,4 @@
-﻿namespace Model.Factory
+﻿namespace Model.Transporter
 {
     internal sealed class Cream
     {

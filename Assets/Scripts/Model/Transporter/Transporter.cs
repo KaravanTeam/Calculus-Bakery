@@ -1,5 +1,4 @@
-﻿using Model.Factory;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,7 +12,7 @@ namespace Model.Transporter
 
         [SerializeField] private float _timeTransitionInSeconds = 1;
 
-        private Factory.Factory _factory;
+        private Factory _factory;
         private Transform _platform;
         private IReadOnlyDictionary<PipeType, Vector3> _pipes;
 
@@ -21,7 +20,7 @@ namespace Model.Transporter
 
         private void Start()
         {
-            _factory = FindObjectOfType<Factory.Factory>();
+            _factory = FindObjectOfType<Factory>();
             _platform = FindObjectOfType<Platform>().GetComponent<Transform>();
 
             _pipes = FindObjectsOfType<Pipe>()

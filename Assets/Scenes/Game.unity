@@ -194,8 +194,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 1579058826}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &76240506
 MonoBehaviour:
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 76240504}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4705a41e1c829de48ab9424a3ca3a662, type: 3}
+  m_Script: {fileID: 11500000, guid: 3db9a19576e3e5b44a1b024bb01dd585, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _source: {fileID: 4900000, guid: 3dfc95fdaf372814eb4024421ce2b442, type: 3}
@@ -240,7 +240,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1579058826}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &288012914
 MonoBehaviour:
@@ -1146,7 +1146,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1579058824
 GameObject:
@@ -1189,13 +1189,14 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 76240505}
   - {fileID: 288012913}
   - {fileID: 1861002891}
   - {fileID: 1886001009}
   - {fileID: 1674948908}
   - {fileID: 2107063845}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1674948907
 GameObject:
@@ -1207,7 +1208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1674948908}
   - component: {fileID: 1674948909}
-  - component: {fileID: 1674948911}
+  - component: {fileID: 1674948910}
   m_Layer: 0
   m_Name: RightPipe
   m_TagString: Untagged
@@ -1227,7 +1228,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1579058826}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1674948909
 SpriteRenderer:
@@ -1280,7 +1281,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1674948911
+--- !u!114 &1674948910
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1289,7 +1290,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1674948907}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6cb957080e79f942911788344230974, type: 3}
+  m_Script: {fileID: 11500000, guid: bff3af50ac2a703499a12ce75c460c2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 1
@@ -1303,7 +1304,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1861002891}
   - component: {fileID: 1861002892}
-  - component: {fileID: 1861002894}
+  - component: {fileID: 1861002893}
   m_Layer: 0
   m_Name: LeftPipe
   m_TagString: Untagged
@@ -1323,7 +1324,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1579058826}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1861002892
 SpriteRenderer:
@@ -1376,7 +1377,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1861002894
+--- !u!114 &1861002893
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1385,7 +1386,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1861002890}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6cb957080e79f942911788344230974, type: 3}
+  m_Script: {fileID: 11500000, guid: bff3af50ac2a703499a12ce75c460c2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Type: -1
@@ -1399,7 +1400,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1886001009}
   - component: {fileID: 1886001010}
-  - component: {fileID: 1886001012}
+  - component: {fileID: 1886001011}
   m_Layer: 0
   m_Name: CenterPipe
   m_TagString: Untagged
@@ -1419,7 +1420,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1579058826}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1886001010
 SpriteRenderer:
@@ -1472,7 +1473,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1886001012
+--- !u!114 &1886001011
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1481,7 +1482,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1886001008}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6cb957080e79f942911788344230974, type: 3}
+  m_Script: {fileID: 11500000, guid: bff3af50ac2a703499a12ce75c460c2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
@@ -1581,7 +1582,7 @@ RectTransform:
   - {fileID: 560352275}
   - {fileID: 773821355}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1598,7 +1599,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2107063845}
   - component: {fileID: 2107063846}
-  - component: {fileID: 2107063848}
+  - component: {fileID: 2107063847}
   m_Layer: 0
   m_Name: CakePipe
   m_TagString: Untagged
@@ -1618,7 +1619,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1579058826}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2107063846
 SpriteRenderer:
@@ -1671,7 +1672,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2107063848
+--- !u!114 &2107063847
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1680,7 +1681,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2107063844}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6cb957080e79f942911788344230974, type: 3}
+  m_Script: {fileID: 11500000, guid: bff3af50ac2a703499a12ce75c460c2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Type: -2

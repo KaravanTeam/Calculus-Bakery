@@ -1,5 +1,4 @@
 ﻿using Model.Transporter;
-using Model.Factory;
 using UnityEngine;
 using UnityEngine.UI;
 

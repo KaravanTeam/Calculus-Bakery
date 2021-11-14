@@ -1,5 +1,4 @@
-﻿using Model.Factory;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Model.Transporter
 {

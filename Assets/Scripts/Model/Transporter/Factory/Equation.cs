@@ -1,4 +1,4 @@
-﻿namespace Model.Factory
+﻿namespace Model.Transporter
 {
     [System.Serializable]
     internal struct Equation

@@ -1,6 +1,5 @@
-using Model.Transporter;
-using Model.Factory;
 using Model.Chef;
+using Model.Transporter;
 using UnityEngine;
 using UnityEngine.UI;
 

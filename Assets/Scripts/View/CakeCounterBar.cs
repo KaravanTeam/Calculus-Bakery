@@ -13,6 +13,7 @@ namespace View
         private void Awake()
         {
             _slider = GetComponent<Slider>();
+            _slider.value = 0;
         }
 
         private void Start()

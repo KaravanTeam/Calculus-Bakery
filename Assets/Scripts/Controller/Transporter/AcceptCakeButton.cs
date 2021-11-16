@@ -1,3 +1,4 @@
+using Model;
 using Model.Chef;
 using Model.Transporter;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace Controller
     {
         private Transporter _transporter;
         private Factory _factory;
-        private Platform _platform;
+
         private Chef _chef;
 
         private Button _button;
@@ -31,7 +32,7 @@ namespace Controller
         {
             _transporter = FindObjectOfType<Transporter>();
             _factory = FindObjectOfType<Factory>();
-            _platform = FindObjectOfType<Platform>();
+
             _chef = FindObjectOfType<Chef>();
 
             _serveButton = FindObjectOfType<ServeCreamButton>();

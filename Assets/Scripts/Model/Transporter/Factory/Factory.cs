@@ -6,6 +6,8 @@ namespace Model.Transporter
 {
     internal sealed class Factory : MonoBehaviour
     {
+        public int EquationsCount => _equations.Count;
+
         [SerializeField] private TextAsset _source;
         [SerializeField] private IReadOnlyList<Equation> _equations;
 

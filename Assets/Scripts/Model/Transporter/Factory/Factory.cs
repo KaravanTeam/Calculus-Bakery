@@ -10,10 +10,10 @@ namespace Model.Transporter
         [SerializeField] private IReadOnlyList<Equation> _equations;
 
         private Platform _platform;
-        private IReadOnlyDictionary<PipeType, Pipe> _pipes;
-        private Bread _currentBread;
+        private IReadOnlyList<Pipe> _pipes;
 
         private readonly System.Random _randGenerator = new System.Random();
+        private LinkedList<Equation> _shuffleEquations = new LinkedList<Equation>();
 
         private void Awake()
         {
@@ -25,34 +25,40 @@ namespace Model.Transporter
             _platform = FindObjectOfType<Platform>();
             _pipes = FindObjectsOfType<Pipe>()
                 .Where(pipe => pipe.Type != PipeType.CakeBuilder)
-                .ToDictionary(pipe => pipe.Type);
+                .ToList();
 
             // TODO: temp
             Distribute();
         }
 
-        // TODO: temp
         public void Distribute()
-        {
-            _platform.Cake = null;
+        {       
+            if (_shuffleEquations.Count < _pipes.Count)
+                _shuffleEquations = new LinkedList<Equation>(_equations.OrderBy(_ => _randGenerator.Next()));
 
-            var i = 0;
-            foreach (var pipe in _pipes.Values)
+            var equations = new List<Equation>();
+            foreach (var pipe in _pipes)
             {
-                pipe.Cream = new Cream(_equations[i].ID, _equations[i].Value);
-                i++;
+                var equation = _shuffleEquations.Last.Value;
+
+                pipe.EquationType = new Cream(equation.ID, equation.Type);
+                equations.Add(equation);
+
+                _shuffleEquations.RemoveLast();
             }
 
-            var q = _randGenerator.Next(0, 3);
-            _currentBread = new Bread(_equations[q].ID, _equations[q].Type);
+            var expectedEquation = equations[_randGenerator.Next(0, equations.Count)];
+            _platform.Equation = new Bread(expectedEquation.ID, expectedEquation.Value);    
         }
 
-        public void BuildCakeOnPlatform(PipeType servicedPipe)
+        public Cake BuildCake(PipeType servicedPipe)
         {
-            var cake = new Cake(_currentBread, _pipes[servicedPipe].Cream);
-            Debug.Log($"Equation: {cake.Equation.ID}, Type: {cake.EquationType.ID}");
+            var pipe = _pipes.FirstOrDefault(pipe => pipe.Type == servicedPipe);
+            if (pipe is null)
+                throw new UnityException("Unknown servicePipe");
 
-            _platform.Cake = cake;
+            Debug.Log($"Equation: {_platform.Equation.ID}, Type: {pipe.EquationType.ID}");
+            return new Cake(_platform.Equation, pipe.EquationType);
         }
     }
 }

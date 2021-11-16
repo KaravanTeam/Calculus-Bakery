@@ -1,7 +1,7 @@
 ﻿namespace Model.Transporter
 {
     [System.Serializable]
-    internal struct Equation
+    internal class Equation
     {
         public int ID;
         public string Value;

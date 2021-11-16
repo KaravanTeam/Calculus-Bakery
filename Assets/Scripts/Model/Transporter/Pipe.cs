@@ -5,6 +5,6 @@ namespace Model.Transporter
     internal sealed class Pipe : MonoBehaviour
     {
         public PipeType Type;
-        public Cream Cream { get; set; }
+        public Cream EquationType { get; set; }
     }
 }

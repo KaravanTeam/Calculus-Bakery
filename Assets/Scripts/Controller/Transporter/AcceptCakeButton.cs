@@ -46,7 +46,7 @@ namespace Controller
         {
             if (_transporter.TryMoveToDefault())
             {
-                Debug.Log(_chef.IsGoodCake(_platform.Cake));
+                Debug.Log(_chef.IsGoodCake(_serveButton.FinishedCake));
                 _factory.Distribute();
                 _serveButton.SetState(ButtonState.Disabled);
 

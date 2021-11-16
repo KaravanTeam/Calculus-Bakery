@@ -5,6 +5,6 @@ namespace Model.Transporter
     [RequireComponent(typeof(Transform))]
     internal sealed class Platform : MonoBehaviour
     {
-        public Cake Cake { get; set; }
+        public Bread Equation { get; set; }
     }
 }

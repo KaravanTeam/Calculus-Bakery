@@ -2,13 +2,13 @@
 {
     internal sealed class Bread
     {
-        public Bread(int id, EquationType equationType)
+        public Bread(int id, string value)
         {
             ID = id;
-            EquationType = equationType;
+            Value = value;
         }
 
         public int ID { get; }
-        public EquationType EquationType { get; }
+        public string Value { get; }
     }
 }

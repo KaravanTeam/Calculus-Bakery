@@ -7,13 +7,13 @@ namespace Controller
     [RequireComponent(typeof(Button))]
     internal class ServeCreamButton : TransporterManipulationButton
     {
+        public Cake FinishedCake { get; private set; }
+
         private Transporter _transporter;
         private Factory _factory;
 
         private Button _button;
         private AcceptCakeButton _acceptButton;
-
-        private Cake _cake;
 
         private void Awake()
         {
@@ -43,7 +43,7 @@ namespace Controller
             if (_transporter.IsMoving)
                 return;
 
-            _factory.BuildCakeOnPlatform(_transporter.ServicedPipe);
+            FinishedCake = _factory.BuildCake(_transporter.ServicedPipe);
 
             _acceptButton.SetState(ButtonState.Enabled);
 

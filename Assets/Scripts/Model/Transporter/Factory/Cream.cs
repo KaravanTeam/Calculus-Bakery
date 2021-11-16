@@ -2,13 +2,13 @@
 {
     internal sealed class Cream
     {
-        public Cream(int id, string equationValue)
+        public Cream(int id, EquationType type)
         {
             ID = id;
-            EquationValue = equationValue;
+            EquationType = type;
         }
 
         public int ID { get; }
-        public string EquationValue { get; }
+        public EquationType EquationType { get; }
     }
 }

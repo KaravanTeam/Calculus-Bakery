@@ -37,7 +37,8 @@ namespace Controller
 
         protected override void OnClick()
         {
-            _transporter.TryMoveTowards(_direction);
+            if (!_transporter.TryMoveTowards(_direction))
+                return;
 
             if (_direction == Direction.Right
                 && _transporter.ServicedPipe == PipeType.Left)

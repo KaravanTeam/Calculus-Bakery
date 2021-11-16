@@ -13,6 +13,8 @@ namespace Controller
         private Button _button;
         private AcceptCakeButton _acceptButton;
 
+        private Cake _cake;
+
         private void Awake()
         {
             _button = GetComponent<Button>();
@@ -41,7 +43,7 @@ namespace Controller
             if (_transporter.IsMoving)
                 return;
 
-            _factory.BuildCake(_transporter.ServicedPipe);
+            _factory.BuildCakeOnPlatform(_transporter.ServicedPipe);
 
             _acceptButton.SetState(ButtonState.Enabled);
 

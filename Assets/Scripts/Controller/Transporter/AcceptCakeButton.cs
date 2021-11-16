@@ -10,6 +10,7 @@ namespace Controller
     {
         private Transporter _transporter;
         private Factory _factory;
+        private Platform _platform;
         private Chef _chef;
 
         private Button _button;
@@ -30,6 +31,7 @@ namespace Controller
         {
             _transporter = FindObjectOfType<Transporter>();
             _factory = FindObjectOfType<Factory>();
+            _platform = FindObjectOfType<Platform>();
             _chef = FindObjectOfType<Chef>();
 
             _serveButton = FindObjectOfType<ServeCreamButton>();
@@ -44,7 +46,7 @@ namespace Controller
         {
             if (_transporter.TryMoveToDefault())
             {
-                Debug.Log(_chef.IsGoodCake(_factory.FinishedCake));
+                Debug.Log(_chef.IsGoodCake(_platform.Cake));
                 _factory.Distribute();
                 _serveButton.SetState(ButtonState.Disabled);
 

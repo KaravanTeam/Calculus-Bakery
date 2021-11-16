@@ -6,13 +6,12 @@ namespace Model.Transporter
 {
     internal sealed class Factory : MonoBehaviour
     {
-        public Cake FinishedCake { get; private set; }
-
         [SerializeField] private TextAsset _source;
         [SerializeField] private IReadOnlyList<Equation> _equations;
 
         private Platform _platform;
         private IReadOnlyDictionary<PipeType, Pipe> _pipes;
+        private Bread _currentBread;
 
         private readonly System.Random _randGenerator = new System.Random();
 
@@ -35,21 +34,25 @@ namespace Model.Transporter
         // TODO: temp
         public void Distribute()
         {
+            _platform.Cake = null;
+
             var i = 0;
             foreach (var pipe in _pipes.Values)
             {
-                pipe.EquationType = new Cream(_equations[i].ID, _equations[i].Value);
+                pipe.Cream = new Cream(_equations[i].ID, _equations[i].Value);
                 i++;
             }
 
             var q = _randGenerator.Next(0, 3);
-            _platform.Equation = new Bread(_equations[q].ID, _equations[q].Type);
+            _currentBread = new Bread(_equations[q].ID, _equations[q].Type);
         }
 
-        public void BuildCake(PipeType servicedPipe)
+        public void BuildCakeOnPlatform(PipeType servicedPipe)
         {
-            FinishedCake = new Cake(_platform.Equation, _pipes[servicedPipe].EquationType);
-            Debug.Log($"Equation: {FinishedCake.Equation.ID}, Type: {FinishedCake.EquationType.ID}");
+            var cake = new Cake(_currentBread, _pipes[servicedPipe].Cream);
+            Debug.Log($"Equation: {cake.Equation.ID}, Type: {cake.EquationType.ID}");
+
+            _platform.Cake = cake;
         }
     }
 }

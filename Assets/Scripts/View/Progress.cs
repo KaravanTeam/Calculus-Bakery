@@ -6,7 +6,7 @@ namespace View
 {
     internal sealed class Progress : MonoBehaviour
     {
-        [SerializeField] private Text _progress;
+        [SerializeField] private UnityEngine.UI.Text _progress;
         [SerializeField] private Player _player;
 
         private void OnEnable()

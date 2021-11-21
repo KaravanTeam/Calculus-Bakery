@@ -1,28 +1,31 @@
 ﻿using Model.Transporter;
+using System;
 using UnityEngine;
-using View;
 
-namespace Model.Chef
+namespace Model
 {
     internal sealed class Chef : MonoBehaviour
     {
-        private Player _player;
-        private CakeCounterBar _progress;
-     
-        private void Start()
+        public event Action<Cake> OnCakeChecked;
+        public event Action<Cake> OnCorrectCakeChecked;
+        public event Action<Cake> OnWrongCakeChecked;
+
+        public bool IsCorrectCake(Cake cake)
         {
-            _player = FindObjectOfType<Player>();
-            _progress = FindObjectOfType<CakeCounterBar>();
-        }
+            var isCorrectCake = cake.Equation.ID == cake.EquationType.ID;
 
-        public bool IsGoodCake(Cake cake)
-        {
-            var isRightCake = cake.Equation.ID == cake.EquationType.ID;
+            OnCakeChecked?.Invoke(cake);
 
-            _player.CorrectCakesCount += isRightCake ? 1 : 0;
-            _progress.SetCakeCount(_player.CorrectCakesCount);
+            if (isCorrectCake)
+            {
+                OnCorrectCakeChecked?.Invoke(cake);
+            }
+            else
+            {
+                OnWrongCakeChecked?.Invoke(cake);
+            }
 
-            return isRightCake;
+            return isCorrectCake;
         }
     }
 }

@@ -1,5 +1,4 @@
 using Model;
-using Model.Chef;
 using Model.Transporter;
 using UnityEngine;
 using UnityEngine.UI;
@@ -47,7 +46,7 @@ namespace Controller
         {
             if (_transporter.TryMoveToDefault())
             {
-                Debug.Log(_chef.IsGoodCake(_serveButton.FinishedCake));
+                Debug.Log(_chef.IsCorrectCake(_serveButton.FinishedCake));
                 _factory.Distribute();
                 _serveButton.SetState(ButtonState.Disabled);
 

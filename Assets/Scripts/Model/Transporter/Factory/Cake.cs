@@ -4,11 +4,11 @@
     {
         public Cake(Bread equation, Cream equationType)
         {
-            Equation = equation;
-            EquationType = equationType;
+            Bread = equation;
+            Cream = equationType;
         }
 
-        public Bread Equation { get; }
-        public Cream EquationType { get; }
+        public Bread Bread { get; }
+        public Cream Cream { get; }
     }
 }

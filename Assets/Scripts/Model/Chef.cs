@@ -12,7 +12,7 @@ namespace Model
 
         public bool IsCorrectCake(Cake cake)
         {
-            var isCorrectCake = cake.Equation.ID == cake.EquationType.ID;
+            var isCorrectCake = cake.Bread.ID == cake.Cream.ID;
 
             OnCakeChecked?.Invoke(cake);
 

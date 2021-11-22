@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ namespace Model.Transporter
 
         private readonly System.Random _randGenerator = new System.Random();
         private LinkedList<Equation> _shuffleEquations = new LinkedList<Equation>();
+
+        public event Action OnFactoryDistributed;
 
         private void Awake()
         {
@@ -43,14 +46,16 @@ namespace Model.Transporter
             {
                 var equation = _shuffleEquations.Last.Value;
 
-                pipe.EquationType = new Cream(equation.ID, equation.Type);
+                pipe.Cream = new Cream(equation.ID, equation.Type);
                 equations.Add(equation);
 
                 _shuffleEquations.RemoveLast();
             }
 
             var expectedEquation = equations[_randGenerator.Next(0, equations.Count)];
-            _platform.Equation = new Bread(expectedEquation.ID, expectedEquation.Value);    
+            _platform.Equation = new Bread(expectedEquation.ID, expectedEquation.Value);
+
+            OnFactoryDistributed?.Invoke();
         }
 
         public Cake BuildCake(PipeType servicedPipe)
@@ -59,8 +64,8 @@ namespace Model.Transporter
             if (pipe is null)
                 throw new UnityException("Unknown servicePipe");
 
-            Debug.Log($"Equation: {_platform.Equation.ID}, Type: {pipe.EquationType.ID}");
-            return new Cake(_platform.Equation, pipe.EquationType);
+            Debug.Log($"Equation: {_platform.Equation.ID}, Type: {pipe.Cream.ID}");
+            return new Cake(_platform.Equation, pipe.Cream);
         }
     }
 }

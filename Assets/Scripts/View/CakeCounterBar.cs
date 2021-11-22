@@ -1,5 +1,5 @@
-﻿using Model.Transporter;
-using System;
+﻿using Model;
+using Model.Transporter;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +9,7 @@ namespace View
     internal class CakeCounterBar : MonoBehaviour
     {
         private Slider _slider;
+        [SerializeField] private Chef _chef;
 
         private void Awake()
         {
@@ -16,17 +17,24 @@ namespace View
             _slider.value = 0;
         }
 
+        private void OnEnable()
+        {
+            _chef.OnCorrectCakeChecked += Increase;
+        }
+
         private void Start()
         {
             _slider.maxValue = FindObjectOfType<Factory>().EquationsCount;
         }
 
-        public void SetCakeCount(int count)
+        private void OnDisable()
         {
-            if (count < 0 || count > _slider.maxValue)
-                throw new ArgumentOutOfRangeException($"Cake's count is out of range: {count}");
+            _chef.OnCorrectCakeChecked -= Increase;
+        }
 
-            _slider.value = count;
+        private void Increase(Cake cake)
+        {
+            _slider.value += _slider.value < _slider.maxValue ? 1 : 0;
         }
     }
 }

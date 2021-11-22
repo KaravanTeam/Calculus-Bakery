@@ -1,24 +1,44 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Model.Achievements
 {
     internal sealed class BrainAchievements : MonoBehaviour
     {
-        public IReadOnlyList<IBrainAchievement> Achievements => _achievements;
-        public static BrainAchievements Instance { get; private set; }
+        [SerializeField] private Player _player;
 
-        private readonly List<IBrainAchievement> _achievements = new List<IBrainAchievement>();
+        private IReadOnlyList<IBrainAchievement> _achievements = new List<IBrainAchievement>();
 
-        private void Awake()
+        private void OnEnable()
         {
-            if (Instance is null)
-                Instance = this;
+            Subscribe();   
         }
 
-        public void Add(IBrainAchievement achievement)
+        private void Start()
         {
-            _achievements.Add(achievement);
+            _achievements = FindObjectsOfType<MonoBehaviour>()
+                .OfType<IBrainAchievement>()
+                .ToList();
+
+            Subscribe();
+        }
+
+        private void OnDisable()
+        {
+            Unsubscribe();
+        }
+
+        private void Subscribe()
+        {
+            foreach (var achievement in _achievements)
+                achievement.OnTargetAchieved += _player.UpdateProgress;
+        }
+
+        private void Unsubscribe()
+        {
+            foreach (var achievement in _achievements)
+                achievement.OnTargetAchieved -= _player.UpdateProgress;
         }
     }
 }

@@ -6,12 +6,12 @@ using UnityEngine;
 
 namespace Model.Achievements
 {
-    internal sealed class EquationTypesCount : MonoBehaviour, IBrainAchievement
+    internal class CorrectEquationTypesCount : MonoBehaviour, IBrainAchievement
     {
         [SerializeField] private int _target;
         [SerializeField] private int _points;
 
-        [SerializeField] private Chef _chef;
+        [SerializeField] protected Chef _chef;
 
         private readonly Dictionary<EquationType, int> _types = 
             Enum.GetValues(typeof(EquationType))
@@ -22,20 +22,15 @@ namespace Model.Achievements
 
         private void OnEnable()
         {
-            _chef.OnCorrectCakeChecked += UpdateState;
-        }
-
-        private void Start()
-        {
-            BrainAchievements.Instance.Add(this);
+            Subscribe();
         }
 
         private void OnDisable()
         {
-            _chef.OnCorrectCakeChecked -= UpdateState;
+            Unsubscribe();
         }
 
-        private void UpdateState(Cake cake)
+        protected void UpdateState(Cake cake)
         {
             _types[cake.Cream.EquationType] += _types[cake.Cream.EquationType] < _target ? 1 : 0;
 
@@ -46,6 +41,17 @@ namespace Model.Achievements
             }
 
             OnTargetAchieved?.Invoke(_points);
+            Debug.Log(string.Format("CorrectEquationTypes {0} +{1}", _target, _points));
+            Unsubscribe();
+        }
+
+        protected virtual void Subscribe()
+        {
+            _chef.OnCorrectCakeChecked += UpdateState;
+        }
+
+        protected virtual void Unsubscribe()
+        {
             _chef.OnCorrectCakeChecked -= UpdateState;
         }
     }

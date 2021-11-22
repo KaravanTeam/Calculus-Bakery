@@ -1,54 +1,35 @@
-﻿using Model.Transporter;
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace Model.Achievements
 {
-    internal interface IBrainAchievement
-    {
-        public event Action<int> OnTargetAchieved;
-    }
-
-    internal sealed class RankAchievement : MonoBehaviour, IBrainAchievement
+    internal sealed class RankAchievement : MonoBehaviour
     {
         [SerializeField] private string _name;
-        [SerializeField] private int _target;
-        [SerializeField] private int _points;
+        [SerializeField] private int _targetPercents;
 
-        [SerializeField] private Chef _chef;
+        [SerializeField] private Player _player;
 
-        private int _correctCakesCount;
-
-        public string Name => _name;
-        public int Target => _target;
-        public int Points => _points;
-
-        public event Action<int> OnTargetAchieved;
+        public event Action OnRankUpdated;
 
         private void OnEnable()
         {
-            _chef.OnCorrectCakeChecked += UpdateState;
-        }
-
-        private void Start()
-        {
-            BrainAchievements.Instance.Add(this);
+            _player.OnProgressUpdated += UpdateState;
         }
 
         private void OnDisable()
         {
-            _chef.OnCorrectCakeChecked -= UpdateState;
+            _player.OnProgressUpdated -= UpdateState;
         }
 
-        private void UpdateState(Cake cake)
+        private void UpdateState(int progress)
         {
-            _correctCakesCount += 1;
-
-            if (_correctCakesCount < _target)
+            if (progress < _targetPercents)
                 return;
 
-            OnTargetAchieved?.Invoke(_points);
-            _chef.OnCorrectCakeChecked -= UpdateState;
+            Debug.Log(_name);
+            OnRankUpdated?.Invoke();
+            _player.OnProgressUpdated -= UpdateState;
         }
     }
 }

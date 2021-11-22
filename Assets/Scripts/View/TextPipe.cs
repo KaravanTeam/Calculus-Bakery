@@ -17,7 +17,7 @@ namespace View
             _factory.OnFactoryDistributed += UpdateState;
         }
 
-        private void Start()
+        private void Awake()
         {
             _mesh = GetComponent<TextMesh>();
         }

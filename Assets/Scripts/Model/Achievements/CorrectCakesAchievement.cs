@@ -6,7 +6,7 @@ namespace Model.Achievements
 {
     internal sealed class CorrectCakesAchievement : MonoBehaviour, IBrainAchievement
     {
-        [SerializeField] private int _cakesTarget;
+        [SerializeField] private int _targetCount;
         [SerializeField] private int _points;
 
         [SerializeField] private Chef _chef;
@@ -18,36 +18,24 @@ namespace Model.Achievements
         private void OnEnable()
         {
             _chef.OnCorrectCakeChecked += UpdateState;
-            _chef.OnWrongCakeChecked += Reset;
-        }
-
-        private void Start()
-        {
-            BrainAchievements.Instance.Add(this);
         }
 
         private void OnDisable()
         {
             _chef.OnCorrectCakeChecked -= UpdateState;
-            _chef.OnWrongCakeChecked -= Reset;
         }
 
         private void UpdateState(Cake cake)
         {
             _count += 1;
 
-            if (_count < _cakesTarget)
+            if (_count < _targetCount)
                 return;
 
+            Debug.Log(string.Format("CorrectCakes {0} +{1}", _targetCount, _points));
             OnTargetAchieved?.Invoke(_points);
 
             _chef.OnCorrectCakeChecked -= UpdateState;
-            _chef.OnWrongCakeChecked -= Reset;
-        }
-
-        private void Reset(Cake cake)
-        {
-            _count = 0;
         }
     }
 }

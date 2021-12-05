@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _platform: {fileID: 288012914}
   _factory: {fileID: 76240506}
+  _transporter: {fileID: 1579058825}
 --- !u!4 &42930253
 Transform:
   m_ObjectHideFlags: 0
@@ -2644,7 +2645,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8746fe689b75344c822252c29270536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeTransition: 1
+  _timeTransition: 1.5
+  _start: {x: -13, y: 0}
+  _end: {x: 13, y: 0}
 --- !u!4 &1579058826
 Transform:
   m_ObjectHideFlags: 0

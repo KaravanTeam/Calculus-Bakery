@@ -10,6 +10,7 @@ namespace Model
     {
         [SerializeField] private Platform _platform;
         [SerializeField] private Factory _factory;
+        [SerializeField] private Transporter.Transporter _transporter;
 
         private IReadOnlyList<Pipe> _pipes;
 
@@ -20,11 +21,21 @@ namespace Model
         public event Action<Cake> OnCorrectCakeChecked;
         public event Action<Cake> OnWrongCakeChecked;
 
+        private void OnEnable()
+        {
+            _transporter.OnReseted += Distribute;
+        }
+
         private void Start()
         {
             _pipes = FindObjectsOfType<Pipe>();
 
             Distribute();
+        }
+
+        private void OnDisable()
+        {
+            _transporter.OnReseted -= Distribute;
         }
 
         public void Distribute()
@@ -42,7 +53,7 @@ namespace Model
             OnDistributed?.Invoke();
         }
 
-        public bool CheckSolution(Cake solution)
+        public void CheckSolution(Cake solution)
         {
             var isCorrectCake = solution.Bread.ID == solution.Cream.ID;
 
@@ -55,9 +66,7 @@ namespace Model
                 OnWrongCakeChecked?.Invoke(solution);
             }
 
-            OnCakeChecked?.Invoke();
-
-            return isCorrectCake;
+            OnCakeChecked?.Invoke();          
         }
     }
 }

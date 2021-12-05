@@ -58,6 +58,7 @@ namespace Controller
                 return;
 
             _chef.CheckSolution(_actualSolution);
+            StartCoroutine(_transporter.ResetPlatform());
 
             _servedButton.SetEnabledState();
             SetDisabledState();

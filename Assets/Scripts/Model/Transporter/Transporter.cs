@@ -9,17 +9,18 @@ namespace Model.Transporter
     internal sealed class Transporter : MonoBehaviour
     {
         [SerializeField] private float _timeTransition = 1;
+        [SerializeField] private Vector2 _start;
+        [SerializeField] private Vector2 _end;
 
         private Platform _platform;
         private Dictionary<PipeType, Pipe> _pipes;
 
-        private Vector3 _defaultPlatformPosition;
+        private Vector3 _defaultPosition;
         private PipeType _servicedPipe;
-        
+
+        public event Action OnReseted;
         public event Action<PipeType> OnPlatformMovingStarted;
         public event Action<PipeType> OnPlatformMovingEnded;
-
-        public int PipesCount { get; private set; }
 
         private void Start()
         {
@@ -27,20 +28,35 @@ namespace Model.Transporter
 
             _pipes = FindObjectsOfType<Pipe>()
                 .ToDictionary(pipe => pipe.Type, pipe => pipe);
-            PipesCount = _pipes.Count;
 
             var pipe = _pipes[PipeType.Left].transform.localPosition;
-            _defaultPlatformPosition = new Vector3(pipe.x, _platform.transform.localPosition.y);
+            _defaultPosition = new Vector3(pipe.x, _platform.transform.localPosition.y);
             _servicedPipe = PipeType.Left;
 
 
-            _platform.transform.localPosition = _defaultPlatformPosition;
+            _platform.transform.localPosition = _defaultPosition;
         }
 
         public Cake Build()
         {
             return new Cake(_platform.Equation, _pipes[_servicedPipe].Solution);
-        }    
+        }
+        
+        public IEnumerator ResetPlatform()
+        {
+            OnPlatformMovingStarted?.Invoke(_servicedPipe);
+
+            yield return _platform.MoveTo(_end, _timeTransition);
+
+            _platform.transform.localPosition = new Vector3(_start.x, _platform.transform.localPosition.y);
+            _servicedPipe = PipeType.Left;
+            OnReseted?.Invoke();
+
+            yield return _platform.MoveTo(_defaultPosition, _timeTransition);
+
+            OnPlatformMovingEnded?.Invoke(PipeType.Left);
+        }
+
 
         public bool TryMoveTowards(Direction direction)
         {

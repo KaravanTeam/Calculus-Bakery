@@ -1,4 +1,5 @@
-﻿using Model.Transporter;
+﻿using Model;
+using Model.Transporter;
 using UnityEngine;
 
 namespace View
@@ -8,13 +9,13 @@ namespace View
     internal sealed class TextPlatform : MonoBehaviour
     {
         [SerializeField] private Platform _platform;
-        [SerializeField] private Factory _factory;
+        [SerializeField] private Chef _chef;
 
         private TextMesh _mesh;
 
         private void OnEnable()
         {
-            _factory.OnFactoryDistributed += UpdateState;
+            _chef.OnDistributed += UpdateState;
         }
 
         private void Awake()
@@ -24,7 +25,7 @@ namespace View
 
         private void OnDisable()
         {
-            _factory.OnFactoryDistributed -= UpdateState;
+            _chef.OnDistributed -= UpdateState;
         }
 
         private void UpdateState()

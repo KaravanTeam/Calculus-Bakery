@@ -1,8 +1,8 @@
 ﻿namespace Model.Transporter
 {
-    internal sealed class Bread
+    internal sealed class Solution
     {
-        public Bread(int id, string value)
+        public Solution(int id, string value)
         {
             ID = id;
             Value = value;

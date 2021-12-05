@@ -1,10 +1,16 @@
 ﻿namespace Model.Transporter
 {
-    [System.Serializable]
-    internal class Equation
+    internal sealed class Equation
     {
-        public int ID;
-        public string Value;
-        public EquationType Type;
+        public Equation(int id, string value, EquationType type)
+        {
+            ID = id;
+            Value = value;
+            Type = type;
+        }
+
+        public int ID { get; }
+        public string Value { get; }
+        public EquationType Type { get; }
     }
 }

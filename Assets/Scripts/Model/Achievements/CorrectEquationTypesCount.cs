@@ -32,7 +32,7 @@ namespace Model.Achievements
 
         protected void UpdateState(Cake cake)
         {
-            _types[cake.Cream.EquationType] += _types[cake.Cream.EquationType] < _target ? 1 : 0;
+            _types[cake.Bread.Type] += _types[cake.Bread.Type] < _target ? 1 : 0;
 
             foreach (var count in _types.Values)
             {

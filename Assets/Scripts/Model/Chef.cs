@@ -1,31 +1,72 @@
 ﻿using Model.Transporter;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Model
 {
     internal sealed class Chef : MonoBehaviour
     {
-        public event Action<Cake> OnCakeChecked;
+        [SerializeField] private Platform _platform;
+        [SerializeField] private Factory _factory;
+        [SerializeField] private Transporter.Transporter _transporter;
+
+        private IReadOnlyList<Pipe> _pipes;
+
+        private readonly System.Random _randGenerator = new System.Random();
+
+        public event Action OnCakeChecked;
+        public event Action OnDistributed;
         public event Action<Cake> OnCorrectCakeChecked;
         public event Action<Cake> OnWrongCakeChecked;
 
-        public bool IsCorrectCake(Cake cake)
+        private void OnEnable()
         {
-            var isCorrectCake = cake.Bread.ID == cake.Cream.ID;
+            _transporter.OnReseted += Distribute;
+        }
 
-            OnCakeChecked?.Invoke(cake);
+        private void Start()
+        {
+            _pipes = FindObjectsOfType<Pipe>();
+
+            Distribute();
+        }
+
+        private void OnDisable()
+        {
+            _transporter.OnReseted -= Distribute;
+        }
+
+        public void Distribute()
+        {
+            var cakes = _factory.Build(_pipes.Count);
+
+            var expected = cakes[_randGenerator.Next(cakes.Count)];
+
+            var stack = new Stack<Cake>(cakes);
+            foreach (var pipe in _pipes)
+                pipe.Solution = stack.Pop().Cream;
+
+            _platform.Equation = expected.Bread;
+
+            OnDistributed?.Invoke();
+        }
+
+        public void CheckSolution(Cake solution)
+        {
+            var isCorrectCake = solution.Bread.ID == solution.Cream.ID;
 
             if (isCorrectCake)
             {
-                OnCorrectCakeChecked?.Invoke(cake);
+                OnCorrectCakeChecked?.Invoke(solution);
             }
             else
             {
-                OnWrongCakeChecked?.Invoke(cake);
+                OnWrongCakeChecked?.Invoke(solution);
             }
 
-            return isCorrectCake;
+            OnCakeChecked?.Invoke();          
         }
     }
 }

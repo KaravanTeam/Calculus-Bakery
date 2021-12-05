@@ -7,65 +7,39 @@ namespace Model.Transporter
 {
     internal sealed class Factory : MonoBehaviour
     {
-        public int EquationsCount => _equations.Count;
-
         [SerializeField] private TextAsset _source;
-        [SerializeField] private IReadOnlyList<Equation> _equations;
+        [SerializeField] private IReadOnlyList<EquationInfo> _equations;
 
-        private Platform _platform;
-        private IReadOnlyList<Pipe> _pipes;
-
+        private LinkedList<EquationInfo> _shuffleEquations = new LinkedList<EquationInfo>();
         private readonly System.Random _randGenerator = new System.Random();
-        private LinkedList<Equation> _shuffleEquations = new LinkedList<Equation>();
-
-        public event Action OnFactoryDistributed;
 
         private void Awake()
         {
-            _equations = JsonUtility.FromJson<EquationsInfo>(_source.text).Equations;
+            _equations = JsonUtility.FromJson<EquationsDatabase>(_source.text).Equations;
         }
 
-        private void Start()
-        {
-            _platform = FindObjectOfType<Platform>();
-            _pipes = FindObjectsOfType<Pipe>()
-                .Where(pipe => pipe.Type != PipeType.CakeBuilder)
-                .ToList();
+        public int EquationsCount => _equations.Count;
 
-            // TODO: temp
-            Distribute();
-        }
-
-        public void Distribute()
+        public List<Cake> Build(int count)
         {       
-            if (_shuffleEquations.Count < _pipes.Count)
-                _shuffleEquations = new LinkedList<Equation>(_equations.OrderBy(_ => _randGenerator.Next()));
+            if (_shuffleEquations.Count < count)
+                _shuffleEquations = new LinkedList<EquationInfo>(_equations.OrderBy(_ => _randGenerator.Next()));
 
-            var equations = new List<Equation>();
-            foreach (var pipe in _pipes)
+            var cakes = new List<Cake>();
+
+            for (var i = 0; i < count; i++)
             {
                 var equation = _shuffleEquations.Last.Value;
 
-                pipe.Cream = new Cream(equation.ID, equation.Type);
-                equations.Add(equation);
+                var bread = new Equation(equation.ID, equation.Value, equation.Type);
+                var cream = new Solution(equation.ID, equation.Solution);
+
+                cakes.Add(new Cake(bread, cream));
 
                 _shuffleEquations.RemoveLast();
             }
 
-            var expectedEquation = equations[_randGenerator.Next(0, equations.Count)];
-            _platform.Equation = new Bread(expectedEquation.ID, expectedEquation.Value);
-
-            OnFactoryDistributed?.Invoke();
-        }
-
-        public Cake BuildCake(PipeType servicedPipe)
-        {
-            var pipe = _pipes.FirstOrDefault(pipe => pipe.Type == servicedPipe);
-            if (pipe is null)
-                throw new UnityException("Unknown servicePipe");
-
-            Debug.Log($"Equation: {_platform.Equation.ID}, Type: {pipe.Cream.ID}");
-            return new Cake(_platform.Equation, pipe.Cream);
+            return cakes;
         }
     }
 }

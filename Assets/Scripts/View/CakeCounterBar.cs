@@ -8,8 +8,9 @@ namespace View
     [RequireComponent(typeof(Slider))]
     internal class CakeCounterBar : MonoBehaviour
     {
-        private Slider _slider;
         [SerializeField] private Chef _chef;
+
+        private Slider _slider;
 
         private void Awake()
         {

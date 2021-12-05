@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,81 +8,75 @@ namespace Model.Transporter
 {
     internal sealed class Transporter : MonoBehaviour
     {
-        public PipeType ServicedPipe { get; private set; }
-        public bool IsMoving { get; private set; }
+        [SerializeField] private float _timeTransition = 1;
+        [SerializeField] private Vector2 _start;
+        [SerializeField] private Vector2 _end;
 
-        [SerializeField] private float _timeTransitionInSeconds = 1;
+        private Platform _platform;
+        private Dictionary<PipeType, Pipe> _pipes;
 
-        private Factory _factory;
-        private Transform _platform;
-        private IReadOnlyDictionary<PipeType, Vector3> _pipes;
+        private Vector3 _defaultPosition;
+        private PipeType _servicedPipe;
 
-        private Vector3 _defaultPlatformPosition; 
+        public event Action OnReseted;
+        public event Action<PipeType> OnPlatformMovingStarted;
+        public event Action<PipeType> OnPlatformMovingEnded;
 
         private void Start()
         {
-            _factory = FindObjectOfType<Factory>();
-            _platform = FindObjectOfType<Platform>().GetComponent<Transform>();
+            _platform = FindObjectOfType<Platform>();
 
             _pipes = FindObjectsOfType<Pipe>()
-                .ToDictionary(pipe => pipe.Type, pipe => pipe.transform.localPosition);
+                .ToDictionary(pipe => pipe.Type, pipe => pipe);
 
-            _defaultPlatformPosition = new Vector3(
-                _pipes[PipeType.CakeBuilder].x,
-                _platform.localPosition.y);
+            var pipe = _pipes[PipeType.Left].transform.localPosition;
+            _defaultPosition = new Vector3(pipe.x, _platform.transform.localPosition.y);
+            _servicedPipe = PipeType.Left;
 
-            _platform.transform.localPosition = _defaultPlatformPosition;
-            ServicedPipe = PipeType.CakeBuilder;
+
+            _platform.transform.localPosition = _defaultPosition;
         }
+
+        public Cake Build()
+        {
+            return new Cake(_platform.Equation, _pipes[_servicedPipe].Solution);
+        }
+        
+        public IEnumerator ResetPlatform()
+        {
+            OnPlatformMovingStarted?.Invoke(_servicedPipe);
+
+            yield return _platform.MoveTo(_end, _timeTransition);
+
+            _platform.transform.localPosition = new Vector3(_start.x, _platform.transform.localPosition.y);
+            _servicedPipe = PipeType.Left;
+            OnReseted?.Invoke();
+
+            yield return _platform.MoveTo(_defaultPosition, _timeTransition);
+
+            OnPlatformMovingEnded?.Invoke(PipeType.Left);
+        }
+
 
         public bool TryMoveTowards(Direction direction)
         {
-            if (IsMoving)
-                return false;
-
-            var target = (int)ServicedPipe + (int)direction;
+            var target = (int)_servicedPipe + (int)direction;
           
-            if (target < (int)Direction.Left || target > (int)Direction.Right)
+            if (target < (int)PipeType.Left || target > (int)PipeType.Right)
                 return false;
 
-            ServicedPipe = (PipeType)target;
-            StartCoroutine(MoveTo((PipeType)target));
+            StartCoroutine(MovePlatformTo((PipeType)target));
 
             return true;
         }
 
-        public bool TryMoveToDefault()
+        private IEnumerator MovePlatformTo(PipeType target)
         {
-            if (IsMoving)
-                return false;
+            OnPlatformMovingStarted?.Invoke(_servicedPipe);
 
-            ServicedPipe = PipeType.CakeBuilder;
-            StartCoroutine(MoveTo(PipeType.CakeBuilder));
+            yield return _platform.MoveTo(_pipes[target].transform.localPosition, _timeTransition);
 
-            return true;
-        }
-
-        private IEnumerator MoveTo(PipeType target)
-        {
-            IsMoving = true;
-
-            var nextPipe = _pipes[target];
-            
-            var start = _platform.transform.localPosition;
-            var end = new Vector3(nextPipe.x, start.y);
-
-            for (var t = 0f; t < 1; t += Time.deltaTime / _timeTransitionInSeconds)
-            {
-                var easingTime = t < 0.5 ? t * t * 2 : 1 - (1 - t) * (1 - t) * 2;
-
-                _platform.transform.localPosition = Vector3.Lerp(start, end, easingTime);
-
-                yield return null;
-            }
-
-            _platform.transform.localPosition = end;
-
-            IsMoving = false;
+            OnPlatformMovingEnded?.Invoke(_servicedPipe = target);
         }
     }
 }

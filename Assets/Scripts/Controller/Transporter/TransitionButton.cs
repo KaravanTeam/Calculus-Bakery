@@ -5,14 +5,14 @@ using UnityEngine.UI;
 namespace Controller
 {
     [RequireComponent(typeof(Button))]
-    internal class TransitionButton : TransporterManipulationButton
+    internal sealed class TransitionButton : MonoBehaviour
     {
         [SerializeField] private Direction _direction;
-
-        private Transporter _transporter;
+        [SerializeField] private Transporter _transporter;
 
         private Button _button;
-        private ServeCreamButton _serveButton;
+
+        private bool _isInteractable = true;
 
         private void Awake()
         {
@@ -22,39 +22,32 @@ namespace Controller
         private void OnEnable()
         {
             _button.onClick.AddListener(OnClick);
-        }
-
-        private void Start()
-        {
-            _transporter = FindObjectOfType<Transporter>();
-            _serveButton = FindObjectOfType<ServeCreamButton>();
+            _transporter.OnPlatformMovingStarted += SetDisabledState;
+            _transporter.OnPlatformMovingEnded += SetEnabledState;
         }
 
         private void OnDisable()
         {
-            _button.onClick.RemoveAllListeners();
+            _button.onClick.RemoveListener(OnClick);
+            _transporter.OnPlatformMovingStarted -= SetDisabledState;
+            _transporter.OnPlatformMovingEnded -= SetEnabledState;
         }
 
-        protected override void OnClick()
+        private void OnClick()
         {
-            if (!_transporter.TryMoveTowards(_direction))
+            if (!_isInteractable)
                 return;
 
-            if (_direction == Direction.Right
-                && _transporter.ServicedPipe == PipeType.Left)
-            {
-                _serveButton.SetState(ButtonState.Enabled);
-            }
+            _transporter.TryMoveTowards(_direction);          
         }
 
-        protected override void SetEnabledState()
+        private void SetEnabledState(PipeType pipe)
         {
-            _button.interactable = true;
+            _isInteractable = true;
         }
-
-        protected override void SetDisabledState()
+        private void SetDisabledState(PipeType pipe)
         {
-            _button.interactable = false;
+            _isInteractable = false;
         }
     }
 }

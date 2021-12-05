@@ -2,13 +2,13 @@
 {
     internal sealed class Cake
     {
-        public Cake(Bread equation, Cream equationType)
+        public Cake(Equation equation, Solution solution)
         {
             Bread = equation;
-            Cream = equationType;
+            Cream = solution;
         }
 
-        public Bread Bread { get; }
-        public Cream Cream { get; }
+        public Equation Bread { get; }
+        public Solution Cream { get; }
     }
 }

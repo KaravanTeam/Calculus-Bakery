@@ -1,7 +1,6 @@
 ﻿namespace Model.Transporter
 {
-    [System.Serializable]
-    internal enum EquationType
+    enum EquationType
     {
         None
     }

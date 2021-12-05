@@ -1,4 +1,5 @@
-﻿using Model.Transporter;
+﻿using Model;
+using Model.Transporter;
 using UnityEngine;
 
 namespace View
@@ -8,28 +9,28 @@ namespace View
     internal sealed class TextPipe : MonoBehaviour
     {
         [SerializeField] private Pipe _pipe;
-        [SerializeField] private Factory _factory;
+        [SerializeField] private Chef _chef;
 
         private TextMesh _mesh;
-
-        private void OnEnable()
-        {
-            _factory.OnFactoryDistributed += UpdateState;
-        }
 
         private void Awake()
         {
             _mesh = GetComponent<TextMesh>();
         }
 
+        private void OnEnable()
+        {
+            _chef.OnDistributed += UpdateState;
+        }
+
         private void OnDisable()
         {
-            _factory.OnFactoryDistributed -= UpdateState;
+            _chef.OnDistributed -= UpdateState;
         }
 
         private void UpdateState()
         {
-            _mesh.text = _pipe.Cream.ID.ToString();
+            _mesh.text = _pipe.Solution.ID.ToString();
         }
     }
 }

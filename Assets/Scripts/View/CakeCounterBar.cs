@@ -25,7 +25,9 @@ namespace View
 
         private void Start()
         {
-            _slider.maxValue = FindObjectOfType<Factory>().EquationsCount;
+            //TODO
+            //_slider.maxValue = FindObjectOfType<Factory>().EquationsCount;
+            _slider.maxValue = 55;
         }
 
         private void OnDisable()

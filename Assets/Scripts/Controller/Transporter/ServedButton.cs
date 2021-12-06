@@ -1,4 +1,5 @@
 ﻿using Model.Transporter;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,8 @@ namespace Controller
         private Button _button;
 
         private bool _isInteractable = true;
+
+        public event Action OnCreamServed;
 
         private void Awake()
         {
@@ -50,10 +53,11 @@ namespace Controller
                 return;
 
             var solution = _transporter.Build();
-            Debug.Log("Cream was served");
-
+            
             _checkerButton.SaveSolution(solution);
             _checkerButton.SetEnabledState();
+
+            OnCreamServed?.Invoke();
 
             SetDisabledState();
         }

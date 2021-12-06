@@ -8,38 +8,54 @@ namespace Model.Transporter
     internal sealed class Factory : MonoBehaviour
     {
         [SerializeField] private TextAsset _source;
-        [SerializeField] private IReadOnlyList<EquationInfo> _equations;
 
-        private LinkedList<EquationInfo> _shuffleEquations = new LinkedList<EquationInfo>();
+        private EquationInfo[] _database;
+        private Dictionary<int, EquationInfo> _equations;
+
         private readonly System.Random _randGenerator = new System.Random();
 
         private void Awake()
         {
-            _equations = JsonUtility.FromJson<EquationsDatabase>(_source.text).Equations;
+            _database = JsonUtility.FromJson<EquationsDatabase>(_source.text).Equations;
+
+            _equations = GetNewUnsolvedEquations();
         }
 
-        public int EquationsCount => _equations.Count;
+        public List<Cake> BuildCakes(int count)
+        {
+            if (_equations.Count < count)
+                _equations = GetNewUnsolvedEquations();
 
-        public List<Cake> Build(int count)
-        {       
-            if (_shuffleEquations.Count < count)
-                _shuffleEquations = new LinkedList<EquationInfo>(_equations.OrderBy(_ => _randGenerator.Next()));
+            var shuffledEquations = new Stack<EquationInfo>(_equations
+                .Values
+                .OrderBy(_ => _randGenerator.Next()));
 
             var cakes = new List<Cake>();
 
             for (var i = 0; i < count; i++)
             {
-                var equation = _shuffleEquations.Last.Value;
+                var equation = shuffledEquations.Pop();
 
                 var bread = new Equation(equation.ID, equation.Value, equation.Type);
                 var cream = new Solution(equation.ID, equation.Solution);
 
                 cakes.Add(new Cake(bread, cream));
-
-                _shuffleEquations.RemoveLast();
             }
 
             return cakes;
+        }
+
+        public void MarkSolvedEquation(int id)
+        {
+            if (!_equations.Remove(id))
+                throw new InvalidOperationException($"Unknown equation id = {id}");
+        }
+
+        private Dictionary<int, EquationInfo> GetNewUnsolvedEquations()
+        {
+            return _database
+                .ToArray()
+                .ToDictionary(eq => eq.ID, eq => eq);
         }
     }
 }

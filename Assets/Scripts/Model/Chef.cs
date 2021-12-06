@@ -1,6 +1,5 @@
 ﻿using Model.Transporter;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,7 +39,7 @@ namespace Model
 
         public void Distribute()
         {
-            var cakes = _factory.Build(_pipes.Count);
+            var cakes = _factory.BuildCakes(_pipes.Count);
 
             var expected = cakes[_randGenerator.Next(cakes.Count)];
 
@@ -59,6 +58,7 @@ namespace Model
 
             if (isCorrectCake)
             {
+                _factory.MarkSolvedEquation(solution.Bread.ID);
                 OnCorrectCakeChecked?.Invoke(solution);
             }
             else

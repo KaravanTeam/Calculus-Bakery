@@ -10,7 +10,7 @@ namespace Model.Achievements
 
         [SerializeField] private Player _player;
 
-        public string Rank => _name;
+        public string Name => _name;
 
         public event Action<RankAchievement> OnRankReached;
 

@@ -8,6 +8,10 @@ namespace Model.Achievements
 {
     internal class CorrectEquationTypesCount : BrainAchievement
     {
+        [TextArea]
+        [SerializeField] private string _text;
+
+        [SerializeField] private int _orderNumber;
         [SerializeField] private int _target;
         [SerializeField] private int _points;
 
@@ -19,11 +23,14 @@ namespace Model.Achievements
                 .Cast<EquationType>()
                 .ToDictionary(type => type, _ => 0);
 
+        public override int OrderNumber => _orderNumber;
+        public override string Text => _text;
         public override int Score => _types.Values.Sum();
         public override int Target => _target * _types.Count;
         public override int Points => _points;
 
         public override event Action OnStateUpdated;
+        public override event Action<BrainAchievement> OnReached;
 
         private void OnEnable()
         {
@@ -47,6 +54,8 @@ namespace Model.Achievements
             }
 
             _player.AddProgress(_points);
+            OnReached?.Invoke(this);
+
             Unsubscribe();
         }
 

@@ -30,7 +30,7 @@ namespace View
 
         private void UpdateField(RankAchievement rank)
         {
-            _field.text = rank.Rank;
+            _field.text = rank.Name;
 
 
             rank.OnRankReached -= UpdateField;

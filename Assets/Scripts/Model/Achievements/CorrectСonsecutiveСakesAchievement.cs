@@ -6,6 +6,10 @@ namespace Model.Achievements
 {
     internal class CorrectСonsecutiveСakesAchievement : BrainAchievement
     {
+        [TextArea]
+        [SerializeField] private string _text;
+
+        [SerializeField] private int _orderNumber;
         [SerializeField] private int _cakesTarget;
         [SerializeField] private int _points;
 
@@ -14,11 +18,14 @@ namespace Model.Achievements
 
         private int _count;
 
+        public override int OrderNumber => _orderNumber;
+        public override string Text => _text;
         public override int Score => _count;
         public override int Target => _cakesTarget;
         public override int Points => _points;
 
         public override event Action OnStateUpdated;
+        public override event Action<BrainAchievement> OnReached;
 
         private void OnEnable()
         {
@@ -39,6 +46,7 @@ namespace Model.Achievements
                 return;
 
             _player.AddProgress(_points);
+            OnReached?.Invoke(this);
 
             Unsubcribe();
         }

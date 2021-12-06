@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 namespace Controller
 {
     [RequireComponent(typeof(Button))]
-    internal sealed class MenuBackButton : MonoBehaviour
+    internal sealed class SceneLoader : MonoBehaviour
     {
+        [SerializeField] private string _name;
+
         private Button _button;
 
         private void Awake()
@@ -16,17 +18,17 @@ namespace Controller
 
         private void OnEnable()
         {
-            _button.onClick.AddListener(Exit);
+            _button.onClick.AddListener(Load);
         }
 
         private void OnDisable()
         {
-            _button.onClick.RemoveListener(Exit);
+            _button.onClick.RemoveListener(Load);
         }
 
-        private void Exit()
+        private void Load()
         {
-            SceneManager.LoadScene("Menu");
+            SceneManager.LoadScene(_name);
         }
     }
 }

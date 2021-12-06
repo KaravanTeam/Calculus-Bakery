@@ -4,15 +4,15 @@ using UnityEngine.UI;
 namespace Controller
 {
     [RequireComponent(typeof(Animator))]
-    internal sealed class ReferencePanelMover : MonoBehaviour
+    internal sealed class PanelMover : MonoBehaviour
     {
+        [SerializeField] private string _entryTrigger;
         [SerializeField] private Button _entryButton;
+
+        [SerializeField] private string _exitTrigger;
         [SerializeField] private Button _exitButton;
 
         private Animator _panelAnimator;
-
-        private readonly string _entryTrigger = "IsEntry";
-        private readonly string _exitTrigger = "IsExit";
 
         private void Awake()
         {

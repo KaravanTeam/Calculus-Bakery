@@ -12,7 +12,7 @@ namespace Model
 
         public event Action<int> OnProgressUpdated;
 
-        public void UpdateProgress(int value)
+        public void AddProgress(int value)
         {
             Progress += value;
             OnProgressUpdated?.Invoke(Progress);

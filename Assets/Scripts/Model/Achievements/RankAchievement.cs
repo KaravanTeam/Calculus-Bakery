@@ -10,7 +10,9 @@ namespace Model.Achievements
 
         [SerializeField] private Player _player;
 
-        public event Action OnRankUpdated;
+        public string Rank => _name;
+
+        public event Action<RankAchievement> OnRankReached;
 
         private void OnEnable()
         {
@@ -27,8 +29,8 @@ namespace Model.Achievements
             if (progress < _targetPercents)
                 return;
 
-            Debug.Log(_name);
-            OnRankUpdated?.Invoke();
+            OnRankReached?.Invoke(this);
+
             _player.OnProgressUpdated -= UpdateState;
         }
     }

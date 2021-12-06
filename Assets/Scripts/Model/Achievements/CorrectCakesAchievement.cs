@@ -4,16 +4,21 @@ using UnityEngine;
 
 namespace Model.Achievements
 {
-    internal sealed class CorrectCakesAchievement : MonoBehaviour, IBrainAchievement
+    internal sealed class CorrectCakesAchievement : BrainAchievement
     {
         [SerializeField] private int _targetCount;
         [SerializeField] private int _points;
 
         [SerializeField] private Chef _chef;
-
+        [SerializeField] private Player _player;
+        
         private int _count;
 
-        public event Action<int> OnTargetAchieved;
+        public override int Score => _count;
+        public override int Target => _targetCount;
+        public override int Points => _points;
+
+        public override event Action OnStateUpdated;
 
         private void OnEnable()
         {
@@ -28,12 +33,12 @@ namespace Model.Achievements
         private void UpdateState(Cake cake)
         {
             _count += 1;
+            OnStateUpdated?.Invoke();
 
             if (_count < _targetCount)
                 return;
 
-            Debug.Log(string.Format("CorrectCakes {0} +{1}", _targetCount, _points));
-            OnTargetAchieved?.Invoke(_points);
+            _player.AddProgress(_points);
 
             _chef.OnCorrectCakeChecked -= UpdateState;
         }

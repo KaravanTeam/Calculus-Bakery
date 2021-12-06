@@ -6,19 +6,24 @@ using UnityEngine;
 
 namespace Model.Achievements
 {
-    internal class CorrectEquationTypesCount : MonoBehaviour, IBrainAchievement
+    internal class CorrectEquationTypesCount : BrainAchievement
     {
         [SerializeField] private int _target;
         [SerializeField] private int _points;
 
         [SerializeField] protected Chef _chef;
+        [SerializeField] private Player _player;
 
         private readonly Dictionary<EquationType, int> _types = 
             Enum.GetValues(typeof(EquationType))
                 .Cast<EquationType>()
                 .ToDictionary(type => type, _ => 0);
 
-        public event Action<int> OnTargetAchieved;
+        public override int Score => _types.Values.Sum();
+        public override int Target => _target * _types.Count;
+        public override int Points => _points;
+
+        public override event Action OnStateUpdated;
 
         private void OnEnable()
         {
@@ -33,6 +38,7 @@ namespace Model.Achievements
         protected void UpdateState(Cake cake)
         {
             _types[cake.Bread.Type] += _types[cake.Bread.Type] < _target ? 1 : 0;
+            OnStateUpdated?.Invoke();
 
             foreach (var count in _types.Values)
             {
@@ -40,8 +46,7 @@ namespace Model.Achievements
                     return;
             }
 
-            OnTargetAchieved?.Invoke(_points);
-            Debug.Log(string.Format("CorrectEquationTypes {0} +{1}", _target, _points));
+            _player.AddProgress(_points);
             Unsubscribe();
         }
 

@@ -1,5 +1,4 @@
 ﻿using Model.Achievements;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,13 +35,13 @@ namespace View
 
         private void ReportRank(RankAchievement rank)
         {
-            var message = $"Вы достигли звания\n\"{rank.Name}\"";
+            var message = $"Ты достиг звания\n\"{rank.Name}\"";
             Report(message);
         }
 
         private void ReportBrainAchievement(BrainAchievement brain)
         {
-            var message = $"Вы выполнили достижение #{brain.OrderNumber}\n\"{brain.Text}\"";
+            var message = $"Ты выполнил достижение #{brain.OrderNumber}\n\"{brain.Text}\"";
             Report(message);
         }
 

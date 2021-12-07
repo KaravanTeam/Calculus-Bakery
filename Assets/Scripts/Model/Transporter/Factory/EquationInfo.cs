@@ -6,6 +6,6 @@
         public int ID;
         public string Value;
         public string Solution;
-        public EquationType Type;
+        public string Type;
     }
 }

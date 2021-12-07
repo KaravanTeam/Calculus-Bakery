@@ -1,7 +1,8 @@
 ﻿namespace Model.Transporter
 {
-    enum EquationType
+    internal enum EquationType
     {
-        None
+        Separable,
+        Homogeneous
     }
 }

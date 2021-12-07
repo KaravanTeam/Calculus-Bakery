@@ -36,7 +36,7 @@ namespace Model.Transporter
             {
                 var equation = shuffledEquations.Pop();
 
-                var bread = new Equation(equation.ID, equation.Value, equation.Type);
+                var bread = new Equation(equation.ID, equation.Value, (EquationType)Enum.Parse(typeof(EquationType), equation.Type));
                 var cream = new Solution(equation.ID, equation.Solution);
 
                 cakes.Add(new Cake(bread, cream));

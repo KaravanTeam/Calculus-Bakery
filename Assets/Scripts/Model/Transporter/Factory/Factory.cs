@@ -16,6 +16,7 @@ namespace Model.Transporter
 
         private void Awake()
         {
+            
             _database = JsonUtility.FromJson<EquationsDatabase>(_source.text).Equations;
 
             _equations = GetNewUnsolvedEquations();
@@ -49,6 +50,11 @@ namespace Model.Transporter
         {
             if (!_equations.Remove(id))
                 throw new InvalidOperationException($"Unknown equation id = {id}");
+        }
+
+        private void LoadEquations()
+        {
+
         }
 
         private Dictionary<int, EquationInfo> GetNewUnsolvedEquations()

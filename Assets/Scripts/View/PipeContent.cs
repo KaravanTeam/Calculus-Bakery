@@ -4,18 +4,17 @@ using UnityEngine;
 
 namespace View
 {
-    // TODO: temp class
-    [RequireComponent(typeof(TextMesh))]
-    internal sealed class TextPipe : MonoBehaviour
+    [RequireComponent(typeof(SpriteRenderer))]
+    internal sealed class PipeContent : MonoBehaviour
     {
         [SerializeField] private Pipe _pipe;
         [SerializeField] private Chef _chef;
 
-        private TextMesh _mesh;
+        private SpriteRenderer _render;
 
         private void Awake()
         {
-            _mesh = GetComponent<TextMesh>();
+            _render = GetComponent<SpriteRenderer>();
         }
 
         private void OnEnable()
@@ -30,7 +29,7 @@ namespace View
 
         private void UpdateState()
         {
-            _mesh.text = _pipe.Solution.ID.ToString();
+            _render.sprite = _pipe.Solution.Sprite;
         }
     }
 }

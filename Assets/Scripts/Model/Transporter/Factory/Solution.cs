@@ -1,14 +1,16 @@
-﻿namespace Model.Transporter
+﻿using UnityEngine;
+
+namespace Model.Transporter
 {
     internal sealed class Solution
     {
-        public Solution(int id, string value)
+        public Solution(int id, Sprite value)
         {
             ID = id;
-            Value = value;
+            Sprite = value;
         }
 
         public int ID { get; }
-        public string Value { get; }
+        public Sprite Sprite { get; }
     }
 }

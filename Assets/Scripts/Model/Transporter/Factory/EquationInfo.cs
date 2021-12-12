@@ -1,11 +1,11 @@
-﻿namespace Model.Transporter
+﻿using UnityEngine;
+
+namespace Model.Transporter
 {
-    [System.Serializable]
-    internal class EquationInfo
+    internal class EquationInfo : MonoBehaviour
     {
-        public int ID;
-        public string Value;
-        public string Solution;
-        public string Type;
+        public Sprite Value;
+        public Sprite Solution;
+        public EquationType Type;
     }
 }

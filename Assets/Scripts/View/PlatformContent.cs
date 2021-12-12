@@ -4,14 +4,13 @@ using UnityEngine;
 
 namespace View
 {
-    // TODO: temp class
-    [RequireComponent(typeof(TextMesh))]
-    internal sealed class TextPlatform : MonoBehaviour
+    [RequireComponent(typeof(SpriteRenderer))]
+    internal sealed class PlatformContent : MonoBehaviour
     {
         [SerializeField] private Platform _platform;
         [SerializeField] private Chef _chef;
 
-        private TextMesh _mesh;
+        private SpriteRenderer _render;
 
         private void OnEnable()
         {
@@ -20,7 +19,7 @@ namespace View
 
         private void Awake()
         {
-            _mesh = GetComponent<TextMesh>();
+            _render = GetComponent<SpriteRenderer>();
         }
 
         private void OnDisable()
@@ -30,7 +29,7 @@ namespace View
 
         private void UpdateState()
         {
-            _mesh.text = _platform.Equation.ID.ToString();
+            _render.sprite = _platform.Equation.Sprite;
         }
     }
 }

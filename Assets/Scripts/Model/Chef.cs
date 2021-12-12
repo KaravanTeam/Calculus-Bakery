@@ -42,9 +42,8 @@ namespace Model
 
             var expected = cakes[_randGenerator.Next(cakes.Count)];
 
-            var stack = new Stack<Cake>(cakes);
-            foreach (var pipe in _pipes)
-                pipe.Solution = stack.Pop().Cream;
+            for (var i = 0; i < _pipes.Count; i++)
+                _pipes[i].Solution = cakes[i].Cream;
 
             _platform.Equation = expected.Bread;
 

@@ -3,6 +3,11 @@
     internal enum EquationType
     {
         Separable,
-        Homogeneous
+        Homogeneous,
+        GeneralHomogeneous,
+        LDU_Y,
+        LDU_X,
+        Bernoulli,
+        Differential
     }
 }

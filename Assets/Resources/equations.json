@@ -1,186 +1,285 @@
 {
-    "Equations": 
-    [
-        {
-            "ID": 0,
-            "Value": "",
-            "Solution": "",
-            "Type": "Separable"
-        },
+  "Equations": [
+    {
+      "ID": 0,
+      "Value": "EquationImages/Separable/1.svg",
+      "Solution": "EquationImages/Separable/Solution.svg",
+      "Type": "Separable"
+    },
 
-        {
-            "ID": 1,
-            "Value": "",
-            "Solution": "",
-            "Type": "Separable"
-        },
+    {
+      "ID": 1,
+      "Value": "EquationImages/Separable/2.svg",
+      "Solution": "EquationImages/Separable/Solution.svg",
+      "Type": "Separable"
+    },
 
-        {
-            "ID": 2,
-            "Value": "",
-            "Solution": "",
-            "Type": "Separable"
-        },
+    {
+      "ID": 2,
+      "Value": "EquationImages/Separable/3.svg",
+      "Solution": "EquationImages/Separable/Solution.svg",
+      "Type": "Separable"
+    },
 
-        {
-            "ID": 3,
-            "Value": "",
-            "Solution": "",
-            "Type": "Separable"
-        },
+    {
+      "ID": 3,
+      "Value": "EquationImages/Separable/4.svg",
+      "Solution": "EquationImages/Separable/Solution.svg",
+      "Type": "Separable"
+    },
 
-        {
-            "ID": 4,
-            "Value": "",
-            "Solution": "",
-            "Type": "Separable"
-        },
+    {
+      "ID": 4,
+      "Value": "EquationImages/Separable/5.svg",
+      "Solution": "EquationImages/Separable/Solution.svg",
+      "Type": "Separable"
+    },
 
-        {
-            "ID": 5,
-            "Value": "",
-            "Solution": "",
-            "Type": "Separable"
-        },
+    {
+      "ID": 5,
+      "Value": "EquationImages/Separable/6.svg",
+      "Solution": "EquationImages/Separable/Solution.svg",
+      "Type": "Separable"
+    },
 
-        {
-            "ID": 6,
-            "Value": "",
-            "Solution": "",
-            "Type": "Separable"
-        },
+    {
+      "ID": 6,
+      "Value": "EquationImages/Homogeneous/1.svg",
+      "Solution": "EquationImages/Homogeneous/Solution.svg",
+      "Type": "Homogeneous"
+    },
 
-        {
-            "ID": 7,
-            "Value": "",
-            "Solution": "",
-            "Type": "Separable"
-        },
+    {
+      "ID": 7,
+      "Value": "EquationImages/Homogeneous/2.svg",
+      "Solution": "EquationImages/Homogeneous/Solution.svg",
+      "Type": "Homogeneous"
+    },
 
-        {
-            "ID": 8,
-            "Value": "",
-            "Solution": "",
-            "Type": "Separable"
-        },
+    {
+      "ID": 8,
+      "Value": "EquationImages/Homogeneous/3.svg",
+      "Solution": "EquationImages/Homogeneous/Solution.svg",
+      "Type": "Homogeneous"
+    },
 
-        {
-            "ID": 9,
-            "Value": "",
-            "Solution": "",
-            "Type": "Separable"
-        },
+    {
+      "ID": 9,
+      "Value": "EquationImages/Homogeneous/4.svg",
+      "Solution": "EquationImages/Homogeneous/Solution.svg",
+      "Type": "Homogeneous"
+    },
 
-        {
-            "ID": 10,
-            "Value": "",
-            "Solution": "",
-            "Type": "Separable"
-        },
+    {
+      "ID": 10,
+      "Value": "EquationImages/Homogeneous/5.svg",
+      "Solution": "EquationImages/Homogeneous/Solution.svg",
+      "Type": "Homogeneous"
+    },
 
-        {
-            "ID": 11,
-            "Value": "",
-            "Solution": "",
-            "Type": "Separable"
-        },
+    {
+      "ID": 11,
+      "Value": "EquationImages/Homogeneous/6.svg",
+      "Solution": "EquationImages/Homogeneous/Solution.svg",
+      "Type": "Homogeneous"
+    },
 
-        {
-            "ID": 12,
-            "Value": "",
-            "Solution": "",
-            "Type": "Homogeneous"
-        },
+    {
+      "ID": 12,
+      "Value": "EquationImages/Homogeneous/7.svg",
+      "Solution": "EquationImages/Homogeneous/Solution.svg",
+      "Type": "Homogeneous"
+    },
 
-        {
-            "ID": 13,
-            "Value": "",
-            "Solution": "",
-            "Type": "Homogeneous"
-        },
+    {
+      "ID": 13,
+      "Value": "EquationImages/Homogeneous/8.svg",
+      "Solution": "EquationImages/Homogeneous/Solution.svg",
+      "Type": "Homogeneous"
+    },
 
-        {
-            "ID": 14,
-            "Value": "",
-            "Solution": "",
-            "Type": "Homogeneous"
-        },
+    {
+      "ID": 14,
+      "Value": "EquationImages/Homogeneous/9.svg",
+      "Solution": "EquationImages/Homogeneous/Solution.svg",
+      "Type": "Homogeneous"
+    },
 
-        {
-            "ID": 15,
-            "Value": "",
-            "Solution": "",
-            "Type": "Homogeneous"
-        },
+    {
+      "ID": 15,
+      "Value": "EquationImages/GeneralHomogeneous/1.svg",
+      "Solution": "EquationImages/GeneralHomogeneous/Solution.svg",
+      "Type": "GeneralHomogeneous"
+    },
 
-        {
-            "ID": 16,
-            "Value": "",
-            "Solution": "",
-            "Type": "Homogeneous"
-        },
+    {
+      "ID": 16,
+      "Value": "EquationImages/GeneralHomogeneous/2.svg",
+      "Solution": "EquationImages/GeneralHomogeneous/Solution.svg",
+      "Type": "GeneralHomogeneous"
+    },
 
-        {
-            "ID": 17,
-            "Value": "",
-            "Solution": "",
-            "Type": "Homogeneous"
-        },
+    {
+      "ID": 17,
+      "Value": "EquationImages/GeneralHomogeneous/3.svg",
+      "Solution": "EquationImages/GeneralHomogeneous/Solution.svg",
+      "Type": "GeneralHomogeneous"
+    },
 
-        {
-            "ID": 18,
-            "Value": "",
-            "Solution": "",
-            "Type": "Homogeneous"
-        },
+    {
+      "ID": 18,
+      "Value": "EquationImages/GeneralHomogeneous/4.svg",
+      "Solution": "EquationImages/GeneralHomogeneous/Solution.svg",
+      "Type": "GeneralHomogeneous"
+    },
 
-        {
-            "ID": 19,
-            "Value": "",
-            "Solution": "",
-            "Type": "Homogeneous"
-        },
+    {
+      "ID": 19,
+      "Value": "EquationImages/GeneralHomogeneous/5.svg",
+      "Solution": "EquationImages/GeneralHomogeneous/Solution.svg",
+      "Type": "GeneralHomogeneous"
+    },
 
-        {
-            "ID": 20,
-            "Value": "",
-            "Solution": "",
-            "Type": "Homogeneous"
-        },
+    {
+      "ID": 20,
+      "Value": "EquationImages/GeneralHomogeneous/6.svg",
+      "Solution": "EquationImages/GeneralHomogeneous/Solution.svg",
+      "Type": "GeneralHomogeneous"
+    },
 
-        {
-            "ID": 21,
-            "Value": "",
-            "Solution": "",
-            "Type": "Homogeneous"
-        },
+    {
+      "ID": 21,
+      "Value": "EquationImages/GeneralHomogeneous/7.svg",
+      "Solution": "EquationImages/GeneralHomogeneous/Solution.svg",
+      "Type": "GeneralHomogeneous"
+    },
 
-        {
-            "ID": 22,
-            "Value": "",
-            "Solution": "",
-            "Type": "Homogeneous"
-        },
+    {
+      "ID": 22,
+      "Value": "EquationImages/GeneralHomogeneous/8.svg",
+      "Solution": "EquationImages/GeneralHomogeneous/Solution.svg",
+      "Type": "GeneralHomogeneous"
+    },
 
-        {
-            "ID": 23,
-            "Value": "",
-            "Solution": "",
-            "Type": "Homogeneous"
-        },
+    {
+      "ID": 23,
+      "Value": "EquationImages/LDU_Y/1.svg",
+      "Solution": "EquationImages/LDU_Y/Solution.svg",
+      "Type": "LDU_Y"
+    },
 
-        {
-            "ID": 24,
-            "Value": "",
-            "Solution": "",
-            "Type": "Homogeneous"
-        },
+    {
+      "ID": 24,
+      "Value": "EquationImages/LDU_Y/2.svg",
+      "Solution": "EquationImages/LDU_Y/Solution.svg",
+      "Type": "LDU_Y"
+    },
 
-        {
-            "ID": 25,
-            "Value": "",
-            "Solution": "",
-            "Type": "Homogeneous"
-        }
-    ]
+    {
+      "ID": 25,
+      "Value": "EquationImages/LDU_Y/3.svg",
+      "Solution": "EquationImages/LDU_Y/Solution.svg",
+      "Type": "LDU_Y"
+    },
+
+    {
+      "ID": 26,
+      "Value": "EquationImages/LDU_Y/4.svg",
+      "Solution": "EquationImages/LDU_Y/Solution.svg",
+      "Type": "LDU_Y"
+    },
+
+    {
+      "ID": 27,
+      "Value": "EquationImages/LDU_Y/5.svg",
+      "Solution": "EquationImages/LDU_Y/Solution.svg",
+      "Type": "LDU_Y"
+    },
+
+    {
+      "ID": 28,
+      "Value": "EquationImages/LDU_Y/6.svg",
+      "Solution": "EquationImages/LDU_Y/Solution.svg",
+      "Type": "LDU_Y"
+    },
+
+    {
+      "ID": 29,
+      "Value": "EquationImages/LDU_Y/7.svg",
+      "Solution": "EquationImages/LDU_Y/Solution.svg",
+      "Type": "LDU_Y"
+    },
+
+    {
+      "ID": 30,
+      "Value": "EquationImages/LDU_Y/8.svg",
+      "Solution": "EquationImages/LDU_Y/Solution.svg",
+      "Type": "LDU_Y"
+    },
+
+    {
+      "ID": 31,
+      "Value": "EquationImages/LDU_Y/9.svg",
+      "Solution": "EquationImages/LDU_Y/Solution.svg",
+      "Type": "LDU_Y"
+    },
+
+    {
+      "ID": 32,
+      "Value": "EquationImages/LDU_X/1.svg",
+      "Solution": "EquationImages/LDU_X/Solution.svg",
+      "Type": "LDU_X"
+    },
+
+    {
+      "ID": 33,
+      "Value": "EquationImages/LDU_X/2.svg",
+      "Solution": "EquationImages/LDU_X/Solution.svg",
+      "Type": "LDU_X"
+    },
+
+    {
+      "ID": 34,
+      "Value": "EquationImages/LDU_X/3.svg",
+      "Solution": "EquationImages/LDU_X/Solution.svg",
+      "Type": "LDU_X"
+    },
+
+    {
+      "ID": 35,
+      "Value": "EquationImages/LDU_X/4.svg",
+      "Solution": "EquationImages/LDU_X/Solution.svg",
+      "Type": "LDU_X"
+    },
+
+    {
+      "ID": 36,
+      "Value": "EquationImages/LDU_X/5.svg",
+      "Solution": "EquationImages/LDU_X/Solution.svg",
+      "Type": "LDU_X"
+    },
+
+    {
+      "ID": 37,
+      "Value": "EquationImages/LDU_X/6.svg",
+      "Solution": "EquationImages/LDU_X/Solution.svg",
+      "Type": "LDU_X"
+    },
+
+    {
+      "ID": 38,
+      "Value": "EquationImages/LDU_X/7.svg",
+      "Solution": "EquationImages/LDU_X/Solution.svg",
+      "Type": "LDU_X"
+    },
+
+    {
+      "ID": 39,
+      "Value": "EquationImages/LDU_X/8.svg",
+      "Solution": "EquationImages/LDU_X/Solution.svg",
+      "Type": "LDU_X"
+    },
+
+    
+  ]
 }

@@ -1,6 +1,5 @@
 ﻿using Model;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,7 +20,6 @@ namespace View
 
         private void Awake()
         {
-            //_backgroundScene.enabled = true;
             _tutorialPanel.SetActive(true);
         }
 

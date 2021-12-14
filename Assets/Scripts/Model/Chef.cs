@@ -28,7 +28,6 @@ namespace Model
         private void Start()
         {
             _pipes = FindObjectsOfType<Pipe>();
-
             Distribute();
         }
 
@@ -48,6 +47,22 @@ namespace Model
                 pipe.Solution = stack.Pop().Cream;
 
             _platform.Equation = expected.Bread;
+
+            OnDistributed?.Invoke();
+        }
+
+        public void DistributeTutorial()
+        {
+            var stack = new Stack<Cake>(_factory.BuildCakes(_pipes.Count));
+
+            foreach (var pipe in _pipes)
+            {
+                var cake = stack.Pop();
+                pipe.Solution = cake.Cream;
+                
+                if (pipe.Type == PipeType.Center)
+                    _platform.Equation = cake.Bread;
+            }
 
             OnDistributed?.Invoke();
         }

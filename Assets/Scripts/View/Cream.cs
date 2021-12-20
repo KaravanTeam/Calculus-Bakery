@@ -8,6 +8,7 @@ namespace View
     [RequireComponent(typeof(SpriteRenderer))]
     internal sealed class Cream : MonoBehaviour
     {
+        [SerializeField] private Color _dropColor;
         [SerializeField] private Transporter _transporter;
         [SerializeField] private ServedButton _servedButton;
 

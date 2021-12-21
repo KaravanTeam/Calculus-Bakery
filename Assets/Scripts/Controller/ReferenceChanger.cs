@@ -6,6 +6,8 @@ namespace Controller
 {
     internal sealed class ReferenceChanger : MonoBehaviour
     {
+        [SerializeField] private Sprite _enabledPointer;
+        [SerializeField] private Sprite _disabledPointer;
         [SerializeField] private Button _leftButton;
         [SerializeField] private Button _rightButton;
         [SerializeField] private ReferencePage[] _pages;
@@ -23,9 +25,9 @@ namespace Controller
         private void Start()
         {
             foreach (var page in _pages)
-                page.Hide();
+                page.Hide(_disabledPointer);
 
-            Current.Show();
+            Current.Show(_enabledPointer);
         }
 
         private void OnDisable()
@@ -52,10 +54,10 @@ namespace Controller
 
         private void ToggleNextPage(int offset)
         {
-            Current.Hide();
+            Current.Hide(_disabledPointer);
 
             _position += offset;
-            Current.Show();
+            Current.Show(_enabledPointer);
         }
     }
 }

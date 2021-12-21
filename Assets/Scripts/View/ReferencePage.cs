@@ -10,34 +10,25 @@ namespace View
 
         private Image _page;
 
-        private readonly float _transparentPointer = 0.5f;
-
         private void Awake()
         {
             _page = GetComponent<Image>();
         }
 
-        public void Show()
+        public void Show(Sprite enabledPointer)
         {
             _page.enabled = true;
 
-            SetPointerAlpha(1);
+            _pointer.sprite = enabledPointer;
+            _pointer.SetNativeSize();
         }
 
-        public void Hide()
+        public void Hide(Sprite disabledPointer)
         {
             _page.enabled = false;
 
-            SetPointerAlpha(_transparentPointer);
-        }
-
-        private void SetPointerAlpha(float value)
-        {
-            var color = _pointer.color;
-
-            color.a = value;
-
-            _pointer.color = color;
+            _pointer.sprite = disabledPointer;
+            _pointer.SetNativeSize();
         }
     }
 }

@@ -29,12 +29,12 @@ namespace Model.Transporter
             _pipes = FindObjectsOfType<Pipe>()
                 .ToDictionary(pipe => pipe.Type, pipe => pipe);
 
-            var pipe = _pipes[PipeType.Left].transform.localPosition;
-            _defaultPosition = new Vector3(pipe.x, _platform.transform.localPosition.y);
+            var pipe = _pipes[PipeType.Left].transform.position;
+            _defaultPosition = new Vector3(pipe.x, _platform.transform.position.y);
             _servicedPipe = PipeType.Left;
 
 
-            _platform.transform.localPosition = _defaultPosition;
+            _platform.transform.position = _defaultPosition;
         }
 
         public Cake Build()
@@ -48,7 +48,7 @@ namespace Model.Transporter
 
             yield return _platform.MoveTo(_end, _timeTransition);
 
-            _platform.transform.localPosition = new Vector3(_start.x, _platform.transform.localPosition.y);
+            _platform.transform.position = new Vector3(_start.x, _platform.transform.position.y);
             _servicedPipe = PipeType.Left;
             OnReseted?.Invoke();
 
@@ -74,7 +74,7 @@ namespace Model.Transporter
         {
             OnPlatformMovingStarted?.Invoke(_servicedPipe);
 
-            yield return _platform.MoveTo(_pipes[target].transform.localPosition, _timeTransition);
+            yield return _platform.MoveTo(_pipes[target].transform.position, _timeTransition);
 
             OnPlatformMovingEnded?.Invoke(_servicedPipe = target);
         }

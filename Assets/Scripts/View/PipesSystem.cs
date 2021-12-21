@@ -18,6 +18,7 @@ namespace View
 
             var drop = Instantiate(_waterDropPrefab, pipe.transform);
             drop.Initialize(cream);
+            pipe.Drop = drop;
 
             return drop;
         }

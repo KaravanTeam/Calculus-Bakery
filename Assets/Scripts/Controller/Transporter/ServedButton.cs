@@ -52,7 +52,8 @@ namespace Controller
             if (!_isInteractable)
                 return;
 
-            var solution = _transporter.Build();
+            var solution = _transporter.BuildSolution();
+            _transporter.ServicedPipe.Drop.FallDown();
             
             _checkerButton.SaveSolution(solution);
             _checkerButton.SetEnabledState();

@@ -18,6 +18,8 @@ namespace Model.Transporter
         private Vector3 _defaultPosition;
         private PipeType _servicedPipe;
 
+        public Pipe ServicedPipe => _pipes[_servicedPipe];
+
         public event Action OnReseted;
         public event Action<PipeType> OnPlatformMovingStarted;
         public event Action<PipeType> OnPlatformMovingEnded;
@@ -37,9 +39,9 @@ namespace Model.Transporter
             _platform.transform.position = _defaultPosition;
         }
 
-        public Cake Build()
+        public Cake BuildSolution()
         {
-            return new Cake(_platform.Equation, _pipes[_servicedPipe].Solution);
+            return new Cake(_platform.Equation, ServicedPipe.Solution);
         }
         
         public IEnumerator ResetPlatform()

@@ -1,6 +1,7 @@
 ﻿using Model.Transporter;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using View;
 
@@ -12,8 +13,7 @@ namespace Model
         [SerializeField] private Factory _factory;
         [SerializeField] private Transporter.Transporter _transporter;
         [SerializeField] private PipesSystem _pipesSystem;
-
-        private IReadOnlyList<Pipe> _pipes;
+        [SerializeField] private Pipe[] _pipes;
 
         private readonly System.Random _randGenerator = new System.Random();
 
@@ -30,7 +30,6 @@ namespace Model
 
         private void Start()
         {
-            _pipes = FindObjectsOfType<Pipe>();
             Distribute();
         }
 
@@ -41,11 +40,13 @@ namespace Model
 
         public void Distribute()
         {
-            var cakes = _factory.BuildCakes(_pipes.Count);
+            ClearPipes();
+
+            var cakes = _factory.BuildCakes(_pipes.Length);
 
             var expected = cakes[_randGenerator.Next(cakes.Count)];
 
-            for (var i = 0; i < _pipes.Count; i++)
+            for (var i = 0; i < _pipes.Length; i++)
             {
                 _pipes[i].Solution = cakes[i].Cream;
                 var drop = _pipesSystem.InstantiateWaterDrop(_pipes[i]);
@@ -62,7 +63,7 @@ namespace Model
 
         public void DistributeTutorial()
         {
-            var stack = new Stack<Cake>(_factory.BuildCakes(_pipes.Count));
+            var stack = new Stack<Cake>(_factory.BuildCakes(_pipes.Length));
 
             foreach (var pipe in _pipes)
             {
@@ -96,6 +97,12 @@ namespace Model
             }
 
             OnCakeChecked?.Invoke();          
+        }
+
+        private void ClearPipes()
+        {
+            foreach (var pipe in _pipes.Where(pipe => pipe.Drop != null))
+                Destroy(pipe.Drop.gameObject);
         }
     }
 }

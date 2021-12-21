@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using View;
 
 namespace Model.Transporter
 {
@@ -6,5 +7,6 @@ namespace Model.Transporter
     {
         public PipeType Type;
         public Solution Solution { get; set; }
+        public WaterDrop Drop { get; set; }
     }
 }

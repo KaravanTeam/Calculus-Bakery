@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using View;
 
 namespace Model
 {
@@ -10,6 +11,7 @@ namespace Model
         [SerializeField] private Platform _platform;
         [SerializeField] private Factory _factory;
         [SerializeField] private Transporter.Transporter _transporter;
+        [SerializeField] private PipesSystem _pipesSystem;
 
         private IReadOnlyList<Pipe> _pipes;
 
@@ -19,6 +21,7 @@ namespace Model
         public event Action OnDistributed;
         public event Action<Cake> OnCorrectCakeChecked;
         public event Action<Cake> OnWrongCakeChecked;
+
 
         private void OnEnable()
         {
@@ -43,9 +46,16 @@ namespace Model
             var expected = cakes[_randGenerator.Next(cakes.Count)];
 
             for (var i = 0; i < _pipes.Count; i++)
+            {
                 _pipes[i].Solution = cakes[i].Cream;
+                var drop = _pipesSystem.InstantiateWaterDrop(_pipes[i]);
+
+                if (cakes[i] == expected)
+                    _pipesSystem.SetExpectedCream(drop.Cream);
+            }
 
             _platform.Equation = expected.Bread;
+
 
             OnDistributed?.Invoke();
         }
@@ -57,10 +67,15 @@ namespace Model
             foreach (var pipe in _pipes)
             {
                 var cake = stack.Pop();
+
                 pipe.Solution = cake.Cream;
-                
+                var drop = _pipesSystem.InstantiateWaterDrop(pipe);
+
                 if (pipe.Type == PipeType.Center)
+                {
                     _platform.Equation = cake.Bread;
+                    _pipesSystem.SetExpectedCream(drop.Cream);
+                }
             }
 
             OnDistributed?.Invoke();

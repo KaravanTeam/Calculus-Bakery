@@ -4,17 +4,18 @@ using UnityEngine;
 
 namespace View
 {
-    [RequireComponent(typeof(SpriteRenderer))]
+    [RequireComponent(typeof(Pipe))]
     internal sealed class PipeContent : MonoBehaviour
     {
-        [SerializeField] private Pipe _pipe;
+        [SerializeField] private GameObject _center;
         [SerializeField] private Chef _chef;
 
-        private SpriteRenderer _render;
+        private Sprite _currentContent;
+        private Pipe _pipe;
 
         private void Awake()
         {
-            _render = GetComponent<SpriteRenderer>();
+            _pipe = GetComponent<Pipe>();
         }
 
         private void OnEnable()
@@ -29,7 +30,10 @@ namespace View
 
         private void UpdateState()
         {
-            _render.sprite = _pipe.Solution.Sprite;
+            Destroy(_currentContent);
+
+            _currentContent = Instantiate(_pipe.Solution.Sprite, 
+                _center.transform.localPosition, Quaternion.identity, _pipe.transform);
         }
     }
 }

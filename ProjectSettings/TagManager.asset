@@ -38,11 +38,11 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 3182938143
+    locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: ServedPipe
-    uniqueID: 4025518723
     locked: 0
   - name: UI
     uniqueID: 254070999

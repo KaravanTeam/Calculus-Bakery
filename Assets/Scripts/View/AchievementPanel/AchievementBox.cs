@@ -34,7 +34,7 @@ namespace View
         {
             _numberField.text = $"#{_task.Achievement.OrderNumber}";
             _taskField.text = _task.Achievement.Text;
-            _progressField.text = $"{_task.Achievement.Score} / {_task.Achievement.Target}";
+            _progressField.text = $"{_task.Achievement.Score}/{_task.Achievement.Target}";
             _pointsField.text = $"+{_task.Achievement.Points}%";
         }
     }

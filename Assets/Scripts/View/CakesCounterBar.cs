@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace View
 {
     [RequireComponent(typeof(Slider))]
-    internal class CakeCounterBar : MonoBehaviour
+    internal class CakesCounterBar : MonoBehaviour
     {
         [SerializeField] private Chef _chef;
 
@@ -23,16 +23,14 @@ namespace View
             _chef.OnCorrectCakeChecked += Increase;
         }
 
-        private void Start()
-        {
-            //TODO
-            //_slider.maxValue = FindObjectOfType<Factory>().EquationsCount;
-            _slider.maxValue = 55;
-        }
-
         private void OnDisable()
         {
             _chef.OnCorrectCakeChecked -= Increase;
+        }
+
+        public void SetMaxValue(int count)
+        {
+            _slider.maxValue = count;
         }
 
         private void Increase(Cake cake)

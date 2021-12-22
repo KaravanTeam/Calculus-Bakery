@@ -12,6 +12,12 @@ namespace Model
         [SerializeField] private Platform _platform;
         [SerializeField] private Factory _factory;
         [SerializeField] private Transporter.Transporter _transporter;
+
+        [Header("Factory")]
+        [SerializeField] private int _finishedCakesCount;
+        [SerializeField] private CakesCounterBar _bar;
+
+        [Header("Pipe System")]
         [SerializeField] private PipesSystem _pipesSystem;
         [SerializeField] private Pipe[] _pipes;
 
@@ -30,6 +36,7 @@ namespace Model
 
         private void Start()
         {
+            _bar.SetMaxValue(_finishedCakesCount);
             Distribute();
         }
 

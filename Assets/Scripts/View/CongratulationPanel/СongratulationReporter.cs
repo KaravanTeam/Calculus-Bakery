@@ -4,6 +4,18 @@ using UnityEngine;
 
 namespace View
 {
+    internal sealed class MessageInfo
+    {
+        public MessageInfo(string text, int achievementPoints)
+        {
+            Text = text;
+            AchievementPoints = achievementPoints;
+        }
+
+        public string Text { get; }
+        public int AchievementPoints { get; }
+    }
+
     internal sealed class СongratulationReporter : MonoBehaviour
     {
         [SerializeField] private СongratulationPanel _panel;
@@ -11,7 +23,7 @@ namespace View
         [SerializeField] private RankAchievement[] _ranks;
         [SerializeField] private BrainAchievement[] _brains;
 
-        private readonly Queue<string> _messages = new Queue<string>();
+        private readonly Queue<MessageInfo> _messages = new Queue<MessageInfo>();
 
         private void OnEnable()
         {
@@ -31,7 +43,7 @@ namespace View
                 brain.OnReached -= ReportBrainAchievement;
         }
 
-        public string NextMessage() => _messages.Count > 0 ? _messages.Dequeue() : null;
+        public MessageInfo NextMessage() => _messages.Count > 0 ? _messages.Dequeue() : null;
 
         private void ReportRank(RankAchievement rank)
         {
@@ -42,12 +54,12 @@ namespace View
         private void ReportBrainAchievement(BrainAchievement brain)
         {
             var message = $"Ты выполнил достижение #{brain.OrderNumber}\n\"{brain.Text}\"";
-            Report(message);
+            Report(message, brain.Points);
         }
 
-        private void Report(string message)
+        private void Report(string message, int? points = null)
         {
-            _messages.Enqueue(message);
+            _messages.Enqueue(new MessageInfo(message, points ?? 1));
 
             _panel.gameObject.SetActive(true);
         }

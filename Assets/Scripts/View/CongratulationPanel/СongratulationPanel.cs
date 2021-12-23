@@ -7,12 +7,14 @@ namespace View
     {
         [SerializeField] private СongratulationReporter _reporter;
 
+        [SerializeField] private Image _goodCakes;
+        [SerializeField] private Image _badCakes;
         [SerializeField] private Button _nextButton;
         [SerializeField] private Text _field;
 
         private void OnEnable()
         {
-            _field.text = _reporter.NextMessage();
+            Show(_reporter.NextMessage());
             _nextButton.onClick.AddListener(ChangeMessage);
         }
 
@@ -23,15 +25,31 @@ namespace View
 
         private void ChangeMessage()
         {
-            var message = _reporter.NextMessage();
+            var info = _reporter.NextMessage();
 
-            if (message is null)
+            if (info is null)
             {
                 gameObject.SetActive(false);
                 return;
             }
 
-            _field.text = message;
+            Show(info);
+        }
+
+        private void Show(MessageInfo info)
+        {
+            _goodCakes.enabled = false;
+            _badCakes.enabled = false;
+
+            _field.text = info.Text;
+
+            if (info.AchievementPoints > 0)
+            {
+                _goodCakes.enabled = true;
+                return;
+            }
+
+            _badCakes.enabled = true;
         }
     }
 }

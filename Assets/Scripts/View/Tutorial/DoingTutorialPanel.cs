@@ -31,10 +31,11 @@ namespace View
             _target.interactable = true;
 
             yield return new WaitUntil(() => _isEnd);
-            yield return new WaitForSeconds(_waitTime);
-            yield return new WaitUntil(() => _waitObjectActive == null ? true : !_waitObjectActive.activeInHierarchy);
 
             _target.interactable = false;
+
+            yield return new WaitForSeconds(_waitTime);
+            yield return new WaitUntil(() => _waitObjectActive == null ? true : !_waitObjectActive.activeInHierarchy);
         }
 
         private void OnClickTarget()

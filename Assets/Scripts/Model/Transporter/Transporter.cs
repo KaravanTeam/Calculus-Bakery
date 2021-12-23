@@ -8,7 +8,6 @@ namespace Model.Transporter
 {
     internal sealed class Transporter : MonoBehaviour
     {
-        [SerializeField] private float _timeTransition = 1;
         [SerializeField] private Transform _start;
         [SerializeField] private Transform _end;
 
@@ -48,13 +47,13 @@ namespace Model.Transporter
         {
             OnPlatformMovingStarted?.Invoke(_servicedPipe);
 
-            yield return _platform.MoveTo(_end.position, _timeTransition);
+            yield return _platform.MoveTo(_end.position);
 
             _platform.transform.position = new Vector3(_start.position.x, _platform.transform.position.y);
             _servicedPipe = PipeType.Left;
             OnReseted?.Invoke();
 
-            yield return _platform.MoveTo(_defaultPosition, _timeTransition);
+            yield return _platform.MoveTo(_defaultPosition);
 
             OnPlatformMovingEnded?.Invoke(PipeType.Left);
         }
@@ -76,7 +75,7 @@ namespace Model.Transporter
         {
             OnPlatformMovingStarted?.Invoke(_servicedPipe);
 
-            yield return _platform.MoveTo(_pipes[target].transform.position, _timeTransition);
+            yield return _platform.MoveTo(_pipes[target].transform.position);
 
             OnPlatformMovingEnded?.Invoke(_servicedPipe = target);
         }

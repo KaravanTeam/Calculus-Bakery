@@ -2701,6 +2701,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2b1620df2546954b9c3ed77c8dfb0d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _transitionTime: 1.4
+  _wheels:
+  - {fileID: 1525918815}
+  - {fileID: 1920907799}
 --- !u!212 &288012915
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4768,7 +4772,7 @@ GameObject:
   - component: {fileID: 567610415}
   - component: {fileID: 567610414}
   m_Layer: 0
-  m_Name: Board
+  m_Name: Table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12977,7 +12981,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8746fe689b75344c822252c29270536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeTransition: 1.4
   _start: {fileID: 1077936032}
   _end: {fileID: 1068869524}
 --- !u!4 &1579058826
@@ -14205,8 +14208,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1151887604}
   m_HandleRect: {fileID: 1151887603}
   m_Direction: 2
-  m_Value: 0.5000086
-  m_Size: 0.29886875
+  m_Value: 0.5
+  m_Size: 0.29888073
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

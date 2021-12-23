@@ -1,6 +1,7 @@
 using Controller;
 using Model.Transporter;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace View
 {
@@ -9,7 +10,7 @@ namespace View
     {
         [SerializeField] private SpriteRenderer _cream;
         [SerializeField] private Transporter _transporter;
-        [SerializeField] private TransitionButton[] _movers;
+        [SerializeField] private Button[] _blockButtons;
 
         private void OnEnable()
         {
@@ -28,8 +29,8 @@ namespace View
                 _cream.sprite = drop.Cream;
                 Destroy(drop.gameObject);
 
-                foreach (var mover in _movers)
-                    mover.enabled = true;
+                foreach (var button in _blockButtons)
+                    button.interactable = true;
             }
         }
 

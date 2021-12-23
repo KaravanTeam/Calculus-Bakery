@@ -10,7 +10,7 @@ namespace Controller
     {
         [SerializeField] private Transporter _transporter;
         [SerializeField] private CheckerButton _checkerButton;
-        [SerializeField] private TransitionButton[] _movers;
+        [SerializeField] private Button[] _blockButtons;
 
         private Button _button;
 
@@ -56,8 +56,8 @@ namespace Controller
             var solution = _transporter.BuildSolution();
             _transporter.ServicedPipe.Drop.FallDown();
 
-            foreach (var mover in _movers)
-                mover.enabled = false;
+            foreach (var button in _blockButtons)
+                button.interactable = false;
             
             _checkerButton.SaveSolution(solution);
             _checkerButton.SetEnabledState();

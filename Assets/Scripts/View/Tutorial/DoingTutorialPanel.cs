@@ -7,6 +7,8 @@ namespace View
 {
     internal sealed class DoingTutorialPanel : TutorialPanel
     {
+        [SerializeField] private float _waitTime;
+        [SerializeField] private GameObject _waitObjectActive;
         [SerializeField] private Button _target;
 
         private void OnEnable()
@@ -29,6 +31,8 @@ namespace View
             _target.interactable = true;
 
             yield return new WaitUntil(() => _isEnd);
+            yield return new WaitForSeconds(_waitTime);
+            yield return new WaitUntil(() => _waitObjectActive == null ? true : !_waitObjectActive.activeInHierarchy);
 
             _target.interactable = false;
         }

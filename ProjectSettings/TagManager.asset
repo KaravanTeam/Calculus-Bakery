@@ -47,3 +47,6 @@ TagManager:
   - name: UI
     uniqueID: 254070999
     locked: 0
+  - name: ObjectsSelectable
+    uniqueID: 968146389
+    locked: 0

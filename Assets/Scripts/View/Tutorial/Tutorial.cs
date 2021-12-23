@@ -29,6 +29,11 @@ namespace View
             _skipButton.onClick.AddListener(Skip);
         }
 
+        private void Start()
+        {
+            DoButtonsInteractable(false);
+        }
+
         private void OnDisable()
         {
             _startButton.onClick.RemoveAllListeners();
@@ -38,13 +43,13 @@ namespace View
         private void Skip()
         {
             _tutorialPanel.SetActive(false);
+            DoButtonsInteractable();
         }
 
         private IEnumerator Run()
         {
             _tutorialPanel.SetActive(false);
-            DoButtonsInteractable(false);
-
+            
             _chef.DistributeTutorial();
         
             foreach (var panel in _panels)

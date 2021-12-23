@@ -8,8 +8,15 @@ namespace View
     {
         [SerializeField] protected Animator _replicaAnimator;
 
+        private SpriteUISelector _selector;
+
         protected bool _isEnd;
         protected bool _isLoadedPanel;
+
+        private void Awake()
+        {
+            _selector = GetComponent<SpriteUISelector>();
+        }
 
         public virtual void OnPointerClick(PointerEventData eventData)
         {
@@ -18,7 +25,9 @@ namespace View
         }
 
         public virtual IEnumerator Run()
-        { 
+        {
+            _selector?.Select();
+
             var waitTimeEntry = _replicaAnimator.GetCurrentAnimatorStateInfo(0).length;
             for (var time = 0f; time < waitTimeEntry; time += Time.deltaTime)
             {
@@ -37,6 +46,8 @@ namespace View
             {
                 yield return null;
             }
+
+            _selector?.Unselect();
         }
     }
 }

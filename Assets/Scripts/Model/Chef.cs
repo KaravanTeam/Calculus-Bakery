@@ -95,7 +95,7 @@ namespace Model
 
             if (isCorrectCake)
             {
-                _factory.MarkSolvedEquation(solution.Bread.ID);
+                _factory.MarkSolvedEquation(solution.Bread);
                 OnCorrectCakeChecked?.Invoke(solution);
             }
             else

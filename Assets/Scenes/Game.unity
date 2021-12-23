@@ -18046,6 +18046,10 @@ PrefabInstance:
       propertyPath: _transporter
       value: 
       objectReference: {fileID: 1579058825}
+    - target: {fileID: 662619948814538329, guid: 5d746a49d91e98b4892767484f360069, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 662619948814538330, guid: 5d746a49d91e98b4892767484f360069, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

@@ -1,13 +1,15 @@
+using Controller;
 using Model.Transporter;
 using UnityEngine;
 
 namespace View
 {
     [RequireComponent(typeof(BoxCollider2D))]
-    internal sealed class CakePresenter : MonoBehaviour
+    internal sealed class CreamToggler : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _cream;
         [SerializeField] private Transporter _transporter;
+        [SerializeField] private TransitionButton[] _movers;
 
         private void OnEnable()
         {
@@ -25,6 +27,9 @@ namespace View
             {
                 _cream.sprite = drop.Cream;
                 Destroy(drop.gameObject);
+
+                foreach (var mover in _movers)
+                    mover.enabled = true;
             }
         }
 

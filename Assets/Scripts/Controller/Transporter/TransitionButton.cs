@@ -45,6 +45,7 @@ namespace Controller
         {
             _isInteractable = true;
         }
+
         private void SetDisabledState(PipeType pipe)
         {
             _isInteractable = false;

@@ -96,10 +96,11 @@ namespace Model
             if (isCorrectCake)
             {
                 _factory.MarkSolvedEquation(solution.Bread);
+
                 OnCorrectCakeChecked?.Invoke(solution);
             }
             else
-            {
+            { 
                 OnWrongCakeChecked?.Invoke(solution);
             }
 

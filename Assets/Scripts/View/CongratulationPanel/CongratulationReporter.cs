@@ -4,22 +4,8 @@ using UnityEngine;
 
 namespace View
 {
-    internal sealed class MessageInfo
+    internal sealed class CongratulationReporter : MonoBehaviour
     {
-        public MessageInfo(string text, int achievementPoints)
-        {
-            Text = text;
-            AchievementPoints = achievementPoints;
-        }
-
-        public string Text { get; }
-        public int AchievementPoints { get; }
-    }
-
-    internal sealed class СongratulationReporter : MonoBehaviour
-    {
-        [SerializeField] private СongratulationPanel _panel;
-
         [SerializeField] private RankAchievement[] _ranks;
         [SerializeField] private BrainAchievement[] _brains;
 
@@ -60,8 +46,6 @@ namespace View
         private void Report(string message, int? points = null)
         {
             _messages.Enqueue(new MessageInfo(message, points ?? 1));
-
-            _panel.gameObject.SetActive(true);
         }
     }
 }

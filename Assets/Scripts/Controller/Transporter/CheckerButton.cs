@@ -25,15 +25,15 @@ namespace Controller
         private void OnEnable()
         {
             _button.onClick.AddListener(OnClick);
-            _transporter.OnPlatformMovingStarted += IsMovingPlatform;
-            _transporter.OnPlatformMovingEnded += IsNotMovingPlatform;
+            _transporter.OnPlatformMovingStarted += OnPlatformMoved;
+            _transporter.OnPlatformMovingEnded += OnPlatformStopped;
         }
 
         private void OnDisable()
         {
             _button.onClick.RemoveListener(OnClick);
-            _transporter.OnPlatformMovingStarted -= IsMovingPlatform;
-            _transporter.OnPlatformMovingEnded -= IsNotMovingPlatform;
+            _transporter.OnPlatformMovingStarted -= OnPlatformMoved;
+            _transporter.OnPlatformMovingEnded -= OnPlatformStopped;
         }
 
         public void SetEnabledState()
@@ -64,12 +64,12 @@ namespace Controller
             SetDisabledState();
         }
 
-        private void IsMovingPlatform(PipeType pipe)
+        private void OnPlatformMoved(PipeType pipe)
         {
             _isInteractable = false;
         }
 
-        private void IsNotMovingPlatform(PipeType pipe)
+        private void OnPlatformStopped(PipeType pipe)
         {
             _isInteractable = true;
         }

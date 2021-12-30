@@ -8,6 +8,7 @@ namespace View
     internal sealed class CongratulationPanel : MonoBehaviour
     {
         [SerializeField] private GameObject _panel;
+        [SerializeField] private ChefEmoji _chefEmoji;
 
         [SerializeField] private Image _goodCakes;
         [SerializeField] private Image _badCakes;
@@ -25,11 +26,13 @@ namespace View
 
         private void OnEnable()
         {
+            _chefEmoji.OnClosed += Show;
             _nextButton.onClick.AddListener(ChangeMessage);
         }
 
         private void OnDisable()
         {
+            _chefEmoji.OnClosed -= Show;
             _nextButton.onClick.RemoveListener(ChangeMessage);
         }
 

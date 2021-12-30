@@ -9,6 +9,7 @@ namespace View
     {
         [SerializeField] private float _waitTime;
         [SerializeField] private GameObject _waitObjectActive;
+
         [SerializeField] private Button _target;
 
         private void OnEnable()
@@ -28,14 +29,14 @@ namespace View
 
         public override IEnumerator Run()
         {
-            _target.interactable = true;
+            _target.enabled = true;
 
             yield return new WaitUntil(() => _isEnd);
 
-            _target.interactable = false;
+            _target.enabled = false;
 
             yield return new WaitForSeconds(_waitTime);
-            yield return new WaitUntil(() => _waitObjectActive == null ? true : !_waitObjectActive.activeInHierarchy);
+            yield return new WaitWhile(() => _waitObjectActive == null ? false : _waitObjectActive.activeInHierarchy);
         }
 
         private void OnClickTarget()

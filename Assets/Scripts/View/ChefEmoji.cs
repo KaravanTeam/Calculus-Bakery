@@ -1,5 +1,6 @@
 using Model;
 using Model.Transporter;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,6 +30,9 @@ namespace View
         private readonly string _closingTrigger = "Closing";
         private readonly string _manualControlTrigger = "ManualControl";
         private readonly string _changingReplicaTrigger = "ChangingReplica";
+
+        public event Action OnOpened;
+        public event Action OnClosed;
 
         private void Awake()
         {
@@ -68,15 +72,22 @@ namespace View
         }
 
         #region AnimationEvents
+
+        public void OnPanelActivated()
+        {
+            OnOpened?.Invoke();
+        }
+
         public void OnPanelDeactivated()
         {
-            _congratulationPanel.Show();
+            OnClosed?.Invoke();
         }
 
         public void OnReplicaClosed()
         {
             _replicaContainer.sprite = _nextReplica;
         }
+
         #endregion
 
         private void ShowHappyChef(Cake cake)

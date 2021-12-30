@@ -6,21 +6,35 @@ namespace View
 {
     internal class TutorialPanel : MonoBehaviour, IPointerClickHandler
     {
-        [SerializeField] protected Animator _replicaAnimator;
+        [SerializeField] private Sprite _replica;
+        [SerializeField] private ChefEmoji _chefEmoji;
 
         private SpriteUISelector _selector;
 
+        private bool _isLoaded;
+        private bool _isVisibleReplica;
         protected bool _isEnd;
-        protected bool _isLoadedPanel;
 
         private void Awake()
         {
             _selector = GetComponent<SpriteUISelector>();
         }
 
+        private void OnEnable()
+        {
+            _chefEmoji.OnOpened += ToggleVisibleState;
+            _chefEmoji.OnClosed += ToggleVisibleState;
+        }
+
+        private void OnDisable()
+        {
+            _chefEmoji.OnOpened -= ToggleVisibleState;
+            _chefEmoji.OnClosed -= ToggleVisibleState;
+        }
+
         public virtual void OnPointerClick(PointerEventData eventData)
         {
-            if (_isLoadedPanel)
+            if (_isLoaded)
                 _isEnd = true;
         }
 
@@ -28,26 +42,21 @@ namespace View
         {
             _selector?.Select();
 
-            var waitTimeEntry = _replicaAnimator.GetCurrentAnimatorStateInfo(0).length;
-            for (var time = 0f; time < waitTimeEntry; time += Time.deltaTime)
-            {
-                yield return null;
-            }
-
-            _isLoadedPanel = true;
+            _chefEmoji.ShowWith(_replica);
+            yield return new WaitWhile(() => !_isVisibleReplica);
+            _isLoaded = true;
 
             yield return new WaitUntil(() => _isEnd);
-
-            _replicaAnimator.SetTrigger("IsEnd");
-            yield return null;
-
-            var waitTime = _replicaAnimator.GetCurrentAnimatorStateInfo(0).length;
-            for (var time = 0f; time < waitTime; time += Time.deltaTime)
-            {
-                yield return null;
-            }
+            
+            _chefEmoji.Close();
+            yield return new WaitWhile(() => _isVisibleReplica);
 
             _selector?.Unselect();
+        }
+
+        private void ToggleVisibleState()
+        {
+            _isVisibleReplica = !_isVisibleReplica;
         }
     }
 }

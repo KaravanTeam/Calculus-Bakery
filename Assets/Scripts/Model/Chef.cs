@@ -36,7 +36,6 @@ namespace Model
         private void Start()
         {
             _bar.SetMaxValue(_finishedCakesCount);
-            Distribute();
         }
 
         private void OnDisable()

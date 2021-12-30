@@ -46,6 +46,7 @@ namespace View
         {
             _tutorialPanel.SetActive(false);
             _locker.Unlock();
+            _chef.Distribute();
         }
 
         private IEnumerator Run()

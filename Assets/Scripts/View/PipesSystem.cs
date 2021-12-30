@@ -1,5 +1,4 @@
 ﻿using Model.Transporter;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -12,22 +11,22 @@ namespace View
         [SerializeField] private WaterDrop _waterDropPrefab;
         [SerializeField] private CreamView[] _creams;
 
-        private Stack<CreamView> _stackCreams = new Stack<CreamView>();
-
         private readonly System.Random _randGenerator = new System.Random();
 
-        public WaterDrop InstantiateWaterDrop(Pipe pipe)
+        public void InstantiateWaterDrops(Pipe[] pipes)
         {
-            if (_stackCreams.Count == 0)
-                _stackCreams = new Stack<CreamView>(_creams.OrderBy(_ => _randGenerator.Next()));
+            var creams = _creams
+                .OrderBy(_ => _randGenerator.Next())
+                .Take(pipes.Length)
+                .ToArray();
 
-            var cream = _stackCreams.Pop();
+            for (var i = 0; i < pipes.Length; i++)
+            {
+                var drop = Instantiate(_waterDropPrefab, pipes[i].SpawnWaterDrop.transform);
+                drop.Initialize(creams[i]);
 
-            var drop = Instantiate(_waterDropPrefab, pipe.SpawnWaterDrop.transform);
-            drop.Initialize(cream);
-            pipe.Drop = drop;
-
-            return drop;
+                pipes[i].Drop = drop;
+            }
         }
 
         public void SetExpectedCream(Sprite cream)

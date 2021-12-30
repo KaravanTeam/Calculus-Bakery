@@ -28,7 +28,6 @@ namespace Model
         public event Action<Cake> OnCorrectCakeChecked;
         public event Action<Cake> OnWrongCakeChecked;
 
-
         private void OnEnable()
         {
             _transporter.OnReseted += Distribute;
@@ -50,16 +49,16 @@ namespace Model
             ClearPipes();
 
             var cakes = _factory.BuildCakes(_pipes.Length);
+            _pipesSystem.InstantiateWaterDrops(_pipes);
 
             var expected = cakes[_randGenerator.Next(cakes.Count)];
 
             for (var i = 0; i < _pipes.Length; i++)
             {
                 _pipes[i].Solution = cakes[i].Cream;
-                var drop = _pipesSystem.InstantiateWaterDrop(_pipes[i]);
 
                 if (cakes[i] == expected)
-                    _pipesSystem.SetExpectedCream(drop.Cream);
+                    _pipesSystem.SetExpectedCream(_pipes[i].Drop.Cream);
             }
 
             _platform.Equation = expected.Bread;
@@ -71,18 +70,18 @@ namespace Model
         public void DistributeTutorial()
         {
             var stack = new Stack<Cake>(_factory.BuildCakes(_pipes.Length));
+            _pipesSystem.InstantiateWaterDrops(_pipes);
 
             foreach (var pipe in _pipes)
             {
                 var cake = stack.Pop();
 
                 pipe.Solution = cake.Cream;
-                var drop = _pipesSystem.InstantiateWaterDrop(pipe);
 
                 if (pipe.Type == PipeType.Center)
                 {
                     _platform.Equation = cake.Bread;
-                    _pipesSystem.SetExpectedCream(drop.Cream);
+                    _pipesSystem.SetExpectedCream(pipe.Drop.Cream);
                 }
             }
 

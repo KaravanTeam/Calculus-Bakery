@@ -5,28 +5,35 @@ using UnityEngine.UI;
 
 namespace View
 {
-    [RequireComponent(typeof(Button))]
+    [RequireComponent(typeof(ButtonsLocker))]
     internal sealed class Tutorial : MonoBehaviour
     {
         [SerializeField] private Chef _chef;
 
         [SerializeField] private TutorialPanel[] _panels;
-        [SerializeField] private Button[] _hudButtons;
 
         [Header("Tutorial panel")]
         [SerializeField] private Button _startButton;
         [SerializeField] private Button _skipButton;
         [SerializeField] private GameObject _tutorialPanel;
 
+        private ButtonsLocker _locker;
+
         private void Awake()
         {
             _tutorialPanel.SetActive(true);
+            _locker = GetComponent<ButtonsLocker>();
         }
 
         private void OnEnable()
         {
             _startButton.onClick.AddListener(() => StartCoroutine(Run()));
             _skipButton.onClick.AddListener(Skip);
+        }
+
+        private void Start()
+        {
+            _locker.Lock();
         }
 
         private void OnDisable()
@@ -38,13 +45,14 @@ namespace View
         private void Skip()
         {
             _tutorialPanel.SetActive(false);
+            _locker.Unlock();
+            _chef.Distribute();
         }
 
         private IEnumerator Run()
         {
             _tutorialPanel.SetActive(false);
-            DoButtonsInteractable(false);
-
+            
             _chef.DistributeTutorial();
         
             foreach (var panel in _panels)
@@ -56,13 +64,7 @@ namespace View
                 panel.gameObject.SetActive(false);
             }
 
-            DoButtonsInteractable();
-        }
-
-        private void DoButtonsInteractable(bool isInteractable = true)
-        {
-            foreach (var button in _hudButtons)
-                button.interactable = isInteractable;
+            _locker.Unlock();
         }
     }
 }

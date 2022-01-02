@@ -1,6 +1,6 @@
 ﻿namespace Model.Achievements
 {
-    internal class WrongEquationTypesCount : CorrectEquationTypesCount
+    internal class WrongEquationTypesCount : CorrectEquationTypes
     {
         protected override void Subscribe()
         {

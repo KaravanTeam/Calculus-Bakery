@@ -32,7 +32,6 @@ namespace View
         {
             _field.text = rank.Name;
 
-
             rank.OnRankReached -= UpdateField;
         }
     }

@@ -7,55 +7,71 @@ namespace Model.Transporter
 {
     internal sealed class Factory : MonoBehaviour
     {
-        [SerializeField] private TextAsset _source;
-
-        private EquationInfo[] _database;
-        private Dictionary<int, EquationInfo> _equations;
+        private Dictionary<EquationType, List<Cake>> _database;
+        private Dictionary<EquationType, Dictionary<int, Cake>> _unsolvedTypes;
 
         private readonly System.Random _randGenerator = new System.Random();
 
+        public Factory()
+        {
+            _database = new Dictionary<EquationType, List<Cake>>();
+            _unsolvedTypes = new Dictionary<EquationType, Dictionary<int, Cake>>();
+        }
+
         private void Awake()
         {
-            _database = JsonUtility.FromJson<EquationsDatabase>(_source.text).Equations;
+            var equtationsInfo = GetComponentsInChildren<EquationInfo>();
 
-            _equations = GetNewUnsolvedEquations();
+            for (var i = 0; i < equtationsInfo.Length; i++)
+            {
+                var equation = equtationsInfo[i];
+
+                var bread = new Equation(i, equation.Value, equation.Type);
+                var cream = new Solution(i, equation.Solution);
+
+                if (!_database.ContainsKey(equation.Type))
+                    _database[equation.Type] = new List<Cake>();
+
+                _database[equation.Type].Add(new Cake(bread, cream));
+            }
+
+            AddUnsolvedEquations();
         }
 
         public List<Cake> BuildCakes(int count)
         {
-            if (_equations.Count < count)
-                _equations = GetNewUnsolvedEquations();
-
-            var shuffledEquations = new Stack<EquationInfo>(_equations
-                .Values
-                .OrderBy(_ => _randGenerator.Next()));
+            if (_unsolvedTypes.Count < count)
+                AddUnsolvedEquations();
 
             var cakes = new List<Cake>();
-
-            for (var i = 0; i < count; i++)
+            foreach (var equations in _unsolvedTypes.Values.OrderBy(_ => _randGenerator.Next()).Take(count))
             {
-                var equation = shuffledEquations.Pop();
-
-                var bread = new Equation(equation.ID, equation.Value, (EquationType)Enum.Parse(typeof(EquationType), equation.Type));
-                var cream = new Solution(equation.ID, equation.Solution);
-
-                cakes.Add(new Cake(bread, cream));
+                cakes.Add(equations.OrderBy(_ => _randGenerator.Next()).First().Value);
             }
 
             return cakes;
         }
 
-        public void MarkSolvedEquation(int id)
+        public void MarkSolvedEquation(Equation solution)
         {
-            if (!_equations.Remove(id))
-                throw new InvalidOperationException($"Unknown equation id = {id}");
+            if (!_unsolvedTypes[solution.Type].Remove(solution.ID))
+                throw new InvalidOperationException($"Unknown equation id = {solution.ID}");
+
+            if (_unsolvedTypes[solution.Type].Count == 0)
+                _unsolvedTypes.Remove(solution.Type);
         }
 
-        private Dictionary<int, EquationInfo> GetNewUnsolvedEquations()
+        private void AddUnsolvedEquations()
         {
-            return _database
-                .ToArray()
-                .ToDictionary(eq => eq.ID, eq => eq);
+            foreach (var equations in _database)
+            {
+                if (_unsolvedTypes.ContainsKey(equations.Key))
+                    continue;
+
+                _unsolvedTypes[equations.Key] = equations
+                    .Value
+                    .ToDictionary(equation => equation.Bread.ID, equation => equation);
+            }
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Model
+namespace View
 {
     internal sealed class PriorityQueue<TElement, TPriority> : IEnumerable<TElement>
         where TPriority : IComparable

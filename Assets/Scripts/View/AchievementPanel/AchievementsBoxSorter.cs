@@ -12,9 +12,7 @@ namespace View
 
 
             for (var i = 0; i < sorted.Length; i++)
-            {
                 sorted[i].transform.SetSiblingIndex(i);
-            }
         }
     }
 }

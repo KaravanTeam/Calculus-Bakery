@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 namespace View
 {
-    internal sealed class Progress : MonoBehaviour
+    internal sealed class PointsPanel : MonoBehaviour
     {
-        [SerializeField] private Text _progress;
+        [SerializeField] private Text _textField;
         [SerializeField] private Player _player;
 
         private void OnEnable()
@@ -16,7 +16,7 @@ namespace View
 
         private void Start()
         {
-            _progress.text = "0%";
+            _textField.text = $"{_player.Progress}%";
         }
 
         private void OnDisable()
@@ -26,7 +26,7 @@ namespace View
 
         private void UpdateState(int progress)
         {
-            _progress.text = progress.ToString() + "%";
+            _textField.text = progress.ToString() + "%";
         }
     }
 }

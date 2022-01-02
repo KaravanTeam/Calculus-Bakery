@@ -7,12 +7,16 @@ namespace Model.Transporter
 {
     internal sealed class Factory : MonoBehaviour
     {
-        private Dictionary<EquationType, List<Cake>> _database = new Dictionary<EquationType, List<Cake>>();
-
-        private Dictionary<EquationType, Dictionary<int, Cake>> _unsolvedTypes 
-            = new Dictionary<EquationType, Dictionary<int, Cake>>();
+        private Dictionary<EquationType, List<Cake>> _database;
+        private Dictionary<EquationType, Dictionary<int, Cake>> _unsolvedTypes;
 
         private readonly System.Random _randGenerator = new System.Random();
+
+        public Factory()
+        {
+            _database = new Dictionary<EquationType, List<Cake>>();
+            _unsolvedTypes = new Dictionary<EquationType, Dictionary<int, Cake>>();
+        }
 
         private void Awake()
         {

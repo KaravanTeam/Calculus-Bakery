@@ -1,27 +1,32 @@
 ﻿using Model.Transporter;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Model.Achievements
 {
-    internal class CorrectСonsecutiveСakesAchievement : BrainAchievement
+    internal class CorrectEquationTypes : BrainAchievement
     {
         [TextArea]
         [SerializeField] private string _text;
 
         [SerializeField] private int _orderNumber;
-        [SerializeField] private int _cakesTarget;
+        [SerializeField] private int _target;
         [SerializeField] private int _points;
 
         [SerializeField] protected Chef _chef;
         [SerializeField] private Player _player;
 
-        private int _count;
+        private readonly Dictionary<EquationType, int> _types = 
+            Enum.GetValues(typeof(EquationType))
+                .Cast<EquationType>()
+                .ToDictionary(type => type, _ => 0);
 
         public override int OrderNumber => _orderNumber;
         public override string Text => _text;
-        public override int Score => _count;
-        public override int Target => _cakesTarget;
+        public override int Score => _types.Values.Sum();
+        public override int Target => _target * _types.Count;
         public override int Points => _points;
 
         public override event Action OnStateUpdated;
@@ -34,39 +39,34 @@ namespace Model.Achievements
 
         private void OnDisable()
         {
-            Unsubcribe();
+            Unsubscribe();
         }
 
         protected void UpdateState(Cake cake)
         {
-            _count += 1;
+            _types[cake.Bread.Type] += _types[cake.Bread.Type] < _target ? 1 : 0;
             OnStateUpdated?.Invoke();
 
-            if (_count < _cakesTarget)
-                return;
+            foreach (var count in _types.Values)
+            {
+                if (count < _target)
+                    return;
+            }
 
             _player.AddProgress(_points);
             OnReached?.Invoke(this);
 
-            Unsubcribe();
-        }
-
-        protected void Reset(Cake cake)
-        {
-            _count = 0;
-            OnStateUpdated?.Invoke();
+            Unsubscribe();
         }
 
         protected virtual void Subscribe()
         {
             _chef.OnCorrectCakeChecked += UpdateState;
-            _chef.OnWrongCakeChecked += Reset;
         }
 
-        protected virtual void Unsubcribe()
+        protected virtual void Unsubscribe()
         {
             _chef.OnCorrectCakeChecked -= UpdateState;
-            _chef.OnWrongCakeChecked -= Reset;
         }
     }
 }

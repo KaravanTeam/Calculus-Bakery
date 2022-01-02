@@ -1,6 +1,6 @@
 ﻿namespace Model.Achievements
 {
-    internal sealed class WrongConsecutiveCakesAchievement : CorrectСonsecutiveСakesAchievement
+    internal sealed class WrongConsecutiveCakesAchievement : CorrectСonsecutiveСakes
     {
         protected override void Subscribe()
         {

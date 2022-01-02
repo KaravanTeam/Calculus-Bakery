@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 namespace View
 {
     [RequireComponent(typeof(SpriteRenderer))]

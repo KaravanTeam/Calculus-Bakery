@@ -4,13 +4,17 @@ using View;
 
 namespace Controller
 {
-    internal sealed class ReferenceChanger : MonoBehaviour
+    internal sealed class ReferencePageToggler : MonoBehaviour
     {
-        [SerializeField] private Sprite _enabledPointer;
-        [SerializeField] private Sprite _disabledPointer;
+        [SerializeField] private ReferencePage[] _pages;
+
+        [Header("Buttons")]
         [SerializeField] private Button _leftButton;
         [SerializeField] private Button _rightButton;
-        [SerializeField] private ReferencePage[] _pages;
+
+        [Header("Pointers")]
+        [SerializeField] private Sprite _enabledPointer;
+        [SerializeField] private Sprite _disabledPointer;
 
         private int _position;
 

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Model
+namespace View
 {
     [RequireComponent(typeof(Animator))]
     internal sealed class SceneTransition : MonoBehaviour

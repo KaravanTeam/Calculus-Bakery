@@ -12,7 +12,7 @@ namespace View
         [SerializeField] private BrainAchievement[] _brains;
 
         [Header("GameOver")]
-        [SerializeField] private CakesCounterBar _bar;
+        [SerializeField] private CakesBar _bar;
         [SerializeField] private Player _player;
         [SerializeField] private Chef _chef;
 

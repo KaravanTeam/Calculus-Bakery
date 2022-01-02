@@ -16,9 +16,6 @@ namespace View
         [SerializeField] private Sprite _happyChefReplica;
         [SerializeField] private Sprite _sadChefReplica;
 
-        [Header("Congratulations")]
-        [SerializeField] private CongratulationPanel _congratulationPanel;
-
         [Header("Containers")]
         [SerializeField] private Image _replicaContainer;
         [SerializeField] private Image _chefContainer;

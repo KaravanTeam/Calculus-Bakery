@@ -2,7 +2,6 @@
 using System.Linq;
 using UnityEngine;
 
-
 namespace View
 {
     internal sealed class PipesSystem : MonoBehaviour

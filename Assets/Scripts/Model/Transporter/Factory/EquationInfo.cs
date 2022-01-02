@@ -2,7 +2,7 @@
 
 namespace Model.Transporter
 {
-    internal class EquationInfo : MonoBehaviour
+    internal sealed class EquationInfo : MonoBehaviour
     {
         public Sprite Value;
         public Sprite Solution;

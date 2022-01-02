@@ -4154,7 +4154,6 @@ MonoBehaviour:
   _sadChef: {fileID: 21300000, guid: 5a121e1c123d0f449b197a9833ec5809, type: 3}
   _happyChefReplica: {fileID: 21300000, guid: c343c10a47b765e4c86ba3b294335df9, type: 3}
   _sadChefReplica: {fileID: 21300000, guid: 02db8aae913ea5c4eab471f3143cbda9, type: 3}
-  _congratulationPanel: {fileID: 1324713193}
   _replicaContainer: {fileID: 145937346}
   _chefContainer: {fileID: 1007689705}
 --- !u!1001 &519003058
@@ -5595,7 +5594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a1438b1a2eedf4589334d7e7947efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _progress: {fileID: 947915640}
+  _textField: {fileID: 947915640}
   _player: {fileID: 448615506}
 --- !u!114 &661478332
 MonoBehaviour:
@@ -11105,7 +11104,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1330473353}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecd533aa9d589954ab5808b4d83d40a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e439d5853c013945a080d304e86f592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _text: "\u0421\u0434\u0435\u043B\u0430\u0442\u044C \u043F\u043E 5 \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u0445
@@ -17047,13 +17046,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df71e1230f1037d4a911411a47d06c41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enabledPointer: {fileID: 21300000, guid: b2dcec81b1bb7154dadac700408aed22, type: 3}
-  _disabledPointer: {fileID: 21300000, guid: 07164da46ec8393428ba899f9494d1cb, type: 3}
-  _leftButton: {fileID: 874158816}
-  _rightButton: {fileID: 1711170606}
   _pages:
   - {fileID: 708777247731583092}
   - {fileID: 1780003638157244428}
+  _leftButton: {fileID: 874158816}
+  _rightButton: {fileID: 1711170606}
+  _enabledPointer: {fileID: 21300000, guid: b2dcec81b1bb7154dadac700408aed22, type: 3}
+  _disabledPointer: {fileID: 21300000, guid: 07164da46ec8393428ba899f9494d1cb, type: 3}
 --- !u!1 &2010265130
 GameObject:
   m_ObjectHideFlags: 0
@@ -17798,7 +17797,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2056580684}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecd533aa9d589954ab5808b4d83d40a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e439d5853c013945a080d304e86f592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _text: "\u0421\u0434\u0435\u043B\u0430\u0442\u044C \u043F\u043E 1 \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E\u043C\u0443

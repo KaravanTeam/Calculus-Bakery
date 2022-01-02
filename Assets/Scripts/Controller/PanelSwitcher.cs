@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace Controller
 {
     [RequireComponent(typeof(Animator))]
-    internal sealed class PanelMover : MonoBehaviour
+    internal sealed class PanelSwitcher : MonoBehaviour
     {
         [SerializeField] private string _entryTrigger;
         [SerializeField] private Button _entryButton;

@@ -1,5 +1,6 @@
 ﻿using Model;
 using Model.Transporter;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,8 @@ namespace View
         [SerializeField] private Chef _chef;
 
         private Slider _slider;
+
+        public event Action<int> OnUpdated;
 
         private void Awake()
         {
@@ -28,14 +31,15 @@ namespace View
             _chef.OnCorrectCakeChecked -= Increase;
         }
 
-        public void SetMaxValue(int count)
+        private void Start()
         {
-            _slider.maxValue = count;
+            _slider.maxValue = _chef.MaxCakes;
         }
 
         private void Increase(Cake cake)
         {
             _slider.value += _slider.value < _slider.maxValue ? 1 : 0;
+            OnUpdated?.Invoke((int)_slider.value);
         }
     }
 }

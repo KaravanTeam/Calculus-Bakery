@@ -2,13 +2,15 @@
 {
     internal sealed class MessageInfo
     {
-        public MessageInfo(string text, int achievementPoints)
+        public MessageInfo(string text, int points, MessageType type)
         {
             Text = text;
-            AchievementPoints = achievementPoints;
+            Points = points;
+            Type = type;
         }
 
         public string Text { get; }
-        public int AchievementPoints { get; }
+        public int Points { get; }
+        public MessageType Type { get; }
     }
 }

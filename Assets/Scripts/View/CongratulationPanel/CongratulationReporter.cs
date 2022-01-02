@@ -1,4 +1,5 @@
-﻿using Model.Achievements;
+﻿using Model;
+using Model.Achievements;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,10 +7,18 @@ namespace View
 {
     internal sealed class CongratulationReporter : MonoBehaviour
     {
+        [Header("Achievement")]
         [SerializeField] private RankAchievement[] _ranks;
         [SerializeField] private BrainAchievement[] _brains;
 
-        private readonly Queue<MessageInfo> _messages = new Queue<MessageInfo>();
+        [Header("GameOver")]
+        [SerializeField] private CakesCounterBar _bar;
+        [SerializeField] private Player _player;
+        [SerializeField] private Chef _chef;
+
+        private readonly PriorityQueue<MessageInfo, int> _messages = new PriorityQueue<MessageInfo, int>();
+        private readonly int _achievementPriority = 0;
+        private readonly int _gameOverPriority = 10;
 
         private void OnEnable()
         {
@@ -18,6 +27,8 @@ namespace View
 
             foreach (var brain in _brains)
                 brain.OnReached += ReportBrainAchievement;
+
+            _bar.OnUpdated += ReportGameOver;
         }
 
         private void OnDisable()
@@ -27,25 +38,36 @@ namespace View
 
             foreach (var brain in _brains)
                 brain.OnReached -= ReportBrainAchievement;
+
+            _bar.OnUpdated -= ReportGameOver;
         }
 
-        public MessageInfo NextMessage() => _messages.Count > 0 ? _messages.Dequeue() : null;
+        public IEnumerable<MessageInfo> Messages => _messages;
 
         private void ReportRank(RankAchievement rank)
         {
             var message = $"Ты достиг звания\n\"{rank.Name}\"";
-            Report(message);
+            ReportAchievement(message);
         }
 
         private void ReportBrainAchievement(BrainAchievement brain)
         {
             var message = $"Ты выполнил достижение #{brain.OrderNumber}\n\"{brain.Text}\"";
-            Report(message, brain.Points);
+            ReportAchievement(message, brain.Points);
         }
 
-        private void Report(string message, int? points = null)
+        private void ReportAchievement(string message, int? points = null)
         {
-            _messages.Enqueue(new MessageInfo(message, points ?? 1));
+            _messages.Enqueue(new MessageInfo(message, points ?? 1, MessageType.Achievement), _achievementPriority);
+        }
+
+        private void ReportGameOver(int count)
+        {
+            if (count != _chef.MaxCakes)
+                return;
+
+            _messages.Enqueue(new MessageInfo(null, _player.Progress, MessageType.GameOver), _gameOverPriority);
+            _bar.OnUpdated -= ReportGameOver;
         }
     }
 }

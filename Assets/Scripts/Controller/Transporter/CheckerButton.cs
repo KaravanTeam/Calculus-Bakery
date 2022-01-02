@@ -2,6 +2,7 @@ using Model;
 using Model.Transporter;
 using UnityEngine;
 using UnityEngine.UI;
+using View;
 
 namespace Controller
 {
@@ -10,12 +11,11 @@ namespace Controller
     {
         [SerializeField] private Chef _chef;
         [SerializeField] private Transporter _transporter;
-        [SerializeField] private ServedButton _servedButton;
+        [SerializeField] private CreamContainer _creamContainer;
 
         private Button _button;
 
         private Cake _actualSolution;
-        private bool _isInteractable = true;
 
         private void Awake()
         {
@@ -24,27 +24,12 @@ namespace Controller
 
         private void OnEnable()
         {
-            _button.onClick.AddListener(OnClick);
-            _transporter.OnPlatformMovingStarted += OnPlatformMoved;
-            _transporter.OnPlatformMovingEnded += OnPlatformStopped;
+            _creamContainer.OnCreamPlaced += SetWaitState;
         }
 
         private void OnDisable()
         {
-            _button.onClick.RemoveListener(OnClick);
-            _transporter.OnPlatformMovingStarted -= OnPlatformMoved;
-            _transporter.OnPlatformMovingEnded -= OnPlatformStopped;
-        }
-
-        public void SetEnabledState()
-        {
-            _button.onClick.RemoveAllListeners();
-            _button.onClick.AddListener(OnClick);
-        }
-
-        public void SetDisabledState()
-        {
-            _button.onClick.RemoveAllListeners();
+            _creamContainer.OnCreamPlaced -= UnsetWaitState;
         }
 
         public void SaveSolution(Cake solution)
@@ -54,24 +39,34 @@ namespace Controller
 
         private void OnClick()
         {
-            if (!_isInteractable)
-                return;
-
             _chef.CheckSolution(_actualSolution);
             StartCoroutine(_transporter.ResetPlatform());
 
-            _servedButton.SetEnabledState();
-            SetDisabledState();
+            UnsetWaitState();
         }
 
-        private void OnPlatformMoved(PipeType pipe)
+        private void SetWaitState()
         {
-            _isInteractable = false;
+            _button.onClick.AddListener(OnClick);
+            _transporter.OnPlatformMovingStarted += SetDisabled;
+            _transporter.OnPlatformMovingEnded += SetEnabled;
         }
 
-        private void OnPlatformStopped(PipeType pipe)
+        private void UnsetWaitState()
         {
-            _isInteractable = true;
+            _button.onClick.RemoveListener(OnClick);
+            _transporter.OnPlatformMovingStarted -= SetDisabled;
+            _transporter.OnPlatformMovingEnded -= SetEnabled;
+        }
+
+        private void SetEnabled(PipeType pipe)
+        {
+            _button.onClick.AddListener(OnClick);
+        }
+
+        private void SetDisabled(PipeType pipe)
+        {
+            _button.onClick.RemoveListener(OnClick);
         }
     }
 }

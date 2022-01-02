@@ -2583,10 +2583,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cream: {fileID: 1598910848}
   _transporter: {fileID: 1579058825}
-  _blockButtons:
-  - {fileID: 989882695}
-  - {fileID: 657775487}
-  - {fileID: 560352276}
 --- !u!1 &266975433
 GameObject:
   m_ObjectHideFlags: 0
@@ -9381,7 +9377,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.00022125, y: -138.95029}
+  m_AnchoredPosition: {x: -0.00022125, y: -138.97955}
   m_SizeDelta: {x: 301.76, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1162233889
@@ -14362,7 +14358,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1151887603}
   m_Direction: 2
   m_Value: 0.5
-  m_Size: 0.2988178
+  m_Size: 0.29888076
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -18334,6 +18330,10 @@ PrefabInstance:
       propertyPath: _transporter
       value: 
       objectReference: {fileID: 1579058825}
+    - target: {fileID: 662619948917175051, guid: 5d746a49d91e98b4892767484f360069, type: 3}
+      propertyPath: _creamContainer
+      value: 
+      objectReference: {fileID: 261860101}
     - target: {fileID: 662619948917175055, guid: 5d746a49d91e98b4892767484f360069, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -18368,7 +18368,7 @@ PrefabInstance:
       objectReference: {fileID: 622412518}
     - target: {fileID: 662619949032959152, guid: 5d746a49d91e98b4892767484f360069, type: 3}
       propertyPath: _blockButtons.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 662619949032959152, guid: 5d746a49d91e98b4892767484f360069, type: 3}
       propertyPath: _blockButtons.Array.data[0]

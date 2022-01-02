@@ -1,16 +1,16 @@
-using Controller;
 using Model.Transporter;
+using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace View
 {
     [RequireComponent(typeof(BoxCollider2D))]
-    internal sealed class CreamToggler : MonoBehaviour
+    internal sealed class CreamContainer : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _cream;
         [SerializeField] private Transporter _transporter;
-        [SerializeField] private Button[] _blockButtons;
+
+        public event Action OnCreamPlaced;
 
         private void OnEnable()
         {
@@ -29,8 +29,7 @@ namespace View
                 _cream.sprite = drop.Cream;
                 Destroy(drop.gameObject);
 
-                foreach (var button in _blockButtons)
-                    button.interactable = true;
+                OnCreamPlaced?.Invoke();
             }
         }
 

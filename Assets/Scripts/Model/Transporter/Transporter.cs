@@ -17,7 +17,7 @@ namespace Model.Transporter
         private Vector3 _defaultPosition;
         private PipeType _servicedPipe;
 
-        public Pipe ServicedPipe => _pipes[_servicedPipe];
+        private Pipe Current => _pipes[_servicedPipe];
 
         public event Action OnReseted;
         public event Action<PipeType> OnPlatformMovingStarted;
@@ -40,7 +40,7 @@ namespace Model.Transporter
 
         public Cake BuildSolution()
         {
-            return new Cake(_platform.Equation, ServicedPipe.Solution);
+            return new Cake(_platform.Equation, Current.Solution);
         }
         
         public IEnumerator ResetPlatform()
@@ -69,6 +69,11 @@ namespace Model.Transporter
             StartCoroutine(MovePlatformTo((PipeType)target));
 
             return true;
+        }
+
+        public void ThrowWaterDrop()
+        {
+            Current.Drop.FallDown();
         }
 
         private IEnumerator MovePlatformTo(PipeType target)

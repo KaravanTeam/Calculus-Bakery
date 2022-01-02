@@ -12,8 +12,6 @@ namespace Controller
 
         private Button _button;
 
-        private bool _isInteractable = true;
-
         private void Awake()
         {
             _button = GetComponent<Button>();
@@ -35,20 +33,17 @@ namespace Controller
 
         private void OnClick()
         {
-            if (!_isInteractable)
-                return;
-
             _transporter.TryMoveTowards(_direction);          
         }
 
         private void SetEnabledState(PipeType pipe)
         {
-            _isInteractable = true;
+            _button.onClick.AddListener(OnClick);
         }
 
         private void SetDisabledState(PipeType pipe)
         {
-            _isInteractable = false;
+            _button.onClick.RemoveListener(OnClick);
         }
     }
 }

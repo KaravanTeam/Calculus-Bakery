@@ -10,13 +10,8 @@ namespace Controller
     {
         [SerializeField] private Transporter _transporter;
         [SerializeField] private CheckerButton _checkerButton;
-        [SerializeField] private Button[] _blockButtons;
 
         private Button _button;
-
-        private bool _isInteractable = true;
-
-        public event Action OnCreamServed;
 
         private void Awake()
         {
@@ -26,55 +21,45 @@ namespace Controller
         private void OnEnable()
         {
             _button.onClick.AddListener(OnClick);
-            _transporter.OnPlatformMovingStarted += IsMovingPlatform;
-            _transporter.OnPlatformMovingEnded += IsNotMovingPlatform;
+            _transporter.OnReseted += ResetHandlers;
+            _transporter.OnPlatformMovingStarted += SetDisabled;
+            _transporter.OnPlatformMovingEnded += SetEnabled;
         }
 
         private void OnDisable()
         {
             _button.onClick.RemoveListener(OnClick);
-            _transporter.OnPlatformMovingStarted -= IsMovingPlatform;
-            _transporter.OnPlatformMovingEnded -= IsNotMovingPlatform;
+            _transporter.OnReseted -= ResetHandlers;
+            _transporter.OnPlatformMovingStarted -= SetDisabled;
+            _transporter.OnPlatformMovingEnded -= SetEnabled;
         }
 
-        public void SetEnabledState()
+        private void ResetHandlers()
         {
-            _button.onClick.RemoveAllListeners();
-            _button.onClick.AddListener(OnClick);
-        }
-
-        public void SetDisabledState()
-        {
-            _button.onClick.RemoveAllListeners();
+            _transporter.OnPlatformMovingStarted += SetDisabled;
+            _transporter.OnPlatformMovingEnded += SetEnabled;
         }
 
         private void OnClick()
         {
-            if (!_isInteractable)
-                return;
-
             var solution = _transporter.BuildSolution();
-            _transporter.ServicedPipe.Drop.FallDown();
-
-            foreach (var button in _blockButtons)
-                button.interactable = false;
-            
+            _transporter.ThrowWaterDrop();
+          
             _checkerButton.SaveSolution(solution);
-            _checkerButton.SetEnabledState();
 
-            OnCreamServed?.Invoke();
-
-            SetDisabledState();
+            _button.onClick.RemoveListener(OnClick);
+            _transporter.OnPlatformMovingStarted -= SetDisabled;
+            _transporter.OnPlatformMovingEnded -= SetEnabled;
         }
 
-        private void IsMovingPlatform(PipeType pipe)
+        private void SetEnabled(PipeType pipe)
         {
-            _isInteractable = false;
+            _button.onClick.AddListener(OnClick);
         }
 
-        private void IsNotMovingPlatform(PipeType pipe)
+        private void SetDisabled(PipeType pipe)
         {
-            _isInteractable = true;
-        }    
+            _button.onClick.RemoveListener(OnClick);
+        }
     }
 }

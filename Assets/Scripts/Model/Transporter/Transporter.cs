@@ -10,14 +10,15 @@ namespace Model.Transporter
     {
         [SerializeField] private Transform _start;
         [SerializeField] private Transform _end;
+        [SerializeField] private Platform _platform;
+        [SerializeField] private Pipe[] _pipes;
 
-        private Platform _platform;
-        private Dictionary<PipeType, Pipe> _pipes;
+        private Dictionary<PipeType, Pipe> _pipeTypes;
 
         private Vector3 _defaultPosition;
         private PipeType _servicedPipe;
 
-        private Pipe Current => _pipes[_servicedPipe];
+        private Pipe Current => _pipeTypes[_servicedPipe];
 
         public event Action OnReseted;
         public event Action<PipeType> OnPlatformMovingStarted;
@@ -25,15 +26,11 @@ namespace Model.Transporter
 
         private void Start()
         {
-            _platform = FindObjectOfType<Platform>();
+            _pipeTypes = _pipes.ToDictionary(pipe => pipe.Type, pipe => pipe);
 
-            _pipes = FindObjectsOfType<Pipe>()
-                .ToDictionary(pipe => pipe.Type, pipe => pipe);
-
-            var pipe = _pipes[PipeType.Left].transform.position;
+            var pipe = _pipeTypes[PipeType.Left].transform.position;
             _defaultPosition = new Vector3(pipe.x, _platform.transform.position.y);
             _servicedPipe = PipeType.Left;
-
 
             _platform.transform.position = _defaultPosition;
         }
@@ -80,7 +77,7 @@ namespace Model.Transporter
         {
             OnPlatformMovingStarted?.Invoke(_servicedPipe);
 
-            yield return _platform.MoveTo(_pipes[target].transform.position);
+            yield return _platform.MoveTo(_pipeTypes[target].transform.position);
 
             OnPlatformMovingEnded?.Invoke(_servicedPipe = target);
         }

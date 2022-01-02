@@ -13081,6 +13081,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _start: {fileID: 1077936032}
   _end: {fileID: 1068869524}
+  _platform: {fileID: 288012914}
+  _pipes:
+  - {fileID: 1052254433}
+  - {fileID: 1618947036}
+  - {fileID: 1133360144}
 --- !u!4 &1579058826
 Transform:
   m_ObjectHideFlags: 0

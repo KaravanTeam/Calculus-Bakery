@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace View
 {
-    internal sealed class SpriteUISelector : MonoBehaviour
+    internal sealed class ObjectsSelector : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer[] _renders;
 

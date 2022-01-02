@@ -9,7 +9,7 @@ namespace View
         [SerializeField] private Sprite _replica;
         [SerializeField] private ChefEmoji _chefEmoji;
 
-        private SpriteUISelector _selector;
+        private ObjectsSelector _selector;
 
         private bool _isLoaded;
         private bool _isVisibleReplica;
@@ -17,7 +17,7 @@ namespace View
 
         private void Awake()
         {
-            _selector = GetComponent<SpriteUISelector>();
+            _selector = GetComponent<ObjectsSelector>();
         }
 
         private void OnEnable()

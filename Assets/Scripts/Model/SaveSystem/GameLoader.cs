@@ -7,9 +7,6 @@ namespace Model.SaveSystem
     {
         [SerializeField] private GameObject _mainPanel;
         [SerializeField] private SettingsPanel _settingsPanel;
-
-        [Header("Info")]
-        [SerializeField] private PlayerProfileInfo _settings;
         
 
         private void Start()
@@ -23,7 +20,8 @@ namespace Model.SaveSystem
                 return;
             }
 
-            PlayerProfile.Load(_settings);
+            PlayerProfile.Load();
+            _settingsPanel.UpdateFields();
         }
     }
 }

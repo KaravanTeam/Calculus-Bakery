@@ -2,11 +2,23 @@
 
 namespace Model.SaveSystem
 {
-    internal static class PlayerProfile
+    [CreateAssetMenu]
+    internal class PlayerProfile : ScriptableObject
     {
+        public string Nickname;
+        public string Name;
+        public string Group;
+
+        private static PlayerProfile _instance;
+
         private static readonly string _nicknameField = "nickname"; 
         private static readonly string _nameField = "name"; 
-        private static readonly string _groupField = "group"; 
+        private static readonly string _groupField = "group";
+
+        private PlayerProfile()
+        {
+            _instance = this;
+        }
 
         public static void Save(string nickname, string name, string group)
         {
@@ -15,13 +27,17 @@ namespace Model.SaveSystem
             PlayerPrefs.SetString(_groupField, group);
 
             PlayerPrefs.Save();
+
+            _instance.Nickname = nickname;
+            _instance.Name = name;
+            _instance.Group = group;
         }
 
-        public static void Load(PlayerProfileInfo profile)
+        public static void Load()
         {
-            profile.Nickname = PlayerPrefs.GetString(_nicknameField);
-            profile.Name = PlayerPrefs.GetString(_nameField);
-            profile.Group = PlayerPrefs.GetString(_groupField);
+            _instance.Nickname = PlayerPrefs.GetString(_nicknameField);
+            _instance.Name = PlayerPrefs.GetString(_nameField);
+            _instance.Group = PlayerPrefs.GetString(_groupField);
         }
 
         public static bool IsExist()

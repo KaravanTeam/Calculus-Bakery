@@ -6,8 +6,8 @@ namespace View.SaveSystem
 {
     internal sealed class SettingsPanel : MonoBehaviour
     {
-        [SerializeField] private PlayerProfileInfo _profile;
         [SerializeField] private GameObject _mainPanel;
+        [SerializeField] private PlayerProfile _playerProfile;
 
         [Header("RegisterForm")]
         [SerializeField] private GameObject _registerForm;
@@ -25,13 +25,6 @@ namespace View.SaveSystem
         [SerializeField] private Sprite _soundOff;
         [SerializeField] private AudioListener _audioListener;
 
-        public void OnEnable()
-        {
-            _nickname.text = _profile.Nickname;
-            _name.text = _profile.Name;
-            _group.text = _profile.Group;
-        }
-
         public void OpenRegisterForm()
         {
             _infoPanel.SetActive(false);
@@ -48,13 +41,20 @@ namespace View.SaveSystem
                 return;
 
             PlayerProfile.Save(nickname, name, group);
-            PlayerProfile.Load(_profile);
+            UpdateFields();
 
             gameObject.SetActive(false);
             _infoPanel.SetActive(true);
             _registerForm.SetActive(false);
 
             _mainPanel.SetActive(true);
+        }
+
+        public void UpdateFields()
+        {
+            _nickname.text = _playerProfile.Nickname;
+            _name.text = _playerProfile.Name;
+            _group.text = _playerProfile.Group;
         }
 
         public void ToggleSound()

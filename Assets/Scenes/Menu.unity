@@ -1450,8 +1450,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b027f93e65347e945adf8bbac25122e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _profile: {fileID: 11400000, guid: c33a6de59384cb6449a13131ad656795, type: 2}
   _mainPanel: {fileID: 1564697931}
+  _playerProfile: {fileID: 11400000, guid: 7b11a2c2d8f7a1c409f117beb6ae1e3c, type: 2}
   _registerForm: {fileID: 1621227486}
   _nicknameField: {fileID: 4665089842787748283}
   _nameField: {fileID: 3770812543100758174}
@@ -1992,7 +1992,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainPanel: {fileID: 1564697931}
   _settingsPanel: {fileID: 1027143824}
-  _settings: {fileID: 11400000, guid: c33a6de59384cb6449a13131ad656795, type: 2}
 --- !u!4 &1556134372
 Transform:
   m_ObjectHideFlags: 0

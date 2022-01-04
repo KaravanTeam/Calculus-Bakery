@@ -1,4 +1,5 @@
 ﻿using Model;
+using Model.SaveSystem;
 using Model.Transporter;
 using System;
 using UnityEngine;
@@ -34,11 +35,13 @@ namespace View
         private void Start()
         {
             _slider.maxValue = _chef.MaxCakes;
+            _slider.value = PlayerProfile.Instance.CakesCount;
         }
 
         private void Increase(Cake cake)
         {
             _slider.value += _slider.value < _slider.maxValue ? 1 : 0;
+            PlayerProfile.SaveCakesCount((int)_slider.value);
 
             OnUpdated?.Invoke((int)_slider.value);
         }

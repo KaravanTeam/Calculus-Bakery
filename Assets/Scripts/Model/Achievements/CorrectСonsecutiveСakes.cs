@@ -1,4 +1,5 @@
-﻿using Model.Transporter;
+﻿using Model.SaveSystem;
+using Model.Transporter;
 using System;
 using UnityEngine;
 
@@ -14,7 +15,6 @@ namespace Model.Achievements
         [SerializeField] private int _points;
 
         [SerializeField] protected Chef _chef;
-        [SerializeField] private Player _player;
 
         private int _count;
 
@@ -45,7 +45,7 @@ namespace Model.Achievements
             if (_count < _cakesTarget)
                 return;
 
-            _player.AddProgress(_points);
+            PlayerProfile.Instance.AddPoints(_points);
             OnReached?.Invoke(this);
 
             Unsubcribe();

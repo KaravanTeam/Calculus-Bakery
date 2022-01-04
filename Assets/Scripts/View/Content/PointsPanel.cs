@@ -1,4 +1,4 @@
-﻿using Model;
+﻿using Model.SaveSystem;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,21 +7,20 @@ namespace View
     internal sealed class PointsPanel : MonoBehaviour
     {
         [SerializeField] private Text _textField;
-        [SerializeField] private Player _player;
 
         private void OnEnable()
         {
-            _player.OnProgressUpdated += UpdateState;
+            PlayerProfile.Instance.OnProgressUpdated += UpdateState;
         }
 
         private void Start()
         {
-            _textField.text = $"{_player.Progress}%";
+            _textField.text = $"{PlayerProfile.Instance.Points}%";
         }
 
         private void OnDisable()
         {
-            _player.OnProgressUpdated -= UpdateState;
+            PlayerProfile.Instance.OnProgressUpdated -= UpdateState;
         }
 
         private void UpdateState(int progress)

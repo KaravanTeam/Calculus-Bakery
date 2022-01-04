@@ -1,4 +1,5 @@
 ﻿using Model;
+using Model.SaveSystem;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ namespace View
     internal sealed class Tutorial : MonoBehaviour
     {
         [SerializeField] private Chef _chef;
+        [SerializeField] private PlayerProfile _profile;
 
         [SerializeField] private TutorialPanel[] _panels;
 
@@ -21,7 +23,6 @@ namespace View
 
         private void Awake()
         {
-            _tutorialPanel.SetActive(true);
             _locker = GetComponent<ButtonsLocker>();
         }
 
@@ -33,6 +34,13 @@ namespace View
 
         private void Start()
         {
+            if (_profile.Points > 0)
+            {
+                Skip();
+                return;
+            }
+
+            _tutorialPanel.SetActive(true);
             _locker.Lock();
         }
 

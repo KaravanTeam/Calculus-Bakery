@@ -844,7 +844,6 @@ MonoBehaviour:
   _targetCount: 10
   _points: 5
   _chef: {fileID: 42930252}
-  _player: {fileID: 448615506}
 --- !u!1 &64521210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1230,7 +1229,6 @@ MonoBehaviour:
   _targetCount: 35
   _points: 18
   _chef: {fileID: 42930252}
-  _player: {fileID: 448615506}
 --- !u!1 &142282210
 GameObject:
   m_ObjectHideFlags: 0
@@ -2604,7 +2602,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: "\u041B\u0435\u0433\u0435\u043D\u0434\u0430\u0440\u043D\u044B\u0439 \u0428\u0435\u0444-\u043F\u043E\u0432\u0430\u0440"
   _targetPercents: 100
-  _player: {fileID: 448615506}
 --- !u!1 &278931070
 GameObject:
   m_ObjectHideFlags: 0
@@ -2802,7 +2799,6 @@ MonoBehaviour:
   _targetCount: 1
   _points: 2
   _chef: {fileID: 42930252}
-  _player: {fileID: 448615506}
 --- !u!1 &340216345
 GameObject:
   m_ObjectHideFlags: 0
@@ -3828,49 +3824,6 @@ MonoBehaviour:
   Value: {fileID: 21300000, guid: e31544ac670dcf04eb1a7a6471263c04, type: 3}
   Solution: {fileID: 21300000, guid: 7bdf8c41d70716e47982cdbe249c7eb9, type: 3}
   Type: 3
---- !u!1 &448615504
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 448615505}
-  - component: {fileID: 448615506}
-  m_Layer: 0
-  m_Name: Player
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &448615505
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 448615504}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &448615506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 448615504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7911bff17ab497a47823e560d0b3894b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &451050822
 GameObject:
   m_ObjectHideFlags: 0
@@ -4505,7 +4458,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.59864134, y: 1}
-  m_AnchoredPosition: {x: -859, y: 4.9348145}
+  m_AnchoredPosition: {x: -859.00006, y: 4.9348145}
   m_SizeDelta: {x: 0, y: 9.7997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &533261663
@@ -4924,7 +4877,7 @@ Transform:
   - {fileID: 717611787}
   - {fileID: 1000877024}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &593931545
 GameObject:
@@ -5571,7 +5524,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textField: {fileID: 947915640}
-  _player: {fileID: 448615506}
 --- !u!114 &661478332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5916,6 +5868,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _chef: {fileID: 42930252}
+  _profile: {fileID: 11400000, guid: 7b11a2c2d8f7a1c409f117beb6ae1e3c, type: 2}
   _panels:
   - {fileID: 2002335284}
   - {fileID: 1129901191}
@@ -6924,7 +6877,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: "\u041F\u043E\u0432\u0430\u0440"
   _targetPercents: 2
-  _player: {fileID: 448615506}
 --- !u!1 &865256233
 GameObject:
   m_ObjectHideFlags: 0
@@ -7523,7 +7475,6 @@ MonoBehaviour:
   _cakesTarget: 5
   _points: 13
   _chef: {fileID: 42930252}
-  _player: {fileID: 448615506}
 --- !u!1 &947915638
 GameObject:
   m_ObjectHideFlags: 0
@@ -7890,7 +7841,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: "\u0421\u0443-\u0448\u0435\u0444"
   _targetPercents: 35
-  _player: {fileID: 448615506}
 --- !u!1 &988023861
 GameObject:
   m_ObjectHideFlags: 0
@@ -7936,7 +7886,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: "\u0421\u0442\u0430\u0440\u0448\u0438\u0439 \u043F\u043E\u0432\u0430\u0440"
   _targetPercents: 15
-  _player: {fileID: 448615506}
 --- !u!114 &989882695 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 662619948814538331, guid: 5d746a49d91e98b4892767484f360069, type: 3}
@@ -8223,7 +8172,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.42764115, y: 1}
-  m_AnchoredPosition: {x: -368.0002, y: 4.990143}
+  m_AnchoredPosition: {x: -368.00027, y: 4.990143}
   m_SizeDelta: {x: 3, y: 9.920013}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1023124057
@@ -9875,7 +9824,7 @@ Transform:
   - {fileID: 973982728}
   - {fileID: 1579058826}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1195163429
 GameObject:
@@ -10309,7 +10258,6 @@ MonoBehaviour:
   _cakesTarget: 5
   _points: 0
   _chef: {fileID: 42930252}
-  _player: {fileID: 448615506}
 --- !u!1 &1235377816
 GameObject:
   m_ObjectHideFlags: 0
@@ -10340,7 +10288,7 @@ Transform:
   - {fileID: 2051001421}
   - {fileID: 1246423010}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1237286646
 GameObject:
@@ -10992,7 +10940,6 @@ MonoBehaviour:
   - {fileID: 1506321245}
   - {fileID: 1227363208}
   _bar: {fileID: 847810533}
-  _player: {fileID: 448615506}
   _chef: {fileID: 42930252}
 --- !u!1 &1329884705
 GameObject:
@@ -11090,7 +11037,6 @@ MonoBehaviour:
   _target: 5
   _points: 18
   _chef: {fileID: 42930252}
-  _player: {fileID: 448615506}
 --- !u!1001 &1337034297
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12440,7 +12386,6 @@ MonoBehaviour:
   _cakesTarget: 10
   _points: 18
   _chef: {fileID: 42930252}
-  _player: {fileID: 448615506}
 --- !u!114 &1507273439 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4297131280862439039, guid: b00a2d7e8c81b7d46a28785052471015, type: 3}
@@ -12978,7 +12923,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: "\u0428\u0435\u0444-\u043F\u043E\u0432\u0430\u0440"
   _targetPercents: 70
-  _player: {fileID: 448615506}
 --- !u!1 &1576889852
 GameObject:
   m_ObjectHideFlags: 0
@@ -14337,8 +14281,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1151887604}
   m_HandleRect: {fileID: 1151887603}
   m_Direction: 2
-  m_Value: 0.50000006
-  m_Size: 0.2989433
+  m_Value: 0.50001144
+  m_Size: 0.2989272
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -15398,7 +15342,6 @@ MonoBehaviour:
   _target: 1
   _points: 0
   _chef: {fileID: 42930252}
-  _player: {fileID: 448615506}
 --- !u!1 &1854198628
 GameObject:
   m_ObjectHideFlags: 0
@@ -16503,7 +16446,6 @@ MonoBehaviour:
   _targetCount: 20
   _points: 13
   _chef: {fileID: 42930252}
-  _player: {fileID: 448615506}
 --- !u!1 &1960468348
 GameObject:
   m_ObjectHideFlags: 0
@@ -17759,7 +17701,6 @@ MonoBehaviour:
   _target: 1
   _points: 13
   _chef: {fileID: 42930252}
-  _player: {fileID: 448615506}
 --- !u!1001 &2071409853
 PrefabInstance:
   m_ObjectHideFlags: 0

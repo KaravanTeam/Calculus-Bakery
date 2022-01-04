@@ -1,4 +1,5 @@
-﻿using Model.Transporter;
+﻿using Model.SaveSystem;
+using Model.Transporter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,6 @@ namespace Model.Achievements
         [SerializeField] private int _points;
 
         [SerializeField] protected Chef _chef;
-        [SerializeField] private Player _player;
 
         private readonly Dictionary<EquationType, int> _types = 
             Enum.GetValues(typeof(EquationType))
@@ -53,7 +53,7 @@ namespace Model.Achievements
                     return;
             }
 
-            _player.AddProgress(_points);
+            PlayerProfile.Instance.AddPoints(_points);
             OnReached?.Invoke(this);
 
             Unsubscribe();

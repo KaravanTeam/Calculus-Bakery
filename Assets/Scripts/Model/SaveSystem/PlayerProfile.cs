@@ -26,7 +26,13 @@ namespace Model.SaveSystem
 
         private PlayerProfile()
         {
-            Instance = this;
+            if (Instance is null)
+                Instance = this;
+        }
+
+        public static void Initialize()
+        {
+            Instance = (PlayerProfile)CreateInstance(typeof(PlayerProfile));
         }
 
         public void AddPoints(int value)

@@ -15,6 +15,8 @@ namespace Model.SaveSystem
         
         private void Start()
         {
+            PlayerProfile.Initialize();
+
             if (!PlayerProfile.IsExist())
             {
                 PlayerProfile.Clear();

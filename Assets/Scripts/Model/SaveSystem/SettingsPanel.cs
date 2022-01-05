@@ -25,6 +25,8 @@ namespace View.SaveSystem
         [SerializeField] private Sprite _soundOff;
         [SerializeField] private AudioListener _audioListener;
 
+        private TouchScreenKeyboard _keyboard;
+
         public void OpenRegisterForm()
         {
             _infoPanel.SetActive(false);
@@ -55,7 +57,7 @@ namespace View.SaveSystem
             PlayerProfile.Clear();
 
             _mainPanel.SetActive(false);
-            _points.text = "0%";
+            ResetFieldsForm();
             OpenRegisterForm();
         }
 
@@ -72,6 +74,14 @@ namespace View.SaveSystem
 
             _soundToggler.sprite = isOn ? _soundOff : _soundOn;
             _audioListener.enabled = isOn;
+        }
+
+        private void ResetFieldsForm()
+        {
+            _points.text = "0%";
+            _nicknameField.text = null;
+            _nameField.text = null;
+            _groupField.text = null;
         }
     }
 }

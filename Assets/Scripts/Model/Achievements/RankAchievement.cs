@@ -10,6 +10,7 @@ namespace Model.Achievements
         [SerializeField] private int _targetPercents;
 
         private int _progress;
+        private string _hash;
 
         public string Name => _name;
 
@@ -17,6 +18,7 @@ namespace Model.Achievements
 
         private void Awake()
         {
+            _hash = Name.GetHashCode().ToString();
             Deserialize();
         }
 
@@ -53,13 +55,13 @@ namespace Model.Achievements
 
         public void Serialize()
         {
-            PlayerPrefs.SetInt(Name.GetHashCode().ToString(), _progress);
+            PlayerPrefs.SetInt(_hash, _progress);
             PlayerPrefs.Save();
         }
 
         public void Deserialize()
         {
-            _progress = PlayerPrefs.GetInt(Name.GetHashCode().ToString());
+            _progress = PlayerPrefs.GetInt(_hash);
         }
     }
 }

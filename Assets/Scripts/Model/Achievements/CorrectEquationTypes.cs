@@ -18,10 +18,10 @@ namespace Model.Achievements
 
         [SerializeField] protected Chef _chef;
 
-        private readonly Dictionary<EquationType, int> _types = 
-            Enum.GetValues(typeof(EquationType))
-                .Cast<EquationType>()
-                .ToDictionary(type => type, _ => 0);
+        private string _hash;
+        private EquationType? _changedType = null;
+
+        private readonly Dictionary<EquationType, int> _types = new Dictionary<EquationType, int>();
 
         public override int OrderNumber => _orderNumber;
         public override string Text => _text;
@@ -31,6 +31,12 @@ namespace Model.Achievements
 
         public override event Action OnStateUpdated;
         public override event Action<BrainAchievement> OnReached;
+
+        private void Awake()
+        {
+            _hash = Text.GetHashCode().ToString();
+            Deserialize();
+        }
 
         private void OnEnable()
         {
@@ -42,16 +48,22 @@ namespace Model.Achievements
             Unsubscribe();
         }
 
+        private void Start()
+        {
+            if (_types.Values.All(count => count >= _target))
+                Unsubscribe();
+        }
+
         protected void UpdateState(Cake cake)
         {
             _types[cake.Bread.Type] += _types[cake.Bread.Type] < _target ? 1 : 0;
             OnStateUpdated?.Invoke();
 
-            foreach (var count in _types.Values)
-            {
-                if (count < _target)
-                    return;
-            }
+            _changedType = cake.Bread.Type;
+            Serialize();
+
+            if (_types.Values.Any(count => count < _target))
+                return;
 
             PlayerProfile.Instance.AddPoints(_points);
             OnReached?.Invoke(this);
@@ -67,6 +79,18 @@ namespace Model.Achievements
         protected virtual void Unsubscribe()
         {
             _chef.OnCorrectCakeChecked -= UpdateState;
+        }
+
+        public override void Serialize()
+        {
+            PlayerPrefs.SetInt(_hash + _changedType.GetHashCode(), _types[_changedType.Value]);
+            PlayerPrefs.Save();
+        }
+
+        public override void Deserialize()
+        {
+            foreach (var type in Enum.GetValues(typeof(EquationType)).Cast<EquationType>())
+                _types[type] = PlayerPrefs.GetInt(_hash + type.GetHashCode());
         }
     }
 }

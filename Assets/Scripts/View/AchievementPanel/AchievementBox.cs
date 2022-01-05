@@ -16,8 +16,6 @@ namespace View
         private void Awake()
         {
             _task = GetComponent<BrainAchievementTask>();
-
-            UpdateFields();
         }
 
         private void OnEnable()
@@ -28,6 +26,11 @@ namespace View
         private void OnDisable()
         {
             _task.Achievement.OnStateUpdated -= UpdateFields;
+        }
+
+        private void Start()
+        {
+            UpdateFields();
         }
 
         private void UpdateFields()

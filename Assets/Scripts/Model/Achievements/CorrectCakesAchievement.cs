@@ -17,6 +17,7 @@ namespace Model.Achievements
         [SerializeField] private Chef _chef;
         
         private int _count;
+        private string _hash;
 
         public override int OrderNumber => _orderNumber;
         public override string Text => _text;
@@ -26,6 +27,12 @@ namespace Model.Achievements
 
         public override event Action OnStateUpdated;
         public override event Action<BrainAchievement> OnReached;
+
+        private void Awake()
+        {
+            _hash = Text.GetHashCode().ToString();
+            Deserialize();
+        }
 
         private void OnEnable()
         {
@@ -37,10 +44,17 @@ namespace Model.Achievements
             _chef.OnCorrectCakeChecked -= UpdateState;
         }
 
+        private void Start()
+        {
+            if (_count >= _targetCount)
+                _chef.OnCorrectCakeChecked -= UpdateState;
+        }
+
         private void UpdateState(Cake cake)
         {
             _count += 1;
             OnStateUpdated?.Invoke();
+            Serialize();
 
             if (_count < _targetCount)
                 return;
@@ -49,6 +63,17 @@ namespace Model.Achievements
             OnReached?.Invoke(this);
 
             _chef.OnCorrectCakeChecked -= UpdateState;
+        }
+
+        public override void Serialize()
+        {
+            PlayerPrefs.SetInt(_hash, _count);
+            PlayerPrefs.Save();
+        }
+
+        public override void Deserialize()
+        {
+            _count = PlayerPrefs.GetInt(_hash);
         }
     }
 }

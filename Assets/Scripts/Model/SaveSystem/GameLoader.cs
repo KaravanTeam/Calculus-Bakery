@@ -6,8 +6,6 @@ namespace Model.SaveSystem
 {
     internal sealed class GameLoader : MonoBehaviour
     {
-        [SerializeField] private PlayerProfile _profile;
-
         [Header("MainPanel")]
         [SerializeField] private GameObject _mainPanel;
         [SerializeField] private Text _points;
@@ -15,7 +13,6 @@ namespace Model.SaveSystem
         [Header("SettingsPanel")]
         [SerializeField] private SettingsPanel _settingsPanel;
         
-
         private void Start()
         {
             if (!PlayerProfile.IsExist())
@@ -31,7 +28,7 @@ namespace Model.SaveSystem
                 PlayerProfile.Load();
             }
 
-            _points.text = $"{_profile.Points}%";
+            _points.text = $"{PlayerProfile.Instance.Points}%";
             _settingsPanel.UpdateFields();
         }
     }

@@ -7,7 +7,7 @@ namespace View.SaveSystem
     internal sealed class SettingsPanel : MonoBehaviour
     {
         [SerializeField] private GameObject _mainPanel;
-        [SerializeField] private PlayerProfile _playerProfile;
+        [SerializeField] private Text _points;
 
         [Header("RegisterForm")]
         [SerializeField] private GameObject _registerForm;
@@ -50,11 +50,20 @@ namespace View.SaveSystem
             _mainPanel.SetActive(true);
         }
 
+        public void SignOut()
+        {
+            PlayerProfile.Clear();
+
+            _mainPanel.SetActive(false);
+            _points.text = "0%";
+            OpenRegisterForm();
+        }
+
         public void UpdateFields()
         {
-            _nickname.text = _playerProfile.Nickname;
-            _name.text = _playerProfile.Name;
-            _group.text = _playerProfile.Group;
+            _nickname.text = PlayerProfile.Instance.Nickname;
+            _name.text = PlayerProfile.Instance.Name;
+            _group.text = PlayerProfile.Instance.Group;
         }
 
         public void ToggleSound()

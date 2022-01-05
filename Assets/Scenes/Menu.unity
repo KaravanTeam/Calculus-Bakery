@@ -1528,7 +1528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainPanel: {fileID: 1564697931}
-  _playerProfile: {fileID: 11400000, guid: 7b11a2c2d8f7a1c409f117beb6ae1e3c, type: 2}
+  _points: {fileID: 1792957843}
   _registerForm: {fileID: 1621227486}
   _nicknameField: {fileID: 4665089842787748283}
   _nameField: {fileID: 3770812543100758174}
@@ -2067,7 +2067,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39096a79a1aea9e4583d5ae043a039cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _profile: {fileID: 11400000, guid: 7b11a2c2d8f7a1c409f117beb6ae1e3c, type: 2}
   _mainPanel: {fileID: 1564697931}
   _points: {fileID: 1792957843}
   _settingsPanel: {fileID: 1027143824}
@@ -2213,7 +2212,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1575418198}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1027143824}
+        m_TargetAssemblyTypeName: View.SaveSystem.SettingsPanel, Assembly-CSharp
+        m_MethodName: SignOut
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1575418198
 MonoBehaviour:
   m_ObjectHideFlags: 0

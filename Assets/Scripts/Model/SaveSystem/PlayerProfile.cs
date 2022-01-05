@@ -6,13 +6,6 @@ namespace Model.SaveSystem
     [CreateAssetMenu]
     internal class PlayerProfile : ScriptableObject
     {
-        public string Nickname;
-        public string Name;
-        public string Group;
-        public int Points;
-        public int CakesCount;
-        public string Rank;
-
         public static PlayerProfile Instance;
 
         private static readonly string _nicknameField = "nickname"; 
@@ -21,6 +14,13 @@ namespace Model.SaveSystem
         private static readonly string _pointsField = "points";
         private static readonly string _cakesCountField = "cakesCount";
         private static readonly string _rankField = "rank";
+
+        public string Nickname { get; set; }
+        public string Name { get; set; }
+        public string Group { get; set; }
+        public int Points { get; set; }
+        public int CakesCount { get; set; }
+        public string Rank { get; set; }
 
         public event Action<int> OnProgressUpdated;
 

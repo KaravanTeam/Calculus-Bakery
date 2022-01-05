@@ -11,6 +11,7 @@ namespace Model.SaveSystem
         public string Group;
         public int Points;
         public int CakesCount;
+        public string Rank;
 
         public static PlayerProfile Instance;
 
@@ -19,6 +20,7 @@ namespace Model.SaveSystem
         private static readonly string _groupField = "group";
         private static readonly string _pointsField = "points";
         private static readonly string _cakesCountField = "cakesCount";
+        private static readonly string _rankField = "rank";
 
         public event Action<int> OnProgressUpdated;
 
@@ -47,6 +49,12 @@ namespace Model.SaveSystem
             PlayerPrefs.Save();
         }
 
+        public static void SaveRank()
+        {
+            PlayerPrefs.SetString(_rankField, Instance.Rank);
+            PlayerPrefs.Save();
+        }
+
         public static void SavePoints(int points)
         {
             Instance.Points = points;
@@ -68,6 +76,7 @@ namespace Model.SaveSystem
             Instance.Group = PlayerPrefs.GetString(_groupField);
             Instance.Points = PlayerPrefs.GetInt(_pointsField);
             Instance.CakesCount = PlayerPrefs.GetInt(_cakesCountField);
+            Instance.Rank = PlayerPrefs.GetString(_rankField);
         }
 
         public static bool IsExist()
@@ -84,6 +93,7 @@ namespace Model.SaveSystem
             Instance.Group = null;
             Instance.Points = 0;
             Instance.CakesCount = 0;
+            Instance.Rank = null;
 
             PlayerPrefs.DeleteAll();
             PlayerPrefs.Save();

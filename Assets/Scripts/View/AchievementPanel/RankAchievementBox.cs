@@ -1,4 +1,5 @@
 ﻿using Model.Achievements;
+using Model.SaveSystem;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,6 +27,11 @@ namespace View
         {
             foreach (var achievement in _achievements)
                 achievement.OnRankReached -= UpdateField;
+        }
+
+        private void Start()
+        {
+            _field.text = PlayerProfile.Instance.Rank;
         }
 
         private void UpdateField(RankAchievement rank)

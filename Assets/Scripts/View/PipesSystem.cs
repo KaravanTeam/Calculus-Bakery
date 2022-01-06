@@ -10,11 +10,14 @@ namespace View
         [SerializeField] private WaterDrop _waterDropPrefab;
         [SerializeField] private CreamView[] _creams;
 
+        private Color _previous = new Color();
+
         private readonly System.Random _randGenerator = new System.Random();
 
         public void InstantiateWaterDrops(Pipe[] pipes)
         {
             var creams = _creams
+                .Where(cream => cream.WaterDropColor != _previous)
                 .OrderBy(_ => _randGenerator.Next())
                 .Take(pipes.Length)
                 .ToArray();
@@ -28,9 +31,10 @@ namespace View
             }
         }
 
-        public void SetExpectedCream(Sprite cream)
+        public void SetExpectedCream(WaterDrop drop)
         {
-            _boardCream.sprite = cream;
+            _previous = drop.Color;
+            _boardCream.sprite = drop.Cream;
         }
     }
 }

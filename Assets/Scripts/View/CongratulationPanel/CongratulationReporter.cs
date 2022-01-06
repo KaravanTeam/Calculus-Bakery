@@ -42,6 +42,12 @@ namespace View
             _bar.OnUpdated -= ReportGameOver;
         }
 
+        private void Start()
+        {
+            if (PlayerProfile.Instance.CakesCount >= _chef.MaxCakes)
+                _bar.OnUpdated -= ReportGameOver;
+        }
+
         public IEnumerable<MessageInfo> Messages => _messages;
 
         private void ReportRank(RankAchievement rank)

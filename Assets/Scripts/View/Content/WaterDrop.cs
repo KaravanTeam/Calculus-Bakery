@@ -16,6 +16,7 @@ namespace View
         }
 
         public Sprite Cream { get; private set; }
+        public Color Color => _render.color;
 
         public void Initialize(CreamView cream)
         {

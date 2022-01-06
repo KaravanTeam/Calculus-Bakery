@@ -51,7 +51,7 @@ namespace Model
                 _pipes[i].Solution = cakes[i].Cream;
 
                 if (cakes[i] == expected)
-                    _pipesSystem.SetExpectedCream(_pipes[i].Drop.Cream);
+                    _pipesSystem.SetExpectedCream(_pipes[i].Drop);
             }
 
             _platform.Equation = expected.Bread;
@@ -74,7 +74,7 @@ namespace Model
                 if (pipe.Type == PipeType.Center)
                 {
                     _platform.Equation = cake.Bread;
-                    _pipesSystem.SetExpectedCream(pipe.Drop.Cream);
+                    _pipesSystem.SetExpectedCream(pipe.Drop);
                 }
             }
 

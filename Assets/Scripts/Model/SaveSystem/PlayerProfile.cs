@@ -14,6 +14,7 @@ namespace Model.SaveSystem
         private static readonly string _pointsField = "points";
         private static readonly string _cakesCountField = "cakesCount";
         private static readonly string _rankField = "rank";
+        private static readonly string _startRank = "Новичок";
 
         public string Nickname { get; set; }
         public string Name { get; set; }
@@ -47,10 +48,12 @@ namespace Model.SaveSystem
             Instance.Nickname = nickname;
             Instance.Name = name;
             Instance.Group = group;
+            Instance.Rank = _startRank;
 
             PlayerPrefs.SetString(_nicknameField, nickname);
             PlayerPrefs.SetString(_nameField, name);
             PlayerPrefs.SetString(_groupField, group);
+            PlayerPrefs.SetString(_rankField, _startRank);
 
             PlayerPrefs.Save();
         }

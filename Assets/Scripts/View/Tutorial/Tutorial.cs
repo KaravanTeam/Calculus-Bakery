@@ -10,7 +10,6 @@ namespace View
     internal sealed class Tutorial : MonoBehaviour
     {
         [SerializeField] private Chef _chef;
-        [SerializeField] private PlayerProfile _profile;
 
         [SerializeField] private TutorialPanel[] _panels;
 
@@ -34,7 +33,7 @@ namespace View
 
         private void Start()
         {
-            if (_profile.Points > 0)
+            if (PlayerProfile.Instance.Points > 0)
             {
                 Skip();
                 return;

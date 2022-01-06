@@ -7,6 +7,7 @@ namespace View.SaveSystem
     internal sealed class SettingsPanel : MonoBehaviour
     {
         [SerializeField] private GameObject _mainPanel;
+        [SerializeField] private GameObject _pointsPanel;
         [SerializeField] private Text _points;
 
         [Header("RegisterForm")]
@@ -29,6 +30,7 @@ namespace View.SaveSystem
         {
             _infoPanel.SetActive(false);
             _registerForm.SetActive(true);
+            _pointsPanel.SetActive(false);
         }
 
         public void SignUp()
@@ -46,6 +48,7 @@ namespace View.SaveSystem
             gameObject.SetActive(false);
             _infoPanel.SetActive(true);
             _registerForm.SetActive(false);
+            _pointsPanel.SetActive(true);
 
             _mainPanel.SetActive(true);
         }

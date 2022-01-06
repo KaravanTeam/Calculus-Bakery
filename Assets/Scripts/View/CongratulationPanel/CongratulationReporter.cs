@@ -1,5 +1,6 @@
 ﻿using Model;
 using Model.Achievements;
+using Model.SaveSystem;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +14,6 @@ namespace View
 
         [Header("GameOver")]
         [SerializeField] private CakesBar _bar;
-        [SerializeField] private Player _player;
         [SerializeField] private Chef _chef;
 
         private readonly PriorityQueue<MessageInfo, int> _messages = new PriorityQueue<MessageInfo, int>();
@@ -66,7 +66,7 @@ namespace View
             if (count != _chef.MaxCakes)
                 return;
 
-            _messages.Enqueue(new MessageInfo(null, _player.Progress, MessageType.GameOver), _gameOverPriority);
+            _messages.Enqueue(new MessageInfo(null, PlayerProfile.Instance.Points, MessageType.GameOver), _gameOverPriority);
             _bar.OnUpdated -= ReportGameOver;
         }
     }

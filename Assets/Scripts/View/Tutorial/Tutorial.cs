@@ -1,4 +1,5 @@
 ﻿using Model;
+using Model.SaveSystem;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,7 +22,6 @@ namespace View
 
         private void Awake()
         {
-            _tutorialPanel.SetActive(true);
             _locker = GetComponent<ButtonsLocker>();
         }
 
@@ -33,6 +33,13 @@ namespace View
 
         private void Start()
         {
+            if (PlayerProfile.Instance.Points > 0)
+            {
+                Skip();
+                return;
+            }
+
+            _tutorialPanel.SetActive(true);
             _locker.Lock();
         }
 

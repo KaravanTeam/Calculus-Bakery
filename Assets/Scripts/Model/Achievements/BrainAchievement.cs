@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Model.Achievements
 {
-    internal abstract class BrainAchievement : MonoBehaviour
+    internal abstract class BrainAchievement : MonoBehaviour, ISerializable
     {
         public abstract string Text { get; }
         public abstract int OrderNumber { get; }
@@ -13,5 +13,8 @@ namespace Model.Achievements
 
         public abstract event Action OnStateUpdated;
         public abstract event Action<BrainAchievement> OnReached;
+
+        public abstract void Serialize();
+        public abstract void Deserialize();
     }
 }

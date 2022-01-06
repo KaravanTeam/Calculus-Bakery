@@ -10,6 +10,8 @@ namespace Model.Transporter
         private Dictionary<EquationType, List<Cake>> _database;
         private Dictionary<EquationType, Dictionary<int, Cake>> _unsolvedTypes;
 
+        private readonly string _equationField = "Equation";
+
         private readonly System.Random _randGenerator = new System.Random();
 
         public Factory()
@@ -35,7 +37,22 @@ namespace Model.Transporter
                 _database[equation.Type].Add(new Cake(bread, cream));
             }
 
-            AddUnsolvedEquations();
+            foreach (var equations in _database)
+            {
+                var unsolvedCakes = equations
+                    .Value
+                    .Where(equation => PlayerPrefs.GetInt(_equationField + equation.Bread.ID) == 0)
+                    .ToList();
+
+                if (unsolvedCakes.Count == 0)
+                    continue;
+
+                _unsolvedTypes[equations.Key] = unsolvedCakes
+                    .ToDictionary(equation => equation.Bread.ID, equation => equation);
+            }
+
+            if (_unsolvedTypes.Count == 0)
+                AddUnsolvedEquations();
         }
 
         public List<Cake> BuildCakes(int count)
@@ -59,6 +76,9 @@ namespace Model.Transporter
 
             if (_unsolvedTypes[solution.Type].Count == 0)
                 _unsolvedTypes.Remove(solution.Type);
+
+            PlayerPrefs.SetInt(_equationField + solution.ID, 1);
+            PlayerPrefs.Save();
         }
 
         private void AddUnsolvedEquations()
@@ -71,7 +91,12 @@ namespace Model.Transporter
                 _unsolvedTypes[equations.Key] = equations
                     .Value
                     .ToDictionary(equation => equation.Bread.ID, equation => equation);
+
+                foreach (var equation in _unsolvedTypes[equations.Key])
+                    PlayerPrefs.SetInt(_equationField + equation.Key, 0);
             }
+
+            PlayerPrefs.Save();
         }
     }
 }

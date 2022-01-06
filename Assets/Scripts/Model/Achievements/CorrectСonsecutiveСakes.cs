@@ -1,4 +1,5 @@
-﻿using Model.Transporter;
+﻿using Model.SaveSystem;
+using Model.Transporter;
 using System;
 using UnityEngine;
 
@@ -14,9 +15,9 @@ namespace Model.Achievements
         [SerializeField] private int _points;
 
         [SerializeField] protected Chef _chef;
-        [SerializeField] private Player _player;
 
         private int _count;
+        private string _hash;
 
         public override int OrderNumber => _orderNumber;
         public override string Text => _text;
@@ -26,6 +27,12 @@ namespace Model.Achievements
 
         public override event Action OnStateUpdated;
         public override event Action<BrainAchievement> OnReached;
+
+        private void Awake()
+        {
+            _hash = Text.GetHashCode().ToString();
+            Deserialize();
+        }
 
         private void OnEnable()
         {
@@ -37,15 +44,22 @@ namespace Model.Achievements
             Unsubcribe();
         }
 
+        private void Start()
+        {
+            if (_count >= _cakesTarget)
+                Unsubcribe();
+        }
+
         protected void UpdateState(Cake cake)
         {
             _count += 1;
+            Serialize();
             OnStateUpdated?.Invoke();
 
             if (_count < _cakesTarget)
                 return;
 
-            _player.AddProgress(_points);
+            PlayerProfile.Instance.AddPoints(_points);
             OnReached?.Invoke(this);
 
             Unsubcribe();
@@ -54,6 +68,7 @@ namespace Model.Achievements
         protected void Reset(Cake cake)
         {
             _count = 0;
+            Serialize();
             OnStateUpdated?.Invoke();
         }
 
@@ -67,6 +82,17 @@ namespace Model.Achievements
         {
             _chef.OnCorrectCakeChecked -= UpdateState;
             _chef.OnWrongCakeChecked -= Reset;
+        }
+
+        public override void Serialize()
+        {
+            PlayerPrefs.SetInt(_hash, _count);
+            PlayerPrefs.Save();
+        }
+
+        public override void Deserialize()
+        {
+            _count = PlayerPrefs.GetInt(_hash);
         }
     }
 }

@@ -25,8 +25,6 @@ namespace View.SaveSystem
         [SerializeField] private Sprite _soundOff;
         [SerializeField] private AudioListener _audioListener;
 
-        private TouchScreenKeyboard _keyboard;
-
         public void OpenRegisterForm()
         {
             _infoPanel.SetActive(false);

@@ -4,8 +4,10 @@ using UnityEngine.UI;
 namespace Controller
 {
     [RequireComponent(typeof(Animator))]
-    internal sealed class PanelSwitcher : MonoBehaviour
+    internal sealed class PopupSwitcher : MonoBehaviour
     {
+        [SerializeField] private Image _background;
+
         [SerializeField] private string _entryTrigger;
         [SerializeField] private Button _entryButton;
 
@@ -33,11 +35,13 @@ namespace Controller
 
         private void PlayEntryAnimation()
         {
+            _background.enabled = true;
             _panelAnimator.SetTrigger(_entryTrigger);
         }
 
         private void PlayExitAnimation()
         {
+            _background.enabled = false;
             _panelAnimator.SetTrigger(_exitTrigger);
         }
     }

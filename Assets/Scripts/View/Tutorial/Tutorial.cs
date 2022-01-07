@@ -9,6 +9,7 @@ namespace View
     [RequireComponent(typeof(ButtonsLocker))]
     internal sealed class Tutorial : MonoBehaviour
     {
+        [SerializeField] private Image _background;
         [SerializeField] private Chef _chef;
 
         [SerializeField] private TutorialPanel[] _panels;
@@ -39,6 +40,7 @@ namespace View
                 return;
             }
 
+            _background.enabled = true;
             _tutorialPanel.SetActive(true);
             _locker.Lock();
         }
@@ -51,6 +53,7 @@ namespace View
 
         private void Skip()
         {
+            _background.enabled = false;
             _tutorialPanel.SetActive(false);
             _locker.Unlock();
             _chef.Distribute();
@@ -59,7 +62,8 @@ namespace View
         private IEnumerator Run()
         {
             _tutorialPanel.SetActive(false);
-            
+            _background.enabled = false;
+
             _chef.DistributeTutorial();
         
             foreach (var panel in _panels)

@@ -21,17 +21,11 @@ namespace Model.SaveSystem
         public string Group { get; set; }
         public int Points { get; set; }
         public int CakesCount { get; set; }
-        public string Rank { get; set; }
+        public string Rank { get; set; } = _startRank;
 
         public event Action<int> OnProgressUpdated;
 
-        private PlayerProfile()
-        {
-            if (Instance is null)
-                Instance = this;
-        }
-
-        public static void Initialize()
+        static PlayerProfile()
         {
             Instance = (PlayerProfile)CreateInstance(typeof(PlayerProfile));
         }

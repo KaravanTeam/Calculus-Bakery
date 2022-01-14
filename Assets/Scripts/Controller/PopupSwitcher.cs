@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using View;
 
 namespace Controller
 {
     [RequireComponent(typeof(Animator))]
     internal sealed class PopupSwitcher : MonoBehaviour
     {
-        [SerializeField] private Image _background;
+        [SerializeField] private BackgroundSwitcher _backgroundSwitcher;
 
         [SerializeField] private string _entryTrigger;
         [SerializeField] private Button _entryButton;
@@ -35,13 +36,13 @@ namespace Controller
 
         private void PlayEntryAnimation()
         {
-            _background.enabled = true;
+            _backgroundSwitcher.SwitchOn();
             _panelAnimator.SetTrigger(_entryTrigger);
         }
 
         private void PlayExitAnimation()
         {
-            _background.enabled = false;
+            _backgroundSwitcher.SwitchOff();
             _panelAnimator.SetTrigger(_exitTrigger);
         }
     }

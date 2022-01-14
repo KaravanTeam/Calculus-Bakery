@@ -6,6 +6,7 @@ namespace View
 {
     internal class TutorialPanel : MonoBehaviour, IPointerClickHandler
     {
+        [SerializeField] private BackgroundSwitcher _backgroundSwitcher;
         [SerializeField] private Sprite _replica;
         [SerializeField] private ChefEmoji _chefEmoji;
 
@@ -40,6 +41,7 @@ namespace View
 
         public virtual IEnumerator Run()
         {
+            _backgroundSwitcher.SwitchOn();
             _selector?.Select();
 
             _chefEmoji.ShowWith(_replica);
@@ -52,6 +54,7 @@ namespace View
             yield return new WaitWhile(() => _isVisibleReplica);
 
             _selector?.Unselect();
+            _backgroundSwitcher.SwitchOff();
         }
 
         private void ToggleVisibleState()

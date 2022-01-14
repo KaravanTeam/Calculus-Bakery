@@ -10,6 +10,7 @@ namespace View
         [SerializeField] private GameObject _panel;
         [SerializeField] private ChefEmoji _chefEmoji;
         [SerializeField] private Button _nextButton;
+        [SerializeField] private BackgroundSwitcher _backgroundSwitcher;
 
         [Header("Achievement")]
         [SerializeField] private GameObject _achievementContainer;
@@ -56,6 +57,7 @@ namespace View
         {
             foreach (var message in _reporter.Messages)
             {
+                _backgroundSwitcher.SwitchOn();
                 _panel.SetActive(true);
                 _next = false;
 
@@ -78,6 +80,7 @@ namespace View
                 }
 
                 _panel.SetActive(false);
+                _backgroundSwitcher.SwitchOff();
             }
         }
 
